@@ -2,7 +2,7 @@
   "name": "mobiljuragan-dashboard",
   "version": "1.0.0",
   "private": true,
-  "description": "MobilJuragan Admin Web Dashboard — Panel Manajemen Rental Mobil Merauke",
+  "description": "MobilJuragan Admin Web Dashboard - Panel Manajemen Rental Mobil Merauke",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
