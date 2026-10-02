@@ -17,6 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 import { Toggle } from "@/components/ui/Toggle";
+import { IconPlus } from "@/components/ui/icons";
 import { DRIVER_ROUTE, DRIVER_STATUS } from "@/lib/labels";
 import { BOOKINGS, DRIVERS, SAMPLE_DATA_LABEL, vehicleById } from "@/lib/mockData";
 
@@ -64,7 +65,14 @@ export function DriverRosterTable() {
       ) : null}
 
       <div className="mt-4">
-        <Panel>
+        <Panel
+          action={
+            <Button variant="confirm" size="md" onClick={() => setFormTarget({ driverId: null })}>
+              <IconPlus className="h-4 w-4" />
+              Tambah Supir Baru
+            </Button>
+          }
+        >
           <Table caption="Roster supir resmi MobilJuragan Merauke">
             <TableHead>
               <TableRow>
@@ -126,12 +134,6 @@ export function DriverRosterTable() {
               })}
             </TableBody>
           </Table>
-
-          <div className="mt-4 flex justify-end">
-            <Button variant="confirm" size="md" onClick={() => setFormTarget({ driverId: null })}>
-              + Tambah Supir Baru
-            </Button>
-          </div>
         </Panel>
       </div>
 

@@ -47,7 +47,16 @@ export function VehicleCatalogTable() {
       ) : null}
 
       <div className="mt-4">
-        <Panel title="Katalog armada resmi" icon={<IconCar />}>
+        <Panel
+          title="Katalog armada resmi"
+          icon={<IconCar />}
+          action={
+            <Button variant="confirm" size="md" onClick={() => setFormTarget({ vehicleId: null })}>
+              <IconPlus className="h-4 w-4" />
+              Tambah Armada Baru
+            </Button>
+          }
+        >
           <Table caption="Katalog armada resmi MobilJuragan">
             <TableHead>
               <TableRow>
@@ -83,7 +92,7 @@ export function VehicleCatalogTable() {
                       {VEHICLE_STATUS[vehicle.status].label}
                     </StatusChip>
                   </TableCell>
-                  <TableCell>
+                                                      <TableCell>
                     {/* Tombol dibiarkan boleh turun baris: kalau dipaksa satu baris, kolom aksi
                         terjepit dan tombol Hapus terpotong di tepi panel. */}
                     <div className="flex flex-wrap items-center gap-2">
@@ -104,13 +113,6 @@ export function VehicleCatalogTable() {
               ))}
             </TableBody>
           </Table>
-
-          <div className="mt-4 flex justify-end">
-            <Button variant="confirm" size="md" onClick={() => setFormTarget({ vehicleId: null })}>
-              <IconPlus className="h-4 w-4" />
-              Tambah Armada Baru
-            </Button>
-          </div>
         </Panel>
       </div>
 

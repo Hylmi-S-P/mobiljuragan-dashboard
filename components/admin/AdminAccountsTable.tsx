@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { DataNotice } from "@/components/ui/DataNotice";
 import { Panel } from "@/components/ui/ScreenHeader";
 import { StatusChip } from "@/components/ui/StatusChip";
+import { IconPlus } from "@/components/ui/icons";
 import {
   Table,
   TableBody,
@@ -41,7 +42,14 @@ export function AdminAccountsTable() {
       ) : null}
 
       <div className="mt-4">
-        <Panel>
+        <Panel
+          action={
+            <Button variant="confirm" size="md" onClick={() => setFormTarget({ accountId: null })}>
+              <IconPlus className="h-4 w-4" />
+              Buat Akun Admin Baru
+            </Button>
+          }
+        >
           <Table caption="Akun staf dan hak akses portal admin">
             <TableHead>
               <TableRow>
@@ -75,12 +83,6 @@ export function AdminAccountsTable() {
               ))}
             </TableBody>
           </Table>
-
-          <div className="mt-4 flex justify-end">
-            <Button variant="confirm" size="md" onClick={() => setFormTarget({ accountId: null })}>
-              + Buat Akun Admin Baru
-            </Button>
-          </div>
         </Panel>
       </div>
 
