@@ -111,7 +111,7 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
         )}
 
         <p className="text-micro text-ink-soft">
-          Status booking sekarang: <StatusChip tone={statusMeta.tone}>{statusMeta.label}</StatusChip>{" "}
+          Status pesanan sekarang: <StatusChip tone={statusMeta.tone}>{statusMeta.label}</StatusChip>{" "}
           &middot; Status pada siklus backend: {statusMeta.canonical}
         </p>
       </div>

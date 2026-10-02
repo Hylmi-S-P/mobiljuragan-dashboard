@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
+import { IconTrash } from "@/components/ui/icons";
 import { Modal } from "@/components/ui/Modal";
 import {
   BOOKING_MODE_LABEL,
@@ -17,6 +18,8 @@ type Props = {
   existingPlates: string[];
   onClose: () => void;
   onSave: (vehicle: Vehicle) => void;
+  /** Dipanggil saat admin meminta penghapusan dari dalam modal kelola. */
+  onRequestDelete?: (vehicleId: string) => void;
 };
 
 const STATUS_OPTIONS: { value: VehicleStatus; label: string }[] = [
@@ -27,8 +30,15 @@ const STATUS_OPTIONS: { value: VehicleStatus; label: string }[] = [
 
 const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
 
-export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: Props) {
+export function VehicleFormModal({
+  vehicle,
+  existingPlates,
+  onClose,
+  onSave,
+  onRequestDelete,
+}: Props) {
   const fieldId = useId();
+  const [hapusDiminta, setHapusDiminta] = useState(false);
   const [name, setName] = useState(vehicle?.name ?? "");
   const [plate, setPlate] = useState(vehicle?.plate ?? "");
   const [category, setCategory] = useState(vehicle?.category ?? VEHICLE_CATEGORY_OPTIONS[0]);
@@ -102,6 +112,27 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
       description="Lengkapi spesifikasi unit untuk ditampilkan pada katalog pelanggan aplikasi MobilJuragan."
       footer={
         <>
+          {vehicle && onRequestDelete ? (
+            <div className="mr-auto flex flex-wrap items-center gap-3">
+              <label className="flex items-center gap-2 text-meta text-ink">
+                <input
+                  type="checkbox"
+                  checked={hapusDiminta}
+                  onChange={(event) => setHapusDiminta(event.target.checked)}
+                  className="h-4 w-4 accent-danger"
+                />
+                <span>Hapus unit ini</span>
+              </label>
+              <Button
+                variant="danger"
+                disabled={!hapusDiminta}
+                onClick={() => onRequestDelete(vehicle.id)}
+              >
+                <IconTrash className="h-4 w-4" />
+                Hapus Unit
+              </Button>
+            </div>
+          ) : null}
           <Button variant="outline" onClick={onClose}>
             Batal
           </Button>
@@ -239,7 +270,7 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
             ))}
           </div>
           <p className="mt-2 text-micro text-ink-soft">
-            Status Disewa diisi otomatis dari booking aktif, jadi tidak bisa dipilih manual di sini.
+            Status Disewa diisi otomatis dari pesanan aktif, jadi tidak bisa dipilih manual di sini.
           </p>
         </fieldset>
 

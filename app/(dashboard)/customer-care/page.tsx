@@ -6,7 +6,7 @@ export default function CustomerCarePage() {
     <>
       <ScreenHeader
         heading="Customer Care"
-        subheading="Kelola pertanyaan dan keluhan customer secara terstruktur."
+        subheading="Kelola pertanyaan dan keluhan pelanggan secara terstruktur."
       />
       <TicketWorkspace />
     </>

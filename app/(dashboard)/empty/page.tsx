@@ -9,7 +9,7 @@ export default function EmptyStatePage() {
         subheading="Halaman rujukan untuk keadaan belum ada data. Pola yang sama dipakai di antrean booking, kalender armada, dan percakapan customer care."
       />
       <EmptyState
-        heading="Belum ada booking"
+        heading="Belum ada pesanan"
         cause="Belum ada permintaan booking yang masuk."
         nextAction="Booking baru akan muncul di antrean ini setelah pelanggan mengirim order."
         actionHref="/bookings"

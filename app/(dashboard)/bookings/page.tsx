@@ -7,8 +7,8 @@ export default function BookingsPage() {
   return (
     <>
       <ScreenHeader
-        heading="Booking Masuk (Antrean Pelanggan)"
-        subheading="Reservasi yang masuk dari aplikasi pelanggan. Cek kesiapan unit, tentukan tarif final, dan alokasikan supir."
+        heading="Pemesanan Masuk"
+        subheading="Pesanan yang masuk dari aplikasi pelanggan. Cek kesiapan unit, tentukan tarif final, dan alokasikan supir."
       />
 
       <DataNotice label={SAMPLE_DATA_LABEL}>

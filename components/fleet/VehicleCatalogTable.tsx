@@ -17,7 +17,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@/components/ui/Table";
-import { IconCar, IconPencil, IconPlus, IconTrash } from "@/components/ui/icons";
+import { IconCar, IconPencil, IconPlus } from "@/components/ui/icons";
 import { SAMPLE_DATA_LABEL, VEHICLES } from "@/lib/mockData";
 import { VEHICLE_STATUS } from "@/lib/labels";
 
@@ -64,7 +64,7 @@ export function VehicleCatalogTable() {
                 <TableHeaderCell className="w-[185px]">Plat Nomor</TableHeaderCell>
                 <TableHeaderCell className="w-[170px]">Transmisi &amp; Kursi</TableHeaderCell>
                 <TableHeaderCell className="w-[130px]">Ketersediaan</TableHeaderCell>
-                <TableHeaderCell className="w-[320px]">Status &amp; Aksi CMS</TableHeaderCell>
+                <TableHeaderCell className="w-[220px]">Status &amp; Aksi</TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -93,21 +93,13 @@ export function VehicleCatalogTable() {
                     </StatusChip>
                   </TableCell>
                                                       <TableCell>
-                    {/* Tombol dibiarkan boleh turun baris: kalau dipaksa satu baris, kolom aksi
-                        terjepit dan tombol Hapus terpotong di tepi panel. */}
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Button
-                        variant="outline"
-                        onClick={() => setFormTarget({ vehicleId: vehicle.id })}
-                      >
-                        <IconPencil className="h-4 w-4" />
-                        Edit / Kelola
-                      </Button>
-                      <Button variant="ghost" onClick={() => setDeleteTarget(vehicle.id)}>
-                        <IconTrash className="h-4 w-4" />
-                        Hapus
-                      </Button>
-                    </div>
+                    <Button
+                      variant="outline"
+                      onClick={() => setFormTarget({ vehicleId: vehicle.id })}
+                    >
+                      <IconPencil className="h-4 w-4" />
+                      Kelola
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -123,6 +115,10 @@ export function VehicleCatalogTable() {
             .filter((vehicle) => vehicle.id !== editing?.id)
             .map((vehicle) => vehicle.plate)}
           onClose={() => setFormTarget(null)}
+          onRequestDelete={(vehicleId) => {
+            setFormTarget(null);
+            setDeleteTarget(vehicleId);
+          }}
           onSave={(saved) => {
             setVehicles((current) => {
               const exists = current.some((vehicle) => vehicle.id === saved.id);

@@ -92,7 +92,7 @@ export function BookingsTable() {
       {filtered.length === 0 ? (
         <div className="rounded-sm border border-rule bg-canvas px-4 py-6">
           <p className="text-body font-semibold text-ink">
-            Tidak ada booking yang cocok dengan filter itu.
+            Tidak ada pesanan yang cocok dengan filter itu.
           </p>
           <p className="mt-1 text-body text-ink-soft">
             Kosongkan kata kunci atau pilih semua status untuk melihat seluruh antrean.
@@ -102,7 +102,7 @@ export function BookingsTable() {
           </Button>
         </div>
       ) : (
-        <Table caption="Antrean booking pelanggan">
+        <Table caption="Antrean pesanan pelanggan">
           <TableHead>
             <TableRow>
               <TableHeaderCell className="w-[220px]">Pemesan</TableHeaderCell>
@@ -154,7 +154,7 @@ export function BookingsTable() {
 
       <div className="mt-4 space-y-2">
         <p className="text-meta text-ink-soft">
-          KTP dan SIM A asli diverifikasi fisik oleh staf saat serah terima unit di pool.
+          Staf memverifikasi KTP dan SIM A asli secara fisik saat serah terima unit di pool.
         </p>
         <p className="text-body font-medium text-ink">
           Aksi operasional: buka detail pemesanan, tentukan tarif final dan surcharge, alokasikan

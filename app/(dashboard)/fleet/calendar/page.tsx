@@ -23,7 +23,7 @@ export default function FleetCalendarPage() {
     <>
       <ScreenHeader
         heading="Manajemen Armada • Kalender Armada"
-        subheading="Timeline ketersediaan unit, jadwal sewa aktif, dan reservasi harian armada."
+        subheading="Riwayat ketersediaan unit, jadwal sewa aktif, dan pesanan harian armada."
       />
 
       <DataNotice label={SAMPLE_DATA_LABEL}>

@@ -56,7 +56,7 @@ export default async function BookingDetailPage({
               <DataField label={isDriverService ? "Nama pemesan / PIC" : "Nama lengkap"}>
                 {customerLabel}
               </DataField>
-              <DataField label="No. WhatsApp">{PRIVATE_FIELD_PLACEHOLDER}</DataField>
+              <DataField label="Nomor WhatsApp">{PRIVATE_FIELD_PLACEHOLDER}</DataField>
               <DataField label="Durasi sewa">
                 {formatDateRange(booking.startDate, booking.endDate, booking.dayCount)}
               </DataField>

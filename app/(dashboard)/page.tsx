@@ -24,8 +24,8 @@ export default function OverviewPage() {
   return (
     <>
       <ScreenHeader
-        heading="Antrean booking butuh konfirmasi"
-        subheading="Satu keputusan utama: booking mana yang perlu ditangani berikutnya."
+        heading="Antrean pesanan butuh konfirmasi"
+        subheading="Periksa tarif dan jadwal unit sebelum mengonfirmasi."
       />
 
       <DataNotice label={SAMPLE_DATA_LABEL}>
@@ -35,7 +35,7 @@ export default function OverviewPage() {
 
       <div className="mt-4">
         <Panel
-          title="Booking menunggu konfirmasi"
+          title="Pesanan menunggu konfirmasi"
           icon={<IconInbox />}
           action={
             queue.length > 0 ? (
@@ -52,7 +52,7 @@ export default function OverviewPage() {
               </span>
               <div>
                 <p className="text-body font-semibold text-ink">
-                  Belum ada booking yang menunggu konfirmasi.
+                  Belum ada pesanan yang menunggu konfirmasi.
                 </p>
                 <p className="mt-1 text-meta text-ink-soft">
                   Buka Booking Masuk untuk memeriksa permintaan baru.
@@ -133,7 +133,7 @@ export default function OverviewPage() {
           </ul>
 
           <p className="mt-4 border-t border-row-line pt-3 text-meta text-ink-soft">
-            Status unit diubah dari detail kendaraan di Katalog &amp; CMS.
+            Status unit diubah dari detail kendaraan di Katalog.
           </p>
         </Panel>
 

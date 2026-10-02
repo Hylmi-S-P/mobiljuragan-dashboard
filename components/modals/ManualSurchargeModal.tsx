@@ -174,7 +174,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
             Penyesuaian manual: {amount.trim().length > 0 ? amount.trim() : AMOUNT_PLACEHOLDER}
           </p>
           <p className="mt-1 font-bold text-ink">
-            Total tagihan baru dihitung sistem setelah tarif dasar dikonfirmasi.
+            Total tagihan baru dihitung oleh sistem setelah tarif dasar dikonfirmasi.
           </p>
         </div>
 

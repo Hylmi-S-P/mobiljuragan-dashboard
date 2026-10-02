@@ -64,15 +64,15 @@ export function TicketWorkspace() {
 
       <div className="mt-4 grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]">
         <div className="min-w-0">
-          <Panel title="Ticket masuk">
+          <Panel title="Tiket masuk">
             <label htmlFor="ticket-search" className="sr-only">
-              Cari ticket
+              Cari tiket
             </label>
             <input
               id="ticket-search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Cari ticket"
+              placeholder="Cari tiket"
               className="h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             />
 
@@ -143,10 +143,10 @@ export function TicketWorkspace() {
                 </div>
 
                 <div className="border-b border-rule px-5 py-4">
-                  <h3 className="text-body font-semibold text-ink">Informasi ticket</h3>
+                  <h3 className="text-body font-semibold text-ink">Informasi tiket</h3>
                   <dl className="mt-3 grid gap-3 sm:grid-cols-2">
                     <div>
-                      <dt className="text-micro font-bold uppercase text-ink-soft">Judul ticket</dt>
+                      <dt className="text-micro font-bold uppercase text-ink-soft">Judul tiket</dt>
                       <dd className="mt-1 text-meta text-ink">{activeTicket.title}</dd>
                     </div>
                     <div>
@@ -161,7 +161,7 @@ export function TicketWorkspace() {
                     <div className="rounded-sm border border-rule bg-canvas px-4 py-8 text-center">
                       <p className="text-body font-semibold text-ink">Belum ada pesan</p>
                       <p className="mt-2 text-body text-ink-soft">
-                        Pesan customer dan balasan tim akan muncul di sini.
+                        Pesan pelanggan dan balasan tim akan muncul di sini.
                       </p>
                     </div>
                   ) : (
@@ -212,9 +212,9 @@ export function TicketWorkspace() {
               </>
             ) : (
               <div className="px-5 py-8">
-                <p className="text-body font-semibold text-ink">Belum ada ticket dipilih</p>
+                <p className="text-body font-semibold text-ink">Belum ada tiket dipilih</p>
                 <p className="mt-2 text-body text-ink-soft">
-                  Pilih ticket di daftar kiri untuk membaca percakapan dan membalas.
+                  Pilih tiket di daftar kiri untuk membaca percakapan dan membalas.
                 </p>
               </div>
             )}

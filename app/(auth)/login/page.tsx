@@ -32,7 +32,7 @@ export default function LoginPage() {
               Unit lepas kunci dan unit dengan supir
             </p>
             <p className="mt-2 text-meta text-on-navy-muted">
-              Pusat kendali rental: unit lepas kunci dan driver.
+              Pusat kendali sewa: unit lepas kunci dan unit dengan supir.
             </p>
 
             <div className="mt-4 rounded-md border border-navy-line bg-navy-inset p-4">

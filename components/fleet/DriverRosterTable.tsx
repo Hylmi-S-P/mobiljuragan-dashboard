@@ -22,7 +22,7 @@ import { DRIVER_ROUTE, DRIVER_STATUS } from "@/lib/labels";
 import { BOOKINGS, DRIVERS, SAMPLE_DATA_LABEL, vehicleById } from "@/lib/mockData";
 
 /* Supir yang sedang bertugas terkunci. Catatannya menyebut unit yang sedang dibawa,
-   diambil dari booking aktif yang memakai supir tersebut. */
+   diambil dari pesanan aktif yang memakai supir tersebut. */
 function activeAssignment(driverLabel: string): string | null {
   const booking = BOOKINGS.find(
     (item) => item.driverName === driverLabel && item.status !== "ditolak",

@@ -5,7 +5,7 @@ export default function FleetCatalogPage() {
   return (
     <>
       <ScreenHeader
-        heading="Manajemen Armada • Katalog & CMS"
+        heading="Manajemen Armada • Katalog"
         subheading="Katalog armada resmi, detail spesifikasi, dan penambahan unit baru. Tarif per unit dikonfirmasi tim MobilJuragan saat booking masuk."
       />
       <VehicleCatalogTable />

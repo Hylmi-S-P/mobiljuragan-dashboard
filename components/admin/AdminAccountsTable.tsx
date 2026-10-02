@@ -55,7 +55,7 @@ export function AdminAccountsTable() {
               <TableRow>
                 <TableHeaderCell className="w-[280px]">Nama</TableHeaderCell>
                 <TableHeaderCell className="w-[220px]">Username</TableHeaderCell>
-                <TableHeaderCell className="w-[300px]">Role</TableHeaderCell>
+                <TableHeaderCell className="w-[300px]">Peran</TableHeaderCell>
                 <TableHeaderCell className="w-[150px]">Status Akun</TableHeaderCell>
                 <TableHeaderCell className="w-[186px]">Aksi Kelola</TableHeaderCell>
               </TableRow>
