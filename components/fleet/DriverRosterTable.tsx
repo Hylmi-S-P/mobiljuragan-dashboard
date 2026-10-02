@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 import { Toggle } from "@/components/ui/Toggle";
-import { IconPlus } from "@/components/ui/icons";
+import { IconPencil, IconPlus } from "@/components/ui/icons";
 import { DRIVER_ROUTE, DRIVER_STATUS } from "@/lib/labels";
 import { BOOKINGS, DRIVERS, SAMPLE_DATA_LABEL, vehicleById } from "@/lib/mockData";
 
@@ -117,17 +117,13 @@ export function DriverRosterTable() {
                       )}
                     </TableCell>
                     <TableCell>
-                      <div className="flex flex-wrap gap-2">
-                        <Button
-                          variant="outline"
-                          onClick={() => setFormTarget({ driverId: driver.id })}
-                        >
-                          Edit Supir
-                        </Button>
-                        <Button variant="ghost" onClick={() => setDeleteTarget(driver.id)}>
-                          Hapus
-                        </Button>
-                      </div>
+                      <Button
+                        variant="outline"
+                        onClick={() => setFormTarget({ driverId: driver.id })}
+                      >
+                        <IconPencil className="h-4 w-4" />
+                        Kelola
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );
@@ -141,6 +137,10 @@ export function DriverRosterTable() {
         <DriverFormModal
           driver={editing}
           onClose={() => setFormTarget(null)}
+          onRequestDelete={(driverId) => {
+            setFormTarget(null);
+            setDeleteTarget(driverId);
+          }}
           onSave={(saved) => {
             setDrivers((current) => {
               const exists = current.some((driver) => driver.id === saved.id);

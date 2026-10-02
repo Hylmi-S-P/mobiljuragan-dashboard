@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
+import { IconTrash } from "@/components/ui/icons";
 import { Modal } from "@/components/ui/Modal";
 import { DRIVER_ROUTE } from "@/lib/labels";
 import type { Driver, DriverRoute } from "@/lib/types";
@@ -11,10 +12,13 @@ type Props = {
   driver?: Driver;
   onClose: () => void;
   onSave: (driver: Driver) => void;
+  /** Dipanggil saat admin meminta penghapusan dari dalam modal kelola. */
+  onRequestDelete?: (driverId: string) => void;
 };
 
-export function DriverFormModal({ driver, onClose, onSave }: Props) {
+export function DriverFormModal({ driver, onClose, onSave, onRequestDelete }: Props) {
   const fieldId = useId();
+  const [hapusDiminta, setHapusDiminta] = useState(false);
   const [label, setLabel] = useState(driver?.label ?? "");
   const [contact, setContact] = useState(driver?.contact ?? "");
   const [route, setRoute] = useState<DriverRoute>(driver?.route ?? "dalam_kota");
@@ -59,6 +63,28 @@ export function DriverFormModal({ driver, onClose, onSave }: Props) {
       description="Pendaftaran supir resmi MobilJuragan untuk penugasan armada sewa dengan supir."
       footer={
         <>
+          {driver && onRequestDelete ? (
+            <div className="mr-auto flex flex-wrap items-center gap-3">
+              <label className="flex items-center gap-2 text-meta text-ink">
+                <input
+                  type="checkbox"
+                  data-testid="hapus-diminta"
+                  checked={hapusDiminta}
+                  onChange={(event) => setHapusDiminta(event.target.checked)}
+                  className="h-4 w-4 accent-danger"
+                />
+                <span>Hapus supir ini</span>
+              </label>
+              <Button
+                variant="danger"
+                disabled={!hapusDiminta}
+                onClick={() => onRequestDelete(driver.id)}
+              >
+                <IconTrash className="h-4 w-4" />
+                Hapus Supir
+              </Button>
+            </div>
+          ) : null}
           <Button variant="outline" onClick={onClose}>
             Batal
           </Button>

@@ -117,6 +117,7 @@ export function VehicleFormModal({
               <label className="flex items-center gap-2 text-meta text-ink">
                 <input
                   type="checkbox"
+                  data-testid="hapus-diminta"
                   checked={hapusDiminta}
                   onChange={(event) => setHapusDiminta(event.target.checked)}
                   className="h-4 w-4 accent-danger"
