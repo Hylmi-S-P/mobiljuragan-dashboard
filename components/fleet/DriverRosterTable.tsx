@@ -58,7 +58,7 @@ export function DriverRosterTable() {
       </DataNotice>
 
       {notice ? (
-        <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-xs text-ink">
+        <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-meta text-ink">
           {notice}
         </p>
       ) : null}
@@ -82,7 +82,7 @@ export function DriverRosterTable() {
                   <TableRow key={driver.id}>
                     <TableCell>
                       <span className="block font-semibold">{driver.label}</span>
-                      <span className="mt-1 block text-xs text-ink-soft">
+                      <span className="mt-1 block text-meta text-ink-soft">
                         {driver.contact ?? "[kontak belum diverifikasi]"} •{" "}
                         {driver.licenseNumber ? `SIM ${driver.licenseNumber}` : "[SIM belum diisi]"}
                       </span>
@@ -94,7 +94,7 @@ export function DriverRosterTable() {
                           <StatusChip tone={DRIVER_STATUS.sedang_tugas.tone}>
                             {DRIVER_STATUS.sedang_tugas.label}
                           </StatusChip>
-                          <span className="text-[11px] text-ink-soft">
+                          <span className="text-micro text-ink-soft">
                             {assignment ? `SPJ aktif (unit ${assignment}), ` : "SPJ aktif, "}
                             terkunci supaya tidak ditugaskan ganda.
                           </span>
@@ -127,11 +127,7 @@ export function DriverRosterTable() {
             </TableBody>
           </Table>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-medium text-ink">
-              Sakelar kesiapan mengubah status antara Siaga dan Libur. Supir yang sedang bertugas
-              terkunci sampai tugasnya selesai.
-            </p>
+          <div className="mt-4 flex justify-end">
             <Button variant="confirm" size="md" onClick={() => setFormTarget({ driverId: null })}>
               + Tambah Supir Baru
             </Button>

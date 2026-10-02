@@ -24,17 +24,17 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
   return (
     <section className="rounded-md border border-rule bg-surface">
       <div className="border-b border-rule px-5 py-4">
-        <h3 className="text-[15px] font-semibold text-ink">Armada &amp; Rincian Pembayaran</h3>
+        <h3 className="text-body font-semibold text-ink">Armada &amp; Rincian Pembayaran</h3>
       </div>
 
       <div className="space-y-4 px-5 py-4">
         <div className="flex items-start gap-4 rounded-sm border border-rule bg-canvas p-3">
-          <div className="flex h-16 w-[72px] shrink-0 items-center justify-center rounded-sm border border-rule bg-surface text-[11px] text-ink-soft">
+          <div className="flex h-16 w-[72px] shrink-0 items-center justify-center rounded-sm border border-rule bg-surface text-micro text-ink-soft">
             [Foto unit]
           </div>
           <div className="min-w-0">
-            <p className="text-[13px] font-semibold text-ink">{vehicle.name}</p>
-            <p className="mt-1 text-[11px] text-ink-soft">Plat {vehicle.plate}</p>
+            <p className="text-meta font-semibold text-ink">{vehicle.name}</p>
+            <p className="mt-1 text-micro text-ink-soft">Plat {vehicle.plate}</p>
             <div className="mt-2 flex flex-wrap gap-2">
               <StatusChip tone={booking.driverStatus ? "available" : "neutral"}>
                 {vehicle.status === "tersedia" ? "Unit siap di pool" : "Perlu cek unit"}
@@ -49,19 +49,19 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
         </div>
 
         <div>
-          <p className="text-[10px] font-bold uppercase text-ink-soft">
+          <p className="text-micro font-bold uppercase text-ink-soft">
             Rincian tagihan &amp; penyesuaian biaya
           </p>
           <ul className="mt-3 divide-y divide-rule">
             {items.map((item) => (
               <li key={item.id} className="flex items-start justify-between gap-4 py-2">
                 <span className="min-w-0">
-                  <span className="block text-xs text-ink">{item.label}</span>
+                  <span className="block text-meta text-ink">{item.label}</span>
                   {item.note ? (
-                    <span className="mt-1 block text-[11px] text-ink-soft">{item.note}</span>
+                    <span className="mt-1 block text-micro text-ink-soft">{item.note}</span>
                   ) : null}
                 </span>
-                <span className="tabular-nums shrink-0 text-xs font-semibold text-ink">
+                <span className="tabular-nums shrink-0 text-meta font-semibold text-ink">
                   {item.amount ?? AMOUNT_PLACEHOLDER}
                 </span>
               </li>
@@ -76,12 +76,12 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
 
         <div className="rounded-sm border border-rule bg-canvas px-4 py-3">
           <div className="flex items-baseline justify-between gap-4">
-            <span className="text-[11px] font-bold uppercase text-ink-soft">
+            <span className="text-micro font-bold uppercase text-ink-soft">
               Total tagihan bersih
             </span>
-            <span className="text-lg font-bold text-ink">{AMOUNT_PLACEHOLDER}</span>
+            <span className="text-subtitle font-bold text-ink">{AMOUNT_PLACEHOLDER}</span>
           </div>
-          <p className="mt-1 text-[11px] text-ink-soft">{TARIFF_PENDING_NOTE}</p>
+          <p className="mt-1 text-micro text-ink-soft">{TARIFF_PENDING_NOTE}</p>
         </div>
 
         {canDecide ? (
@@ -102,7 +102,7 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
           </div>
         ) : (
           <div className="rounded-sm border border-rule bg-canvas px-4 py-3">
-            <p className="text-xs font-medium text-ink">
+            <p className="text-meta font-medium text-ink">
               {status === "ditolak"
                 ? "Permintaan sewa ditolak. Status tersimpan di perangkat ini saja sampai backend tersambung."
                 : "Tarif sudah dikonfirmasi. Perubahan tarif berikutnya lewat penyesuaian biaya baru."}
@@ -110,7 +110,7 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
           </div>
         )}
 
-        <p className="text-[11px] text-ink-soft">
+        <p className="text-micro text-ink-soft">
           Status booking sekarang: <StatusChip tone={statusMeta.tone}>{statusMeta.label}</StatusChip>{" "}
           &middot; Status pada siklus backend: {statusMeta.canonical}
         </p>

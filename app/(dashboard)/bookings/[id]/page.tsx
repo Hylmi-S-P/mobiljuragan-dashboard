@@ -65,9 +65,9 @@ export default async function BookingDetailPage({
             <div className="mt-5 grid gap-4 sm:grid-cols-3">
               {isDriverService ? (
                 <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase text-ink-soft">Supir bertugas</p>
+                  <p className="text-micro font-bold uppercase text-ink-soft">Supir bertugas</p>
                   <div className="mt-1 flex items-center gap-2">
-                    <span className="truncate text-[13px] font-medium text-ink">
+                    <span className="truncate text-meta font-medium text-ink">
                       {booking.driverName}
                     </span>
                     {booking.driverStatus ? (

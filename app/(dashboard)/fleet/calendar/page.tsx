@@ -86,7 +86,7 @@ export default function FleetCalendarPage() {
           <div className="mt-4">
             <Link
               href="/bookings"
-              className="inline-flex h-11 items-center rounded-sm border border-rule-strong px-4 text-sm font-medium text-ink hover:bg-canvas"
+              className="inline-flex h-11 items-center rounded-sm border border-rule-strong px-4 text-body font-medium text-ink hover:bg-canvas"
             >
               Buka Booking Masuk
             </Link>

@@ -43,9 +43,9 @@ export function Toggle({
           />
         </span>
       </button>
-      <span className="text-[13px] font-semibold text-ink">{checked ? labelOn : labelOff}</span>
+      <span className="text-meta font-semibold text-ink">{checked ? labelOn : labelOff}</span>
       {disabled && disabledReason ? (
-        <span className="text-[11px] text-ink-soft">{disabledReason}</span>
+        <span className="text-micro text-ink-soft">{disabledReason}</span>
       ) : null}
     </div>
   );

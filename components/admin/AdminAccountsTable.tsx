@@ -35,7 +35,7 @@ export function AdminAccountsTable() {
       </DataNotice>
 
       {notice ? (
-        <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-xs text-ink">
+        <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-meta text-ink">
           {notice}
         </p>
       ) : null}
@@ -76,10 +76,7 @@ export function AdminAccountsTable() {
             </TableBody>
           </Table>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-medium text-ink">
-              Akun tidak dihapus, hanya dinonaktifkan, supaya jejak audit tetap utuh.
-            </p>
+          <div className="mt-4 flex justify-end">
             <Button variant="confirm" size="md" onClick={() => setFormTarget({ accountId: null })}>
               + Buat Akun Admin Baru
             </Button>

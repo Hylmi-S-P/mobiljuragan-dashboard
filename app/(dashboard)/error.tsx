@@ -18,7 +18,7 @@ export default function DashboardError({
         onRetry={reset}
       />
       {error.digest ? (
-        <p className="mt-3 text-xs text-ink-soft">Kode kejadian untuk laporan: {error.digest}</p>
+        <p className="mt-3 text-meta text-ink-soft">Kode kejadian untuk laporan: {error.digest}</p>
       ) : null}
     </>
   );

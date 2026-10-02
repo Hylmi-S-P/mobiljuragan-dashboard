@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { DataNotice } from "@/components/ui/DataNotice";
+import { PlateBadge } from "@/components/ui/PlateBadge";
 import { Panel, ScreenHeader } from "@/components/ui/ScreenHeader";
 import { StatusChip } from "@/components/ui/StatusChip";
 import {
@@ -11,16 +12,14 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@/components/ui/Table";
-import { BOOKING_STATUS, RENTAL_STATUS_ORDER, VEHICLE_STATUS } from "@/lib/labels";
+import { IconArrowRight, IconCalendar, IconCar, IconInbox } from "@/components/ui/icons";
+import { BOOKING_STATUS } from "@/lib/labels";
 import { formatDateRange } from "@/lib/format";
 import { BOOKINGS, SAMPLE_DATA_LABEL, VEHICLES, vehicleById } from "@/lib/mockData";
 
 export default function OverviewPage() {
   const queue = BOOKINGS.filter((booking) => booking.status === "perlu_konfirmasi_tarif");
-  const fleetCounts = RENTAL_STATUS_ORDER.map((status) => ({
-    status,
-    count: VEHICLES.filter((vehicle) => vehicle.status === status).length,
-  }));
+  const unitTersedia = VEHICLES.filter((vehicle) => vehicle.status === "tersedia");
 
   return (
     <>
@@ -35,31 +34,47 @@ export default function OverviewPage() {
       </DataNotice>
 
       <div className="mt-4">
-        <Panel title="Booking menunggu konfirmasi">
+        <Panel
+          title="Booking menunggu konfirmasi"
+          icon={<IconInbox />}
+          action={
+            queue.length > 0 ? (
+              <span className="text-meta tabular-nums text-ink-soft">
+                {queue.length} dari {BOOKINGS.length} pesanan
+              </span>
+            ) : null
+          }
+        >
           {queue.length === 0 ? (
-            <div className="rounded-sm border border-rule bg-canvas px-4 py-6">
-              <p className="text-sm font-semibold text-ink">
-                Belum ada booking yang menunggu konfirmasi.
-              </p>
-              <p className="mt-1 text-sm text-ink-soft">
-                Buka Booking Masuk untuk memeriksa permintaan baru.
-              </p>
+            <div className="flex flex-col items-start gap-3 rounded-md border border-rule bg-canvas px-5 py-7">
+              <span className="text-ink-soft">
+                <IconInbox className="h-6 w-6" />
+              </span>
+              <div>
+                <p className="text-body font-semibold text-ink">
+                  Belum ada booking yang menunggu konfirmasi.
+                </p>
+                <p className="mt-1 text-meta text-ink-soft">
+                  Buka Booking Masuk untuk memeriksa permintaan baru.
+                </p>
+              </div>
               <Link
                 href="/bookings"
-                className="mt-3 inline-flex h-11 items-center rounded-sm border border-rule-strong px-4 text-sm font-medium text-ink hover:bg-surface"
+                className="inline-flex h-11 items-center gap-2 rounded-sm border border-rule-strong px-4 text-body font-medium text-ink hover:bg-surface"
               >
                 Buka Booking Masuk
+                <IconArrowRight className="h-4 w-4" />
               </Link>
             </div>
           ) : (
             <Table caption="Booking yang menunggu konfirmasi tarif">
               <TableHead>
                 <TableRow>
-                  <TableHeaderCell className="w-[220px]">Pemesan</TableHeaderCell>
-                  <TableHeaderCell className="w-[270px]">Kendaraan</TableHeaderCell>
+                  <TableHeaderCell className="w-[210px]">Pemesan</TableHeaderCell>
+                  <TableHeaderCell className="w-[300px]">Kendaraan</TableHeaderCell>
                   <TableHeaderCell className="w-[180px]">Tanggal</TableHeaderCell>
                   <TableHeaderCell className="w-[180px]">Status</TableHeaderCell>
-                  <TableHeaderCell className="w-[286px]">Aksi</TableHeaderCell>
+                  <TableHeaderCell className="w-[266px]">Aksi</TableHeaderCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -68,12 +83,21 @@ export default function OverviewPage() {
                   const status = BOOKING_STATUS[booking.status];
                   return (
                     <TableRow key={booking.id}>
-                      <TableCell className="font-semibold">{booking.customerName}</TableCell>
                       <TableCell>
-                        <span className="font-semibold">{vehicle?.name}</span>
-                        <span className="ml-1 text-ink-soft">({vehicle?.plate})</span>
+                        <span className="block text-body font-semibold text-ink">
+                          {booking.customerName}
+                        </span>
+                        <span className="mt-0.5 block text-micro text-ink-soft">
+                          {booking.code}
+                        </span>
                       </TableCell>
                       <TableCell>
+                        <span className="block text-body font-medium text-ink">{vehicle?.name}</span>
+                        {vehicle ? (
+                          <PlateBadge plate={vehicle.plate} className="mt-1" />
+                        ) : null}
+                      </TableCell>
+                      <TableCell className="text-body tabular-nums">
                         {formatDateRange(booking.startDate, booking.endDate, booking.dayCount)}
                       </TableCell>
                       <TableCell>
@@ -82,9 +106,10 @@ export default function OverviewPage() {
                       <TableCell>
                         <Link
                           href={`/bookings/${booking.id}`}
-                          className="inline-flex h-11 items-center rounded-sm border border-rule-strong px-3 text-sm font-medium text-ink hover:bg-canvas"
+                          className="inline-flex h-11 items-center gap-2 rounded-sm border border-rule-strong px-3.5 text-body font-medium text-ink hover:bg-canvas"
                         >
                           Detail &amp; Verifikasi
+                          <IconArrowRight className="h-4 w-4" />
                         </Link>
                       </TableCell>
                     </TableRow>
@@ -96,30 +121,41 @@ export default function OverviewPage() {
         </Panel>
       </div>
 
-      <div className="mt-4 grid gap-4 lg:grid-cols-2">
-        <Panel title="Status armada">
-          <ul className="flex flex-wrap gap-2">
-            {fleetCounts.map(({ status, count }) => (
-              <li key={status} className="flex items-center gap-2">
-                <StatusChip tone={VEHICLE_STATUS[status].tone}>{VEHICLE_STATUS[status].label}</StatusChip>
-                <span className="tabular-nums text-sm text-ink-soft">{count} unit</span>
+      <div className="mt-4 grid items-start gap-4 lg:grid-cols-2">
+        <Panel title="Status armada" icon={<IconCar />}>
+          <ul className="grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+            {unitTersedia.map((vehicle) => (
+              <li key={vehicle.id} className="flex items-center gap-2.5 text-body text-ink">
+                <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-teal" />
+                {vehicle.name}
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-sm text-ink-soft">
+
+          <p className="mt-4 border-t border-row-line pt-3 text-meta text-ink-soft">
             Status unit diubah dari detail kendaraan di Katalog &amp; CMS.
           </p>
         </Panel>
 
-        <Panel title="Kalender armada">
-          <p className="text-sm font-medium text-ink">Jadwal operasional</p>
-          <p className="mt-2 text-sm text-ink-soft">Belum ada jadwal armada untuk ditampilkan.</p>
-          <Link
-            href="/fleet/calendar"
-            className="mt-3 inline-flex h-11 items-center rounded-sm border border-rule-strong px-4 text-sm font-medium text-ink hover:bg-canvas"
-          >
-            Buka Kalender Armada
-          </Link>
+        <Panel title="Kalender armada" icon={<IconCalendar />}>
+          <div className="flex flex-col items-start gap-3 rounded-md border border-rule bg-canvas px-5 py-7">
+            <span className="text-ink-soft">
+              <IconCalendar className="h-6 w-6" />
+            </span>
+            <div>
+              <p className="text-body font-semibold text-ink">Jadwal operasional</p>
+              <p className="mt-1 text-meta text-ink-soft">
+                Belum ada jadwal armada untuk ditampilkan.
+              </p>
+            </div>
+            <Link
+              href="/fleet/calendar"
+              className="inline-flex h-11 items-center gap-2 rounded-sm border border-rule-strong px-4 text-body font-medium text-ink hover:bg-surface"
+            >
+              Buka Kalender Armada
+              <IconArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </Panel>
       </div>
     </>

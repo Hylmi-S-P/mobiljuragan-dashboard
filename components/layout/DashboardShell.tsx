@@ -12,7 +12,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
     <div className="flex min-h-dvh">
       <a
         href="#konten"
-        className="sr-only rounded-sm bg-surface px-4 py-2 text-sm font-medium text-ink shadow-card focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50"
+        className="sr-only rounded-sm bg-surface px-4 py-2 text-body font-medium text-ink shadow-card focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50"
       >
         Lewati ke konten
       </a>

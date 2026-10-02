@@ -8,7 +8,7 @@ export const WORKSPACE_ROLE = "Admin portal";
 /* IA kanonik dari rencana slicing bagian 2.2. Grup "Manajemen Armada" tidak punya halaman sendiri,
    jadi kepala grup dirender sebagai tombol akordeon, bukan tautan. */
 export const NAV_ENTRIES: NavEntry[] = [
-  { label: "Ringkasan", href: "/" },
+  { label: "Dashboard", href: "/" },
   { label: "Pemesanan Masuk", href: "/bookings" },
   {
     label: "Manajemen Armada",

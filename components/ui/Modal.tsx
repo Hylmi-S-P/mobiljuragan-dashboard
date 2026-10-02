@@ -81,10 +81,10 @@ export function Modal({ open, onClose, title, description, children, footer }: M
       >
         <div className="flex items-start justify-between gap-4 border-b border-rule px-6 py-4">
           <div className="min-w-0">
-            <h2 id={titleId} className="text-lg font-semibold text-ink">
+            <h2 id={titleId} className="text-subtitle font-semibold text-ink">
               {title}
             </h2>
-            {description ? <p className="mt-1 text-sm text-ink-soft">{description}</p> : null}
+            {description ? <p className="mt-1 text-body text-ink-soft">{description}</p> : null}
           </div>
           <Button variant="ghost" onClick={onClose}>
             Tutup

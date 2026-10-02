@@ -27,10 +27,10 @@ export function DeleteDriverModal({ driver, onClose, onConfirm }: Props) {
         </>
       }
     >
-      <p className="text-sm text-ink">
+      <p className="text-body text-ink">
         {driver.label} akan dihapus dari roster supir MobilJuragan.
       </p>
-      <p className="mt-3 rounded-sm border border-rule bg-canvas px-3 py-2 text-xs text-ink-soft">
+      <p className="mt-3 rounded-sm border border-rule bg-canvas px-3 py-2 text-meta text-ink-soft">
         Periksa statusnya lebih dulu. Kalau supir sedang bertugas, selesaikan atau ubah statusnya
         menjadi Libur daripada menghapus datanya.
       </p>

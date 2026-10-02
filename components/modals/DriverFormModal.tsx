@@ -70,7 +70,7 @@ export function DriverFormModal({ driver, onClose, onSave }: Props) {
     >
       <div className="space-y-4">
         <div>
-          <label htmlFor={`${fieldId}-label`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-label`} className="block text-meta font-medium text-ink">
             Nama lengkap supir
           </label>
           <input
@@ -79,18 +79,18 @@ export function DriverFormModal({ driver, onClose, onSave }: Props) {
             onChange={(event) => setLabel(event.target.value)}
             aria-invalid={Boolean(errors.label)}
             aria-describedby={errors.label ? `${fieldId}-label-error` : undefined}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Nama sesuai KTP"
           />
           {errors.label ? (
-            <p id={`${fieldId}-label-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-label-error`} className="mt-1 text-meta text-danger">
               {errors.label}
             </p>
           ) : null}
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-contact`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-contact`} className="block text-meta font-medium text-ink">
             Nomor kontak WhatsApp
           </label>
           <input
@@ -100,29 +100,29 @@ export function DriverFormModal({ driver, onClose, onSave }: Props) {
             onChange={(event) => setContact(event.target.value)}
             aria-invalid={Boolean(errors.contact)}
             aria-describedby={errors.contact ? `${fieldId}-contact-error` : `${fieldId}-contact-hint`}
-            className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="+62 ..."
           />
           {errors.contact ? (
-            <p id={`${fieldId}-contact-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-contact-error`} className="mt-1 text-meta text-danger">
               {errors.contact}
             </p>
           ) : (
-            <p id={`${fieldId}-contact-hint`} className="mt-1 text-[11px] text-ink-soft">
+            <p id={`${fieldId}-contact-hint`} className="mt-1 text-micro text-ink-soft">
               Diisi manual oleh admin, bukan data contoh dari sistem.
             </p>
           )}
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-route`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-route`} className="block text-meta font-medium text-ink">
             Rute penugasan operasional
           </label>
           <select
             id={`${fieldId}-route`}
             value={route}
             onChange={(event) => setRoute(event.target.value as DriverRoute)}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
           >
             {Object.entries(DRIVER_ROUTE).map(([value, text]) => (
               <option key={value} value={value}>
@@ -133,7 +133,7 @@ export function DriverFormModal({ driver, onClose, onSave }: Props) {
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-license`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-license`} className="block text-meta font-medium text-ink">
             Nomor SIM (SIM A atau SIM B1)
           </label>
           <input
@@ -142,29 +142,29 @@ export function DriverFormModal({ driver, onClose, onSave }: Props) {
             onChange={(event) => setLicenseNumber(event.target.value)}
             aria-invalid={Boolean(errors.licenseNumber)}
             aria-describedby={errors.licenseNumber ? `${fieldId}-license-error` : `${fieldId}-license-hint`}
-            className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Nomor SIM sesuai dokumen"
           />
           {errors.licenseNumber ? (
-            <p id={`${fieldId}-license-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-license-error`} className="mt-1 text-meta text-danger">
               {errors.licenseNumber}
             </p>
           ) : (
-            <p id={`${fieldId}-license-hint`} className="mt-1 text-[11px] text-ink-soft">
+            <p id={`${fieldId}-license-hint`} className="mt-1 text-micro text-ink-soft">
               Boleh dikosongkan dulu; nomor SIM diisi manual dari dokumen fisik supir.
             </p>
           )}
         </div>
 
         <div className="rounded-sm border border-rule bg-canvas px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase text-ink-soft">ID supir</p>
-          <p className="mt-1 text-[13px] text-ink">
+          <p className="text-micro font-semibold uppercase text-ink-soft">ID supir</p>
+          <p className="mt-1 text-meta text-ink">
             {driver ? driver.id : "Dibuat sistem saat data disimpan"}
           </p>
         </div>
 
         {driver ? null : (
-          <p className="text-[11px] text-ink-soft">
+          <p className="text-micro text-ink-soft">
             Status awal supir baru adalah Siaga. Ubah lewat sakelar di roster kalau belum bisa
             ditugaskan.
           </p>

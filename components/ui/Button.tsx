@@ -15,8 +15,8 @@ const VARIANTS: Record<Variant, string> = {
 
 /* Semua tinggi minimal 44px supaya target sentuh tetap aman di layar sempit. */
 const SIZES: Record<Size, string> = {
-  sm: "h-11 px-3 text-sm",
-  md: "h-12 px-5 text-sm",
+  sm: "h-11 px-3 text-body",
+  md: "h-12 px-5 text-body",
 };
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -34,7 +34,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
       {...props}
     />
   );

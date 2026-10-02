@@ -61,14 +61,14 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
     >
       <div className="space-y-4">
         <div>
-          <label htmlFor={`${fieldId}-category`} className="block text-[11px] font-semibold text-ink">
+          <label htmlFor={`${fieldId}-category`} className="block text-micro font-semibold text-ink">
             Kategori penyesuaian biaya
           </label>
           <select
             id={`${fieldId}-category`}
             value={category}
             onChange={(event) => setCategory(event.target.value)}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
           >
             {SURCHARGE_CATEGORIES.map((option) => (
               <option key={option} value={option}>
@@ -81,7 +81,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
         <div>
           <label
             htmlFor={`${fieldId}-description`}
-            className="block text-[11px] font-semibold text-ink"
+            className="block text-micro font-semibold text-ink"
           >
             Deskripsi rincian penyesuaian
           </label>
@@ -91,11 +91,11 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
             onChange={(event) => setDescription(event.target.value)}
             aria-invalid={Boolean(errors.description)}
             aria-describedby={errors.description ? `${fieldId}-description-error` : undefined}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Contoh: tambahan konsumsi BBM untuk rute tanah"
           />
           {errors.description ? (
-            <p id={`${fieldId}-description-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-description-error`} className="mt-1 text-meta text-danger">
               {errors.description}
             </p>
           ) : null}
@@ -103,7 +103,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor={`${fieldId}-amount`} className="block text-[11px] font-semibold text-ink">
+            <label htmlFor={`${fieldId}-amount`} className="block text-micro font-semibold text-ink">
               Nominal penyesuaian
             </label>
             <input
@@ -113,18 +113,18 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
               onChange={(event) => setAmount(formatCurrencyInput(event.target.value))}
               aria-invalid={Boolean(errors.amount)}
               aria-describedby={errors.amount ? `${fieldId}-amount-error` : undefined}
-              className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+              className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
               placeholder="Rp 0"
             />
             {errors.amount ? (
-              <p id={`${fieldId}-amount-error`} className="mt-1 text-xs text-danger">
+              <p id={`${fieldId}-amount-error`} className="mt-1 text-meta text-danger">
                 {errors.amount}
               </p>
             ) : null}
           </div>
 
           <fieldset>
-            <legend className="text-[11px] font-semibold text-ink">Tipe perhitungan</legend>
+            <legend className="text-micro font-semibold text-ink">Tipe perhitungan</legend>
             <div className="mt-1 flex gap-2">
               <Button
                 variant={direction === "tambah" ? "confirm" : "outline"}
@@ -147,7 +147,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
         <div>
           <label
             htmlFor={`${fieldId}-justification`}
-            className="block text-[11px] font-semibold text-ink"
+            className="block text-micro font-semibold text-ink"
           >
             Catatan justifikasi operasional (wajib untuk audit internal)
           </label>
@@ -158,17 +158,17 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
             rows={3}
             aria-invalid={Boolean(errors.justification)}
             aria-describedby={errors.justification ? `${fieldId}-justification-error` : undefined}
-            className="mt-1 w-full rounded-sm border border-rule-strong bg-canvas px-3 py-2 text-sm text-ink"
+            className="mt-1 w-full rounded-sm border border-rule-strong bg-canvas px-3 py-2 text-body text-ink"
             placeholder="Alasan operasional penyesuaian ini"
           />
           {errors.justification ? (
-            <p id={`${fieldId}-justification-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-justification-error`} className="mt-1 text-meta text-danger">
               {errors.justification}
             </p>
           ) : null}
         </div>
 
-        <div className="rounded-sm border border-rule bg-canvas px-4 py-3 text-[11px] text-ink-soft">
+        <div className="rounded-sm border border-rule bg-canvas px-4 py-3 text-micro text-ink-soft">
           <p>Estimasi awal booking: {AMOUNT_PLACEHOLDER}</p>
           <p className="mt-1">
             Penyesuaian manual: {amount.trim().length > 0 ? amount.trim() : AMOUNT_PLACEHOLDER}
@@ -178,7 +178,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
           </p>
         </div>
 
-        <p className="text-[11px] text-ink-soft">
+        <p className="text-micro text-ink-soft">
           Penyesuaian tercatat dalam audit operasional dan hanya berlaku selama sesi ini sampai
           backend tersambung.
         </p>

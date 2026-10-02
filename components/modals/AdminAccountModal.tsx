@@ -76,7 +76,7 @@ export function AdminAccountModal({ account, existingUsernames, onClose, onSave 
     >
       <div className="space-y-4">
         <div>
-          <label htmlFor={`${fieldId}-name`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-name`} className="block text-meta font-medium text-ink">
             Nama lengkap staf atau admin
           </label>
           <input
@@ -85,25 +85,25 @@ export function AdminAccountModal({ account, existingUsernames, onClose, onSave 
             onChange={(event) => setName(event.target.value)}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? `${fieldId}-name-error` : undefined}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Nama sesuai data staf"
           />
           {errors.name ? (
-            <p id={`${fieldId}-name-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-name-error`} className="mt-1 text-meta text-danger">
               {errors.name}
             </p>
           ) : null}
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-role`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-role`} className="block text-meta font-medium text-ink">
             Peran dan hak akses
           </label>
           <select
             id={`${fieldId}-role`}
             value={role}
             onChange={(event) => setRole(event.target.value as AdminRole)}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
           >
             {Object.entries(ADMIN_ROLE).map(([value, label]) => (
               <option key={value} value={value}>
@@ -115,7 +115,7 @@ export function AdminAccountModal({ account, existingUsernames, onClose, onSave 
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor={`${fieldId}-username`} className="block text-[13px] font-medium text-ink">
+            <label htmlFor={`${fieldId}-username`} className="block text-meta font-medium text-ink">
               Username
             </label>
             <input
@@ -124,18 +124,18 @@ export function AdminAccountModal({ account, existingUsernames, onClose, onSave 
               onChange={(event) => setUsername(event.target.value)}
               aria-invalid={Boolean(errors.username)}
               aria-describedby={errors.username ? `${fieldId}-username-error` : undefined}
-              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
               placeholder="nama.staf"
             />
             {errors.username ? (
-              <p id={`${fieldId}-username-error`} className="mt-1 text-xs text-danger">
+              <p id={`${fieldId}-username-error`} className="mt-1 text-meta text-danger">
                 {errors.username}
               </p>
             ) : null}
           </div>
 
           <div>
-            <label htmlFor={`${fieldId}-password`} className="block text-[13px] font-medium text-ink">
+            <label htmlFor={`${fieldId}-password`} className="block text-meta font-medium text-ink">
               Sandi
             </label>
             <input
@@ -146,14 +146,14 @@ export function AdminAccountModal({ account, existingUsernames, onClose, onSave 
               onChange={(event) => setPassword(event.target.value)}
               aria-invalid={Boolean(errors.password)}
               aria-describedby={errors.password ? `${fieldId}-password-error` : `${fieldId}-password-hint`}
-              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             />
             {errors.password ? (
-              <p id={`${fieldId}-password-error`} className="mt-1 text-xs text-danger">
+              <p id={`${fieldId}-password-error`} className="mt-1 text-meta text-danger">
                 {errors.password}
               </p>
             ) : (
-              <p id={`${fieldId}-password-hint`} className="mt-1 text-[11px] text-ink-soft">
+              <p id={`${fieldId}-password-hint`} className="mt-1 text-micro text-ink-soft">
                 {account
                   ? "Biarkan kosong kalau sandi tidak diganti."
                   : `Minimal ${MIN_PASSWORD_LENGTH} karakter.`}
@@ -164,7 +164,7 @@ export function AdminAccountModal({ account, existingUsernames, onClose, onSave 
 
         {account ? (
           <fieldset>
-            <legend className="text-[13px] font-medium text-ink">Status akun</legend>
+            <legend className="text-meta font-medium text-ink">Status akun</legend>
             <div className="mt-2 flex gap-2">
               <Button
                 variant={active ? "confirm" : "outline"}
@@ -185,13 +185,13 @@ export function AdminAccountModal({ account, existingUsernames, onClose, onSave 
         ) : null}
 
         <div className="rounded-sm border border-rule bg-canvas px-4 py-3">
-          <p className="text-[11px] font-semibold uppercase text-ink-soft">Nomor induk staf (NIP)</p>
-          <p className="mt-1 text-[13px] text-ink">
+          <p className="text-micro font-semibold uppercase text-ink-soft">Nomor induk staf (NIP)</p>
+          <p className="mt-1 text-meta text-ink">
             {account ? account.id : "Dibuat sistem saat akun disimpan"}
           </p>
         </div>
 
-        <p className="text-[11px] text-ink-soft">
+        <p className="text-micro text-ink-soft">
           Sandi tidak disimpan di prototipe ini. Penyimpanan dan pemeriksaan kredensial dilakukan
           backend saat tersambung.
         </p>

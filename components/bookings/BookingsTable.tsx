@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
+import { PlateBadge } from "@/components/ui/PlateBadge";
 import { Panel } from "@/components/ui/ScreenHeader";
 import { StatusChip } from "@/components/ui/StatusChip";
+import { IconArrowRight } from "@/components/ui/icons";
 import {
   Table,
   TableBody,
@@ -56,7 +58,7 @@ export function BookingsTable() {
     <Panel>
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="min-w-0 flex-1">
-          <label htmlFor="booking-search" className="block text-[13px] font-medium text-ink">
+          <label htmlFor="booking-search" className="block text-meta font-medium text-ink">
             Cari pemesan, kode booking, atau plat
           </label>
           <input
@@ -64,18 +66,18 @@ export function BookingsTable() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Contoh: Maria, BK-MRK, PA8593GZ"
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
           />
         </div>
         <div className="sm:w-64">
-          <label htmlFor="booking-status" className="block text-[13px] font-medium text-ink">
+          <label htmlFor="booking-status" className="block text-meta font-medium text-ink">
             Status pesanan
           </label>
           <select
             id="booking-status"
             value={status}
             onChange={(event) => setStatus(event.target.value as "semua" | BookingStatus)}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
           >
             <option value="semua">Semua status</option>
             {Object.entries(BOOKING_STATUS).map(([value, meta]) => (
@@ -89,10 +91,10 @@ export function BookingsTable() {
 
       {filtered.length === 0 ? (
         <div className="rounded-sm border border-rule bg-canvas px-4 py-6">
-          <p className="text-sm font-semibold text-ink">
+          <p className="text-body font-semibold text-ink">
             Tidak ada booking yang cocok dengan filter itu.
           </p>
-          <p className="mt-1 text-sm text-ink-soft">
+          <p className="mt-1 text-body text-ink-soft">
             Kosongkan kata kunci atau pilih semua status untuk melihat seluruh antrean.
           </p>
           <Button variant="outline" className="mt-3" onClick={resetFilters}>
@@ -117,16 +119,18 @@ export function BookingsTable() {
               return (
                 <TableRow key={booking.id}>
                   <TableCell>
-                    <span className="block font-semibold">{booking.customerName}</span>
-                    <span className="mt-1 block text-xs text-ink-soft">
+                    <span className="block text-body font-semibold text-ink">
+                      {booking.customerName}
+                    </span>
+                    <span className="mt-0.5 block text-micro text-ink-soft">
                       {booking.code} &bull; {BOOKING_MODE_LABEL[booking.mode]}
                     </span>
                   </TableCell>
                   <TableCell>
-                    <span className="block font-semibold">{vehicle?.name}</span>
-                    <span className="mt-1 block text-xs text-ink-soft">{vehicle?.plate}</span>
+                    <span className="block text-body font-medium text-ink">{vehicle?.name}</span>
+                    {vehicle ? <PlateBadge plate={vehicle.plate} className="mt-1" /> : null}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-body tabular-nums">
                     {formatDateRange(booking.startDate, booking.endDate, booking.dayCount)}
                   </TableCell>
                   <TableCell>
@@ -135,9 +139,10 @@ export function BookingsTable() {
                   <TableCell>
                     <Link
                       href={`/bookings/${booking.id}`}
-                      className="inline-flex h-11 items-center rounded-sm border border-rule-strong px-3 text-sm font-medium text-ink hover:bg-canvas"
+                      className="inline-flex h-11 items-center gap-2 rounded-sm border border-rule-strong px-3.5 text-body font-medium text-ink hover:bg-canvas"
                     >
                       {ACTION_LABEL[booking.status]}
+                      <IconArrowRight className="h-4 w-4" />
                     </Link>
                   </TableCell>
                 </TableRow>
@@ -148,10 +153,10 @@ export function BookingsTable() {
       )}
 
       <div className="mt-4 space-y-2">
-        <p className="text-xs text-ink-soft">
+        <p className="text-meta text-ink-soft">
           KTP dan SIM A asli diverifikasi fisik oleh staf saat serah terima unit di pool.
         </p>
-        <p className="text-sm font-medium text-ink">
+        <p className="text-body font-medium text-ink">
           Aksi operasional: buka detail pemesanan, tentukan tarif final dan surcharge, alokasikan
           supir resmi, atau tolak reservasi.
         </p>

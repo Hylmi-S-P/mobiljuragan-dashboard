@@ -113,7 +113,7 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
     >
       <div className="space-y-4">
         <div>
-          <label htmlFor={`${fieldId}-name`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-name`} className="block text-meta font-medium text-ink">
             Nama lengkap model kendaraan
           </label>
           <input
@@ -122,18 +122,18 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
             onChange={(event) => setName(event.target.value)}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? `${fieldId}-name-error` : undefined}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Contoh: AVANZA G PUTIH"
           />
           {errors.name ? (
-            <p id={`${fieldId}-name-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-name-error`} className="mt-1 text-meta text-danger">
               {errors.name}
             </p>
           ) : null}
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-plate`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-plate`} className="block text-meta font-medium text-ink">
             Nomor plat kendaraan (Merauke)
           </label>
           <input
@@ -142,11 +142,11 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
             onChange={(event) => setPlate(event.target.value)}
             aria-invalid={Boolean(errors.plate)}
             aria-describedby={errors.plate ? `${fieldId}-plate-error` : undefined}
-            className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Contoh: PS1692B"
           />
           {errors.plate ? (
-            <p id={`${fieldId}-plate-error`} className="mt-1 text-xs text-danger">
+            <p id={`${fieldId}-plate-error`} className="mt-1 text-meta text-danger">
               {errors.plate}
             </p>
           ) : null}
@@ -154,14 +154,14 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
 
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
-            <label htmlFor={`${fieldId}-category`} className="block text-[13px] font-medium text-ink">
+            <label htmlFor={`${fieldId}-category`} className="block text-meta font-medium text-ink">
               Kategori armada
             </label>
             <select
               id={`${fieldId}-category`}
               value={category ?? ""}
               onChange={(event) => setCategory(event.target.value)}
-              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             >
               {VEHICLE_CATEGORY_OPTIONS.map((option) => (
                 <option key={option} value={option}>
@@ -174,7 +174,7 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
           <div>
             <label
               htmlFor={`${fieldId}-transmission`}
-              className="block text-[13px] font-medium text-ink"
+              className="block text-meta font-medium text-ink"
             >
               Tipe transmisi
             </label>
@@ -182,7 +182,7 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
               id={`${fieldId}-transmission`}
               value={transmission ?? ""}
               onChange={(event) => setTransmission(event.target.value)}
-              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             >
               {VEHICLE_TRANSMISSION_OPTIONS.map((option) => (
                 <option key={option} value={option}>
@@ -193,14 +193,14 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
           </div>
 
           <div>
-            <label htmlFor={`${fieldId}-seats`} className="block text-[13px] font-medium text-ink">
+            <label htmlFor={`${fieldId}-seats`} className="block text-meta font-medium text-ink">
               Kapasitas kursi
             </label>
             <select
               id={`${fieldId}-seats`}
               value={seats ?? VEHICLE_SEAT_OPTIONS[2]}
               onChange={(event) => setSeats(Number(event.target.value))}
-              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+              className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             >
               {VEHICLE_SEAT_OPTIONS.map((option) => (
                 <option key={option} value={option}>
@@ -212,20 +212,20 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-usage`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-usage`} className="block text-meta font-medium text-ink">
             Karakteristik penggunaan
           </label>
           <input
             id={`${fieldId}-usage`}
             value={usage}
             onChange={(event) => setUsage(event.target.value)}
-            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-sm text-ink"
+            className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Contoh: keluarga, efisien BBM, mobilitas dalam kota"
           />
         </div>
 
         <fieldset>
-          <legend className="text-[13px] font-medium text-ink">Status operasional armada</legend>
+          <legend className="text-meta font-medium text-ink">Status operasional armada</legend>
           <div className="mt-2 flex flex-wrap gap-2">
             {STATUS_OPTIONS.map((option) => (
               <Button
@@ -238,18 +238,18 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
               </Button>
             ))}
           </div>
-          <p className="mt-2 text-[11px] text-ink-soft">
+          <p className="mt-2 text-micro text-ink-soft">
             Status Disewa diisi otomatis dari booking aktif, jadi tidak bisa dipilih manual di sini.
           </p>
         </fieldset>
 
         <fieldset>
-          <legend className="text-[13px] font-medium text-ink">
+          <legend className="text-meta font-medium text-ink">
             Pilihan moda rental yang diizinkan
           </legend>
           <div className="mt-2 flex flex-wrap gap-4">
             {(["lepas_kunci", "dengan_supir"] as BookingMode[]).map((mode) => (
-              <label key={mode} className="flex items-center gap-2 text-sm text-ink">
+              <label key={mode} className="flex items-center gap-2 text-body text-ink">
                 <input
                   type="checkbox"
                   checked={modes.includes(mode)}
@@ -262,11 +262,11 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
               </label>
             ))}
           </div>
-          {errors.modes ? <p className="mt-1 text-xs text-danger">{errors.modes}</p> : null}
+          {errors.modes ? <p className="mt-1 text-meta text-danger">{errors.modes}</p> : null}
         </fieldset>
 
         <div>
-          <label htmlFor={`${fieldId}-photo`} className="block text-[13px] font-medium text-ink">
+          <label htmlFor={`${fieldId}-photo`} className="block text-meta font-medium text-ink">
             Foto unit armada (tampak depan atau samping)
           </label>
           <input
@@ -274,10 +274,10 @@ export function VehicleFormModal({ vehicle, existingPlates, onClose, onSave }: P
             type="file"
             accept="image/png,image/jpeg"
             onChange={(event) => handlePhoto(event.target.files?.[0])}
-            className="mt-1 w-full rounded-sm border border-rule-strong bg-canvas px-3 py-2 text-xs text-ink file:mr-3 file:h-8 file:rounded-sm file:border-0 file:bg-navy file:px-3 file:text-xs file:font-medium file:text-white"
+            className="mt-1 w-full rounded-sm border border-rule-strong bg-canvas px-3 py-2 text-meta text-ink file:mr-3 file:h-8 file:rounded-sm file:border-0 file:bg-navy file:px-3 file:text-meta file:font-medium file:text-white"
           />
-          {errors.photo ? <p className="mt-1 text-xs text-danger">{errors.photo}</p> : null}
-          <p className="mt-1 text-[11px] text-ink-soft">
+          {errors.photo ? <p className="mt-1 text-meta text-danger">{errors.photo}</p> : null}
+          <p className="mt-1 text-micro text-ink-soft">
             {photoName
               ? `Berkas dipilih: ${photoName}. Belum diunggah, menunggu backend penyimpanan.`
               : "PNG atau JPG, maksimal 5 MB. Foto tampil di katalog aplikasi pelanggan setelah backend tersambung."}

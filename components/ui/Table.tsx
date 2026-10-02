@@ -5,7 +5,7 @@ import type { ReactNode, TdHTMLAttributes, ThHTMLAttributes } from "react";
 export function Table({ children, caption }: { children: ReactNode; caption: string }) {
   return (
     <div className="overflow-x-auto rounded-md border border-rule bg-surface">
-      <table className="w-full min-w-[720px] border-collapse text-sm">
+      <table className="w-full min-w-[720px] border-collapse text-body">
         <caption className="sr-only">{caption}</caption>
         {children}
       </table>
@@ -14,7 +14,7 @@ export function Table({ children, caption }: { children: ReactNode; caption: str
 }
 
 export function TableHead({ children }: { children: ReactNode }) {
-  return <thead className="bg-canvas text-left text-xs font-medium text-ink-soft">{children}</thead>;
+  return <thead className="bg-canvas text-left text-meta font-medium text-ink-soft">{children}</thead>;
 }
 
 export function TableBody({ children }: { children: ReactNode }) {

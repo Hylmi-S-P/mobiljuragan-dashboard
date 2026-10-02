@@ -5,10 +5,31 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { NAV_ENTRIES, WORKSPACE_NAME, WORKSPACE_ROLE, isNavGroup } from "@/lib/navigation";
+import {
+  IconCar,
+  IconCalendar,
+  IconChat,
+  IconChevronDown,
+  IconDashboard,
+  IconInbox,
+  IconShield,
+  IconUsers,
+} from "@/components/ui/icons";
 
 type SidebarProps = {
   open: boolean;
   onClose: () => void;
+};
+
+/* Satu ikon per tujuan navigasi, semuanya dari keluarga ikon yang sama. */
+const IKON_NAV: Record<string, (props: { className?: string }) => React.ReactElement> = {
+  "/": IconDashboard,
+  "/bookings": IconInbox,
+  "/fleet/catalog": IconCar,
+  "/fleet/calendar": IconCalendar,
+  "/fleet/drivers": IconUsers,
+  "/customer-care": IconChat,
+  "/admin": IconShield,
 };
 
 export function Sidebar({ open, onClose }: SidebarProps) {
@@ -40,44 +61,68 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
       <aside
         aria-label="Navigasi utama"
-        className={`fixed inset-y-0 left-0 z-40 flex w-60 shrink-0 flex-col overflow-y-auto bg-navy px-6 py-7 lg:static lg:visible lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-[252px] shrink-0 flex-col overflow-y-auto bg-navy px-4 py-6 lg:static lg:visible lg:translate-x-0 ${
           open ? "visible translate-x-0" : "invisible -translate-x-full"
         }`}
       >
-        <p className="text-base font-semibold leading-snug text-white">{WORKSPACE_NAME}</p>
-        <p className="mt-2 text-[13px] text-white/75">{WORKSPACE_ROLE}</p>
+        <div className="px-2 pb-6">
+          <p className="text-body font-semibold leading-[1.3] tracking-[-0.01em] text-white">
+            {WORKSPACE_NAME}
+          </p>
+          <p className="mt-1.5 text-micro font-semibold uppercase text-on-navy-muted">
+            {WORKSPACE_ROLE}
+          </p>
+        </div>
 
-        <nav className="mt-8 flex flex-col gap-1">
+        <div aria-hidden="true" className="mb-4 h-px bg-navy-line" />
+
+        <nav className="flex flex-col gap-0.5">
           {NAV_ENTRIES.map((entry) => {
             if (isNavGroup(entry)) {
+              const IkonGrup = IconCar;
+              const grupAktif = fleetActive;
               return (
-                <div key={entry.label} className="flex flex-col gap-1">
+                <div key={entry.label} className="flex flex-col gap-0.5">
                   <button
                     type="button"
                     onClick={() => setFleetOverride(!fleetOpen)}
                     aria-expanded={fleetOpen}
-                    className="flex h-11 items-center justify-between rounded-nav px-3 text-sm font-medium text-white hover:bg-navy-hover"
+                    className={`flex h-11 items-center gap-2.5 rounded-nav px-3 text-body font-medium text-white transition-colors ${
+                      grupAktif && !fleetOpen ? "bg-navy-surface" : "hover:bg-navy-hover"
+                    }`}
                   >
-                    {entry.label}
-                    <span aria-hidden="true" className="text-xs">
-                      {fleetOpen ? "\u25B4" : "\u25BE"}
-                    </span>
+                    <IkonGrup className="h-[18px] w-[18px] shrink-0 text-white/85" />
+                    <span className="flex-1 whitespace-nowrap text-left">{entry.label}</span>
+                    <IconChevronDown
+                      className={`h-4 w-4 shrink-0 text-white/70 transition-transform duration-200 ${
+                        fleetOpen ? "rotate-180" : ""
+                      }`}
+                    />
                   </button>
+
                   {fleetOpen ? (
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-0.5 pb-1">
                       {entry.items.map((item) => {
                         const active = pathname.startsWith(item.href);
+                        const IkonItem = IKON_NAV[item.href] ?? IconCar;
                         return (
                           <Link
                             key={item.href}
                             href={item.href}
                             aria-current={active ? "page" : undefined}
                             onClick={onClose}
-                            className={`flex h-10 items-center rounded-nav pl-6 pr-3 text-sm font-medium ${
-                              active ? "bg-teal text-white" : "text-white/90 hover:bg-navy-hover"
+                            className={`ml-3 flex h-10 items-center gap-2.5 rounded-nav pl-3 pr-3 text-body font-medium transition-colors ${
+                              active
+                                ? "bg-teal text-white"
+                                : "text-white/85 hover:bg-navy-hover hover:text-white"
                             }`}
                           >
-                            {item.label}
+                            <IkonItem
+                              className={`h-[17px] w-[17px] shrink-0 ${
+                                active ? "text-white" : "text-white/70"
+                              }`}
+                            />
+                            <span className="truncate">{item.label}</span>
                           </Link>
                         );
                       })}
@@ -88,16 +133,18 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             }
 
             const active = pathname === entry.href;
+            const Ikon = IKON_NAV[entry.href] ?? IconDashboard;
             return (
               <Link
                 key={entry.href}
                 href={entry.href}
                 aria-current={active ? "page" : undefined}
                 onClick={onClose}
-                className={`flex h-11 items-center rounded-nav px-3 text-sm font-medium ${
-                  active ? "bg-teal text-white" : "text-white/90 hover:bg-navy-hover"
+                className={`flex h-11 items-center gap-2.5 rounded-nav px-3 text-body font-medium transition-colors ${
+                  active ? "bg-teal text-white" : "text-white/85 hover:bg-navy-hover hover:text-white"
                 }`}
               >
+                <Ikon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-white" : "text-white/70"}`} />
                 {entry.label}
               </Link>
             );

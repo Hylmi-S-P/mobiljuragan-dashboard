@@ -6,6 +6,7 @@ import { DeleteVehicleModal } from "@/components/modals/DeleteVehicleModal";
 import { VehicleFormModal } from "@/components/modals/VehicleFormModal";
 import { DataNotice } from "@/components/ui/DataNotice";
 import { Button } from "@/components/ui/Button";
+import { PlateBadge } from "@/components/ui/PlateBadge";
 import { Panel } from "@/components/ui/ScreenHeader";
 import { StatusChip } from "@/components/ui/StatusChip";
 import {
@@ -16,6 +17,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@/components/ui/Table";
+import { IconCar, IconPencil, IconPlus, IconTrash } from "@/components/ui/icons";
 import { SAMPLE_DATA_LABEL, VEHICLES } from "@/lib/mockData";
 import { VEHICLE_STATUS } from "@/lib/labels";
 
@@ -39,39 +41,39 @@ export function VehicleCatalogTable() {
       </DataNotice>
 
       {notice ? (
-        <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-xs text-ink">
+        <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-meta text-ink">
           {notice}
         </p>
       ) : null}
 
       <div className="mt-4">
-        <Panel>
+        <Panel title="Katalog armada resmi" icon={<IconCar />}>
           <Table caption="Katalog armada resmi MobilJuragan">
             <TableHead>
               <TableRow>
-                <TableHeaderCell className="w-[220px]">Kendaraan &amp; Kategori</TableHeaderCell>
-                <TableHeaderCell className="w-[256px]">Plat Nomor</TableHeaderCell>
-                <TableHeaderCell className="w-[180px]">Transmisi &amp; Kursi</TableHeaderCell>
-                <TableHeaderCell className="w-[180px]">Ketersediaan</TableHeaderCell>
-                <TableHeaderCell className="w-[300px]">Status &amp; Aksi CMS</TableHeaderCell>
+                <TableHeaderCell className="w-[260px]">Kendaraan &amp; Kategori</TableHeaderCell>
+                <TableHeaderCell className="w-[185px]">Plat Nomor</TableHeaderCell>
+                <TableHeaderCell className="w-[170px]">Transmisi &amp; Kursi</TableHeaderCell>
+                <TableHeaderCell className="w-[130px]">Ketersediaan</TableHeaderCell>
+                <TableHeaderCell className="w-[320px]">Status &amp; Aksi CMS</TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {vehicles.map((vehicle) => (
                 <TableRow key={vehicle.id}>
                   <TableCell>
-                    <span className="block font-semibold">{vehicle.name}</span>
-                    <span className="mt-1 block text-xs text-ink-soft">
-                      {vehicle.category ?? "[kategori belum diisi]"}
+                    <span className="block whitespace-nowrap text-body font-semibold text-ink">
+                      {vehicle.name}
                     </span>
-                    {vehicle.usage ? (
-                      <span className="mt-1 block text-[11px] text-ink-soft">{vehicle.usage}</span>
-                    ) : null}
-                  </TableCell>
-                  <TableCell className="font-semibold">
-                    {vehicle.plate} <span className="font-normal text-ink-soft">(Merauke)</span>
+                    <span className="mt-1 block truncate text-meta text-ink-soft">
+                      {vehicle.category ?? "[kategori belum diisi]"}
+                      {vehicle.usage ? ` • ${vehicle.usage}` : ""}
+                    </span>
                   </TableCell>
                   <TableCell>
+                    <PlateBadge plate={vehicle.plate} region="Merauke" />
+                  </TableCell>
+                  <TableCell className="whitespace-nowrap text-body tabular-nums">
                     {vehicle.transmission && vehicle.seats
                       ? `${vehicle.transmission} • ${vehicle.seats} Kursi`
                       : "[belum diisi]"}
@@ -82,14 +84,18 @@ export function VehicleCatalogTable() {
                     </StatusChip>
                   </TableCell>
                   <TableCell>
-                    <div className="flex flex-wrap gap-2">
+                    {/* Tombol dibiarkan boleh turun baris: kalau dipaksa satu baris, kolom aksi
+                        terjepit dan tombol Hapus terpotong di tepi panel. */}
+                    <div className="flex flex-wrap items-center gap-2">
                       <Button
                         variant="outline"
                         onClick={() => setFormTarget({ vehicleId: vehicle.id })}
                       >
+                        <IconPencil className="h-4 w-4" />
                         Edit / Kelola
                       </Button>
                       <Button variant="ghost" onClick={() => setDeleteTarget(vehicle.id)}>
+                        <IconTrash className="h-4 w-4" />
                         Hapus
                       </Button>
                     </div>
@@ -99,13 +105,10 @@ export function VehicleCatalogTable() {
             </TableBody>
           </Table>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-medium text-ink">
-              Aksi CMS: tambah unit baru, edit spesifikasi unit, atau hapus dari katalog aplikasi
-              pelanggan.
-            </p>
+          <div className="mt-4 flex justify-end">
             <Button variant="confirm" size="md" onClick={() => setFormTarget({ vehicleId: null })}>
-              + Tambah Armada Baru
+              <IconPlus className="h-4 w-4" />
+              Tambah Armada Baru
             </Button>
           </div>
         </Panel>

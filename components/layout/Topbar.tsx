@@ -13,8 +13,8 @@ export function Topbar({ onOpenNav }: { onOpenNav: () => void }) {
       <Button variant="outline" onClick={onOpenNav} className="lg:hidden">
         Menu
       </Button>
-      <h1 className="truncate text-lg font-semibold text-ink">{pageTitleFor(pathname)}</h1>
-      <p className="hidden text-[13px] text-ink-soft sm:block">{WORKSPACE_NAME}</p>
+      <h1 className="truncate text-subtitle font-semibold text-ink">{pageTitleFor(pathname)}</h1>
+      <p className="hidden text-meta text-ink-soft sm:block">{WORKSPACE_NAME}</p>
     </header>
   );
 }
