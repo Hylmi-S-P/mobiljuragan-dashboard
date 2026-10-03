@@ -118,7 +118,7 @@ export function BookingsTable() {
               const statusMeta = BOOKING_STATUS[booking.status];
               return (
                 <TableRow key={booking.id}>
-                  <TableCell>
+                  <TableCell className="text-left">
                     <span className="block text-body font-semibold text-ink">
                       {booking.customerName}
                     </span>

@@ -20,7 +20,8 @@ export function Toggle({
   disabledReason,
 }: ToggleProps) {
   return (
-    <div className="flex items-center gap-2">
+    /* inline-flex supaya sakelar ikut terpusat saat sel tabel menengahkan isinya. */
+    <div className="inline-flex items-center gap-2">
       <button
         type="button"
         role="switch"

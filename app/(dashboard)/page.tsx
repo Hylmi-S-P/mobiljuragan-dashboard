@@ -55,16 +55,9 @@ export default function OverviewPage() {
                   Belum ada pesanan yang menunggu konfirmasi.
                 </p>
                 <p className="mt-1 text-meta text-ink-soft">
-                  Buka Booking Masuk untuk memeriksa permintaan baru.
+                  Buka daftar pesanan untuk memeriksa permintaan baru.
                 </p>
               </div>
-              <Link
-                href="/bookings"
-                className="inline-flex h-11 items-center gap-2 rounded-sm border border-rule-strong px-4 text-body font-medium text-ink hover:bg-surface"
-              >
-                Buka Booking Masuk
-                <IconArrowRight className="h-4 w-4" />
-              </Link>
             </div>
           ) : (
             <Table caption="Booking yang menunggu konfirmasi tarif">
@@ -83,7 +76,7 @@ export default function OverviewPage() {
                   const status = BOOKING_STATUS[booking.status];
                   return (
                     <TableRow key={booking.id}>
-                      <TableCell>
+                      <TableCell className="text-left">
                         <span className="block text-body font-semibold text-ink">
                           {booking.customerName}
                         </span>

@@ -63,7 +63,7 @@ export function AdminAccountsTable() {
             <TableBody>
               {accounts.map((account) => (
                 <TableRow key={account.id}>
-                  <TableCell className="font-semibold">{account.name}</TableCell>
+                  <TableCell className="text-left font-semibold">{account.name}</TableCell>
                   <TableCell>{account.username}</TableCell>
                   <TableCell>{ADMIN_ROLE[account.role]}</TableCell>
                   <TableCell>

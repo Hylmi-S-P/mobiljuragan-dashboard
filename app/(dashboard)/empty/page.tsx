@@ -13,7 +13,7 @@ export default function EmptyStatePage() {
         cause="Belum ada permintaan booking yang masuk."
         nextAction="Booking baru akan muncul di antrean ini setelah pelanggan mengirim order."
         actionHref="/bookings"
-        actionLabel="Buka Booking Masuk"
+        actionLabel="Buka daftar pesanan"
         guidance="Tidak ada metrik atau aktivitas tambahan sampai data nyata tersedia."
       />
     </>

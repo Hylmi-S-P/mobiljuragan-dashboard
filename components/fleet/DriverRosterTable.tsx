@@ -19,18 +19,7 @@ import {
 import { Toggle } from "@/components/ui/Toggle";
 import { IconPencil, IconPlus } from "@/components/ui/icons";
 import { DRIVER_ROUTE, DRIVER_STATUS } from "@/lib/labels";
-import { BOOKINGS, DRIVERS, SAMPLE_DATA_LABEL, vehicleById } from "@/lib/mockData";
-
-/* Supir yang sedang bertugas terkunci. Catatannya menyebut unit yang sedang dibawa,
-   diambil dari pesanan aktif yang memakai supir tersebut. */
-function activeAssignment(driverLabel: string): string | null {
-  const booking = BOOKINGS.find(
-    (item) => item.driverName === driverLabel && item.status !== "ditolak",
-  );
-  if (!booking) return null;
-  const vehicle = vehicleById(booking.vehicleId);
-  return vehicle ? `${vehicle.name} ${vehicle.plate}` : null;
-}
+import { DRIVERS, SAMPLE_DATA_LABEL } from "@/lib/mockData";
 
 export function DriverRosterTable() {
   const [drivers, setDrivers] = useState(DRIVERS);
@@ -85,10 +74,9 @@ export function DriverRosterTable() {
             <TableBody>
               {drivers.map((driver) => {
                 const onDuty = driver.status === "sedang_tugas";
-                const assignment = onDuty ? activeAssignment(driver.label) : null;
                 return (
                   <TableRow key={driver.id}>
-                    <TableCell>
+                    <TableCell className="text-left">
                       <span className="block font-semibold">{driver.label}</span>
                       <span className="mt-1 block text-meta text-ink-soft">
                         {driver.contact ?? "[kontak belum diverifikasi]"} •{" "}
@@ -98,15 +86,9 @@ export function DriverRosterTable() {
                     <TableCell>{DRIVER_ROUTE[driver.route]}</TableCell>
                     <TableCell>
                       {onDuty ? (
-                        <div className="flex flex-wrap items-center gap-2">
-                          <StatusChip tone={DRIVER_STATUS.sedang_tugas.tone}>
-                            {DRIVER_STATUS.sedang_tugas.label}
-                          </StatusChip>
-                          <span className="text-micro text-ink-soft">
-                            {assignment ? `SPJ aktif (unit ${assignment}), ` : "SPJ aktif, "}
-                            terkunci supaya tidak ditugaskan ganda.
-                          </span>
-                        </div>
+                        <StatusChip tone={DRIVER_STATUS.sedang_tugas.tone}>
+                          {DRIVER_STATUS.sedang_tugas.label}
+                        </StatusChip>
                       ) : (
                         <Toggle
                           checked={driver.status === "siaga"}

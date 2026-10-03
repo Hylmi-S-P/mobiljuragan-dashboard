@@ -70,7 +70,7 @@ export function VehicleCatalogTable() {
             <TableBody>
               {vehicles.map((vehicle) => (
                 <TableRow key={vehicle.id}>
-                  <TableCell>
+                  <TableCell className="text-left">
                     <span className="block whitespace-nowrap text-body font-semibold text-ink">
                       {vehicle.name}
                     </span>

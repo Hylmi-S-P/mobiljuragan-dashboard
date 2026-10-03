@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { DataNotice } from "@/components/ui/DataNotice";
 import { Panel, ScreenHeader } from "@/components/ui/ScreenHeader";
 import { StatusChip } from "@/components/ui/StatusChip";
@@ -61,7 +59,7 @@ export default function FleetCalendarPage() {
                 const booking = confirmed.find((item) => item.vehicleId === vehicle.id);
                 return (
                   <TableRow key={vehicle.id}>
-                    <TableCell className="font-medium">
+                    <TableCell className="text-left font-medium">
                       {vehicle.name} <span className="text-ink-soft">· {vehicle.plate}</span>
                     </TableCell>
                     <TableCell className={booking ? "text-ink" : "text-ink-soft"}>
@@ -82,15 +80,6 @@ export default function FleetCalendarPage() {
               })}
             </TableBody>
           </Table>
-
-          <div className="mt-4">
-            <Link
-              href="/bookings"
-              className="inline-flex h-11 items-center rounded-sm border border-rule-strong px-4 text-body font-medium text-ink hover:bg-canvas"
-            >
-              Buka Booking Masuk
-            </Link>
-          </div>
         </Panel>
       </div>
     </>
