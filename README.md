@@ -111,7 +111,15 @@ npm run start
 
 # Linter kode
 npm run lint
+
+# Format kode dengan Prettier
+npm run format
+
+# Memeriksa format tanpa mengubah berkas
+npm run format:check
 ```
+
+Seluruh kode dashboard mengikuti satu gaya penulisan yang dijaga Prettier (kutip dua, 2 spasi, lebar 100 karakter). Yang dikecualikan diatur di `.prettierignore`, antara lain `.next/`, `package-lock.json`, dan `README.md`.
 
 ---
 
