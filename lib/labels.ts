@@ -67,6 +67,8 @@ export const ADMIN_ROLE: Record<AdminRole, string> = {
 
 export const TICKET_STATUS: Record<SupportTicketStatus, { label: string; tone: ChipTone }> = {
   baru: { label: "Baru", tone: "pending" },
+  /* Tim sudah membalas dan menunggu jawaban pelanggan; ini bukan keadaan darurat. */
+  menunggu_pelanggan: { label: "Menunggu pelanggan", tone: "busy" },
   eskalasi: { label: "Eskalasi ke staf", tone: "danger" },
   ditangani: { label: "Ditangani", tone: "busy" },
   selesai: { label: "Selesai", tone: "available" },

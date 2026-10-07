@@ -77,7 +77,8 @@ export type AdminAccount = {
   active: boolean;
 };
 
-export type SupportTicketStatus = "baru" | "eskalasi" | "ditangani" | "selesai";
+export type SupportTicketStatus =
+  "baru" | "menunggu_pelanggan" | "eskalasi" | "ditangani" | "selesai";
 
 export type SupportTicket = {
   id: string;

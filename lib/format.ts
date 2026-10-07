@@ -1,14 +1,46 @@
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
 
-function parseIsoDate(iso: string) {
-  const [year, month, day] = iso.split("-").map(Number);
+/*
+ * Merauke memakai Waktu Indonesia Timur (UTC+9). Zona ditulis eksplisit, bukan
+ * mengikuti jam mesin, karena dua alasan: server dan klien bisa berada di zona
+ * berbeda sehingga hasil render tidak cocok, dan tanggal sewa harus dibaca dalam
+ * waktu setempat tempat armada dipakai.
+ */
+const ZONA_WIT = "Asia/Jayapura";
+
+type BagianTanggal = { year: number; month: number; day: number };
+
+/** Mengambil tahun/bulan/tanggal dari ISO sesuai zona WIT. */
+function bagianTanggalWit(iso: string): BagianTanggal | null {
+  const waktu = new Date(iso);
+  if (Number.isNaN(waktu.getTime())) return null;
+
+  const bagian = new Intl.DateTimeFormat("en-CA", {
+    timeZone: ZONA_WIT,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(waktu);
+
+  const ambil = (jenis: string) => Number(bagian.find((item) => item.type === jenis)?.value);
+  const year = ambil("year");
+  const month = ambil("month");
+  const day = ambil("day");
+
+  if (!year || !month || !day) return null;
   return { year, month: month - 1, day };
 }
 
-/* Format tanggal ditulis manual supaya hasil server dan klien selalu identik. */
+/*
+ * Format tanggal ditulis manual supaya hasil server dan klien selalu identik.
+ * Tanggal yang tidak terbaca tidak membuat seluruh tabel gagal render; barisnya
+ * hanya menampilkan tanda hubung.
+ */
 export function formatDateRange(startIso: string, endIso: string, dayCount: number): string {
-  const start = parseIsoDate(startIso);
-  const end = parseIsoDate(endIso);
+  const start = bagianTanggalWit(startIso);
+  const end = bagianTanggalWit(endIso);
+  if (!start || !end) return "Tanggal tidak tersedia";
+
   const sameMonth = start.month === end.month && start.year === end.year;
   const range = sameMonth
     ? `${start.day} - ${end.day} ${MONTHS[start.month]}`

@@ -341,7 +341,8 @@ export type TicketMessageView = {
 const TICKET_STATUS_MAP: Record<string, string> = {
   OPEN: "baru",
   IN_PROGRESS: "ditangani",
-  WAITING_CUSTOMER: "eskalasi",
+  /* Tim sudah menjawab, sekarang giliran pelanggan. */
+  WAITING_CUSTOMER: "menunggu_pelanggan",
   RESOLVED: "selesai",
   CLOSED: "selesai",
 };
