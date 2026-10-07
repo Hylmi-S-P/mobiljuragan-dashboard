@@ -5,7 +5,7 @@ import type { ReactNode, TdHTMLAttributes, ThHTMLAttributes } from "react";
 export function Table({ children, caption }: { children: ReactNode; caption: string }) {
   return (
     <div className="overflow-x-auto rounded-md border border-rule bg-surface">
-      <table className="w-full min-w-[720px] border-collapse text-body tabular-nums">
+      <table className="w-full min-w-[680px] border-collapse text-body tabular-nums">
         <caption className="sr-only">{caption}</caption>
         {children}
       </table>
@@ -38,7 +38,7 @@ export function TableHeaderCell({
        dengan isian sel yang juga di tengah. Ukuran huruf tetap dari token. */
     <th
       scope="col"
-      className={`border-b border-rule px-4 py-5 align-middle text-center text-body font-medium ${className}`}
+      className={`border-b border-rule px-3.5 py-3.5 align-middle text-center text-body font-medium ${className}`}
       {...props}
     >
       {children}
@@ -55,7 +55,7 @@ export function TableCell({
     /* Sama seperti header: class dari halaman digabung dengan class dasar. */
     /* Isian sel ikut di tengah mengikuti headernya. Kolom pertama (nama) diberi
        text-left dari halaman masing-masing supaya tetap rata kiri. */
-    <td className={`px-4 py-3 text-center text-ink ${className}`} {...props}>
+    <td className={`px-3.5 py-2.5 text-center text-ink ${className}`} {...props}>
       {children}
     </td>
   );

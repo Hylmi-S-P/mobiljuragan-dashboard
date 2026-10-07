@@ -3,10 +3,10 @@ export default function DashboardLoading() {
     <section
       aria-busy="true"
       aria-live="polite"
-      className="rounded-md border border-rule bg-surface px-6 py-8"
+      className="rounded-md border border-rule bg-surface px-5 py-6"
     >
       <h2 className="text-display lg:text-display-lg font-semibold leading-tight text-ink">Memuat data dashboard</h2>
-      <p className="mt-3 max-w-2xl text-body text-ink-soft">
+      <p className="mt-2.5 max-w-2xl text-body text-ink-soft">
         Mengambil data untuk halaman ini. Tampilan akan berganti begitu datanya siap.
       </p>
     </section>

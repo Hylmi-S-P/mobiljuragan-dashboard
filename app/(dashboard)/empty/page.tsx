@@ -1,13 +1,17 @@
+import type { Metadata } from "next";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { ScreenHeader } from "@/components/ui/ScreenHeader";
+import { PageLead } from "@/components/ui/PageLayout";
+
+export const metadata: Metadata = {
+  title: "Contoh Keadaan Kosong | MobilJuragan",
+  description:
+    "Rujukan tampilan saat belum ada data, dipakai konsisten di antrean pemesanan, kalender armada, dan customer care.",
+};
 
 export default function EmptyStatePage() {
   return (
     <>
-      <ScreenHeader
-        heading="Contoh keadaan kosong"
-        subheading="Halaman rujukan untuk keadaan belum ada data. Pola yang sama dipakai di antrean booking, kalender armada, dan percakapan customer care."
-      />
+      <PageLead lead="Halaman rujukan untuk keadaan belum ada data. Pola yang sama dipakai di antrean booking, kalender armada, dan percakapan customer care." />
       <EmptyState
         heading="Belum ada pesanan"
         cause="Belum ada permintaan booking yang masuk."

@@ -29,18 +29,23 @@
 
   /* Skala tipografi dengan langkah yang jelas antar tingkat.
      Judul halaman sengaja jauh lebih besar daripada isi, karena rasa "datar" sebelumnya
-     datang dari jarak antar-tingkat yang terlalu rapat, bukan dari keluarga hurufnya. */
-  --text-display: 1.75rem;
-  --text-display--line-height: 1.12;
-  --text-display--letter-spacing: -0.026em;
-  --text-display-lg: 2.75rem;
-  --text-display-lg--line-height: 1.05;
-  --text-display-lg--letter-spacing: -0.035em;
-  --text-subtitle: 1.1875rem;
+     datang dari jarak antar-tingkat yang terlalu rapat, bukan dari keluarga hurufnya.
+
+     Seluruh tangga diturunkan sekitar 10% supaya kepadatan dashboard setara melihatnya
+     pada zoom 90%, tanpa harus memakai zoom peramban. Satu tingkat sengaja tidak ikut
+     turun: micro tetap 11px, karena 10px sudah di bawah batas baca untuk label huruf
+     kapital. Tangga akhirnya 11 / 12 / 14 / 17 / 25 / 39. */
+  --text-display: 1.5625rem;
+  --text-display--line-height: 1.14;
+  --text-display--letter-spacing: -0.024em;
+  --text-display-lg: 2.4375rem;
+  --text-display-lg--line-height: 1.06;
+  --text-display-lg--letter-spacing: -0.032em;
+  --text-subtitle: 1.0625rem;
   --text-subtitle--line-height: 1.35;
-  --text-body: 0.9375rem;
+  --text-body: 0.875rem;
   --text-body--line-height: 1.55;
-  --text-meta: 0.8125rem;
+  --text-meta: 0.75rem;
   --text-meta--line-height: 1.45;
   --text-micro: 0.6875rem;
   --text-micro--line-height: 1.35;

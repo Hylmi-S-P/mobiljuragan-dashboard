@@ -143,7 +143,7 @@ export function VehicleFormModal({
         </>
       }
     >
-      <div className="space-y-4">
+      <div className="space-y-3.5">
         <div>
           <label htmlFor={`${fieldId}-name`} className="block text-meta font-medium text-ink">
             Nama lengkap model kendaraan
@@ -184,7 +184,7 @@ export function VehicleFormModal({
           ) : null}
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-3.5 sm:grid-cols-3">
           <div>
             <label htmlFor={`${fieldId}-category`} className="block text-meta font-medium text-ink">
               Kategori armada
@@ -258,7 +258,7 @@ export function VehicleFormModal({
 
         <fieldset>
           <legend className="text-meta font-medium text-ink">Status operasional armada</legend>
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="mt-1.5 flex flex-wrap gap-2">
             {STATUS_OPTIONS.map((option) => (
               <Button
                 key={option.value}
@@ -270,7 +270,7 @@ export function VehicleFormModal({
               </Button>
             ))}
           </div>
-          <p className="mt-2 text-micro text-ink-soft">
+          <p className="mt-1.5 text-micro text-ink-soft">
             Status Disewa diisi otomatis dari pesanan aktif, jadi tidak bisa dipilih manual di sini.
           </p>
         </fieldset>
@@ -279,7 +279,7 @@ export function VehicleFormModal({
           <legend className="text-meta font-medium text-ink">
             Pilihan moda rental yang diizinkan
           </legend>
-          <div className="mt-2 flex flex-wrap gap-4">
+          <div className="mt-1.5 flex flex-wrap gap-3">
             {(["lepas_kunci", "dengan_supir"] as BookingMode[]).map((mode) => (
               <label key={mode} className="flex items-center gap-2 text-body text-ink">
                 <input
@@ -306,7 +306,7 @@ export function VehicleFormModal({
             type="file"
             accept="image/png,image/jpeg"
             onChange={(event) => handlePhoto(event.target.files?.[0])}
-            className="mt-1 w-full rounded-sm border border-rule-strong bg-canvas px-3 py-2 text-meta text-ink file:mr-3 file:h-8 file:rounded-sm file:border-0 file:bg-navy file:px-3 file:text-meta file:font-medium file:text-white"
+            className="mt-1 w-full rounded-sm border border-rule-strong bg-canvas px-3 py-1.5 text-meta text-ink file:mr-3 file:h-8 file:rounded-sm file:border-0 file:bg-navy file:px-3 file:text-meta file:font-medium file:text-white"
           />
           {errors.photo ? <p className="mt-1 text-meta text-danger">{errors.photo}</p> : null}
           <p className="mt-1 text-micro text-ink-soft">

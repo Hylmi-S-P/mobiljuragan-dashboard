@@ -1,5 +1,6 @@
+import type { Metadata } from "next";
 import { DataNotice } from "@/components/ui/DataNotice";
-import { Panel, ScreenHeader } from "@/components/ui/ScreenHeader";
+import { PageLead, Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import {
   Table,
@@ -11,27 +12,38 @@ import {
 } from "@/components/ui/Table";
 import { formatDateRange } from "@/lib/format";
 import { RENTAL_STATUS_ORDER, VEHICLE_STATUS } from "@/lib/labels";
-import { BOOKINGS, SAMPLE_DATA_LABEL, VEHICLES } from "@/lib/mockData";
+import { getFleetCalendar } from "@/lib/operations";
 
-export default function FleetCalendarPage() {
-  /* Tanggal terblokir hanya untuk booking yang sudah dikonfirmasi, sesuai siklus hidup backend. */
-  const confirmed = BOOKINGS.filter((booking) => booking.status === "tarif_terkonfirmasi");
+export const metadata: Metadata = {
+  title: "Kalender Armada | MobilJuragan",
+  description:
+    "Riwayat ketersediaan dan jadwal sewa aktif sembilan unit armada MobilJuragan Merauke.",
+};
+
+// Jadwal sewa berubah mengikuti pemesanan aktif, jadi data diambil segar tiap request.
+export const dynamic = "force-dynamic";
+
+function countDays(start: string, end: string): number {
+  const ms = new Date(end).getTime() - new Date(start).getTime();
+  const days = Math.ceil(ms / (1000 * 60 * 60 * 24));
+  return days > 0 ? days : 1;
+}
+
+export default async function FleetCalendarPage() {
+  const calendar = await getFleetCalendar();
 
   return (
     <>
-      <ScreenHeader
-        heading="Manajemen Armada • Kalender Armada"
-        subheading="Riwayat ketersediaan unit, jadwal sewa aktif, dan pesanan harian armada."
-      />
+      <PageLead lead="Riwayat ketersediaan unit, jadwal sewa aktif, dan pesanan harian armada." />
 
-      <DataNotice label={SAMPLE_DATA_LABEL}>
-        Jadwal di tabel ini dihitung dari booking yang sudah dikonfirmasi. Booking yang masih
-        menunggu konfirmasi belum mengunci tanggal, jadi barisnya masih kosong.
+      <DataNotice label={`Jadwal ${calendar.totalVehicles} unit`}>
+        Hanya pesanan yang sudah dikonfirmasi yang mengunci tanggal. Pesanan yang masih
+        menunggu konfirmasi belum muncul di sini, jadi unitnya masih terlihat bebas.
       </DataNotice>
 
-      <div className="mt-4">
+      <div className="mt-3">
         <Panel title="Status yang digunakan">
-          <ul className="flex flex-wrap gap-3">
+          <ul className="flex flex-wrap gap-2">
             {RENTAL_STATUS_ORDER.map((status) => (
               <li key={status}>
                 <StatusChip tone={VEHICLE_STATUS[status].tone}>
@@ -43,32 +55,39 @@ export default function FleetCalendarPage() {
         </Panel>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-3">
         <Panel>
-          <Table caption="Kalender ketersediaan sembilan unit armada">
+          <Table caption="Kalender ketersediaan unit armada">
             <TableHead>
               <TableRow>
-                <TableHeaderCell className="w-[330px]">Kendaraan</TableHeaderCell>
-                <TableHeaderCell className="w-[280px]">Tanggal</TableHeaderCell>
-                <TableHeaderCell className="w-[300px]">Ketersediaan</TableHeaderCell>
-                <TableHeaderCell className="w-[186px]">Status</TableHeaderCell>
+                <TableHeaderCell className="w-[325px]">Kendaraan</TableHeaderCell>
+                <TableHeaderCell className="w-[255px]">Tanggal</TableHeaderCell>
+                <TableHeaderCell className="w-[275px]">Ketersediaan</TableHeaderCell>
+                <TableHeaderCell className="w-[170px]">Status</TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {VEHICLES.map((vehicle) => {
-                const booking = confirmed.find((item) => item.vehicleId === vehicle.id);
+              {calendar.fleet.map((vehicle) => {
+                // Satu unit bisa punya beberapa jadwal; yang ditampilkan jadwal terdekat.
+                const schedule = vehicle.schedules[0];
                 return (
                   <TableRow key={vehicle.id}>
                     <TableCell className="text-left font-medium">
                       {vehicle.name} <span className="text-ink-soft">· {vehicle.plate}</span>
                     </TableCell>
-                    <TableCell className={booking ? "text-ink" : "text-ink-soft"}>
-                      {booking
-                        ? formatDateRange(booking.startDate, booking.endDate, booking.dayCount)
+                    <TableCell className={schedule ? "text-ink" : "text-ink-soft"}>
+                      {schedule
+                        ? formatDateRange(
+                            schedule.startDateTime,
+                            schedule.endDateTime,
+                            countDays(schedule.startDateTime, schedule.endDateTime)
+                          )
                         : "Belum ada jadwal"}
                     </TableCell>
-                    <TableCell className={booking ? "text-ink" : "text-ink-soft"}>
-                      {booking ? `Terblokir untuk ${booking.code}` : "Menunggu pembaruan"}
+                    <TableCell className={schedule ? "text-ink" : "text-ink-soft"}>
+                      {schedule
+                        ? `Terblokir untuk ${schedule.bookingCode}`
+                        : "Menunggu pembaruan"}
                     </TableCell>
                     <TableCell>
                       <StatusChip tone={VEHICLE_STATUS[vehicle.status].tone}>

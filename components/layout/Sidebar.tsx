@@ -59,22 +59,26 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         <div aria-hidden="true" onClick={onClose} className="fixed inset-0 z-30 bg-ink/50 lg:hidden" />
       ) : null}
 
+      {/* Di layar sempit sidebar adalah laci melayang (fixed). Mulai lg ia jadi kolom
+          yang menempel (sticky) setinggi viewport, jadi tetap terbaca saat isi halaman
+          digulir ke bawah. Tingginya dipatok 100dvh supaya daftar navigasi yang panjang
+          menggulir di dalam sidebar sendiri, bukan mendorong tinggi halaman. */}
       <aside
         aria-label="Navigasi utama"
-        className={`fixed inset-y-0 left-0 z-40 flex w-[252px] shrink-0 flex-col overflow-y-auto bg-navy px-4 py-6 lg:static lg:visible lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-[227px] shrink-0 flex-col overflow-y-auto bg-navy px-3 py-5 lg:sticky lg:top-0 lg:bottom-auto lg:z-auto lg:h-dvh lg:self-start lg:visible lg:translate-x-0 ${
           open ? "visible translate-x-0" : "invisible -translate-x-full"
         }`}
       >
-        <div className="px-2 pb-6">
+        <div className="px-2 pb-5">
           <p className="text-body font-semibold leading-[1.3] tracking-[-0.01em] text-white">
             {WORKSPACE_NAME}
           </p>
-          <p className="mt-1.5 text-micro font-semibold uppercase text-on-navy-muted">
+          <p className="mt-1 text-micro font-semibold uppercase text-on-navy-muted">
             {WORKSPACE_ROLE}
           </p>
         </div>
 
-        <div aria-hidden="true" className="mb-4 h-px bg-navy-line" />
+        <div aria-hidden="true" className="mb-3 h-px bg-navy-line" />
 
         <nav className="flex flex-col gap-0.5">
           {NAV_ENTRIES.map((entry) => {
@@ -91,10 +95,10 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                       grupAktif && !fleetOpen ? "bg-navy-surface" : "hover:bg-navy-hover"
                     }`}
                   >
-                    <IkonGrup className="h-[18px] w-[18px] shrink-0 text-white/85" />
+                    <IkonGrup className="h-[17px] w-[17px] shrink-0 text-white/85" />
                     <span className="flex-1 whitespace-nowrap text-left">{entry.label}</span>
                     <IconChevronDown
-                      className={`h-4 w-4 shrink-0 text-white/70 transition-transform duration-200 ${
+                      className={`h-3.5 w-3.5 shrink-0 text-white/70 transition-transform duration-200 ${
                         fleetOpen ? "rotate-180" : ""
                       }`}
                     />

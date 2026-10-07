@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { PlateBadge } from "@/components/ui/PlateBadge";
-import { Panel } from "@/components/ui/ScreenHeader";
+import { Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { IconArrowRight } from "@/components/ui/icons";
 import {
@@ -18,8 +18,7 @@ import {
 } from "@/components/ui/Table";
 import { formatDateRange } from "@/lib/format";
 import { BOOKING_MODE_LABEL, BOOKING_STATUS } from "@/lib/labels";
-import { BOOKINGS, vehicleById } from "@/lib/mockData";
-import type { BookingStatus } from "@/lib/types";
+import type { Booking, BookingStatus, Vehicle } from "@/lib/types";
 
 /* Label aksi mengikuti nama status pada siklus hidup backend. */
 const ACTION_LABEL: Record<BookingStatus, string> = {
@@ -29,13 +28,24 @@ const ACTION_LABEL: Record<BookingStatus, string> = {
   ditolak: "Lihat Alasan Penolakan",
 };
 
-export function BookingsTable() {
+type Props = {
+  initialBookings: Booking[];
+  vehicles: Vehicle[];
+};
+
+export function BookingsTable({ initialBookings, vehicles }: Props) {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<"semua" | BookingStatus>("semua");
 
+  // Kendaraan dicari dari daftar yang dikirim server, bukan dari data contoh.
+  const vehicleById = useMemo(() => {
+    const byId = new Map(vehicles.map((vehicle) => [vehicle.id, vehicle]));
+    return (id: string) => byId.get(id);
+  }, [vehicles]);
+
   const filtered = useMemo(() => {
     const keyword = query.trim().toLowerCase();
-    return BOOKINGS.filter((booking) => {
+    return initialBookings.filter((booking) => {
       if (status !== "semua" && booking.status !== status) return false;
       if (keyword.length === 0) return true;
       const vehicle = vehicleById(booking.vehicleId);
@@ -47,7 +57,7 @@ export function BookingsTable() {
         vehicle?.plate ?? "",
       ].some((field) => field.toLowerCase().includes(keyword));
     });
-  }, [query, status]);
+  }, [query, status, initialBookings, vehicleById]);
 
   function resetFilters() {
     setQuery("");
@@ -56,7 +66,7 @@ export function BookingsTable() {
 
   return (
     <Panel>
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end">
+      <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="min-w-0 flex-1">
           <label htmlFor="booking-search" className="block text-meta font-medium text-ink">
             Cari pemesan, kode booking, atau plat
@@ -90,7 +100,7 @@ export function BookingsTable() {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="rounded-sm border border-rule bg-canvas px-4 py-6">
+        <div className="rounded-sm border border-rule bg-canvas px-4 py-5">
           <p className="text-body font-semibold text-ink">
             Tidak ada pesanan yang cocok dengan filter itu.
           </p>
@@ -105,11 +115,11 @@ export function BookingsTable() {
         <Table caption="Antrean pesanan pelanggan">
           <TableHead>
             <TableRow>
-              <TableHeaderCell className="w-[220px]">Pemesan</TableHeaderCell>
-              <TableHeaderCell className="w-[256px]">Kendaraan</TableHeaderCell>
-              <TableHeaderCell className="w-[180px]">Tanggal</TableHeaderCell>
-              <TableHeaderCell className="w-[180px]">Status</TableHeaderCell>
-              <TableHeaderCell className="w-[300px]">Aksi</TableHeaderCell>
+              <TableHeaderCell className="w-[225px]">Pemesan</TableHeaderCell>
+              <TableHeaderCell className="w-[230px]">Kendaraan</TableHeaderCell>
+              <TableHeaderCell className="w-[160px]">Tanggal</TableHeaderCell>
+              <TableHeaderCell className="w-[190px]">Status</TableHeaderCell>
+              <TableHeaderCell className="w-[240px]">Aksi</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -152,7 +162,7 @@ export function BookingsTable() {
         </Table>
       )}
 
-      <div className="mt-4 space-y-2">
+      <div className="mt-3 space-y-1.5">
         <p className="text-meta text-ink-soft">
           Staf memverifikasi KTP dan SIM A asli secara fisik saat serah terima unit di pool.
         </p>

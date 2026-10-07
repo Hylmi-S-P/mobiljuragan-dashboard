@@ -5,7 +5,7 @@ import { useId, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { formatCurrencyInput } from "@/lib/format";
-import { AMOUNT_PLACEHOLDER, SURCHARGE_CATEGORIES } from "@/lib/mockData";
+import { AMOUNT_PLACEHOLDER, SURCHARGE_CATEGORIES } from "@/lib/uiText";
 import type { Booking, LineItem } from "@/lib/types";
 
 type Props = {
@@ -59,7 +59,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
         </>
       }
     >
-      <div className="space-y-4">
+      <div className="space-y-3.5">
         <div>
           <label htmlFor={`${fieldId}-category`} className="block text-micro font-semibold text-ink">
             Kategori penyesuaian biaya
@@ -101,7 +101,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
           ) : null}
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3.5 sm:grid-cols-2">
           <div>
             <label htmlFor={`${fieldId}-amount`} className="block text-micro font-semibold text-ink">
               Nominal penyesuaian
@@ -168,7 +168,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
           ) : null}
         </div>
 
-        <div className="rounded-sm border border-rule bg-canvas px-4 py-3 text-micro text-ink-soft">
+        <div className="rounded-sm border border-rule bg-canvas px-3.5 py-2.5 text-micro text-ink-soft">
           <p>Estimasi awal booking: {AMOUNT_PLACEHOLDER}</p>
           <p className="mt-1">
             Penyesuaian manual: {amount.trim().length > 0 ? amount.trim() : AMOUNT_PLACEHOLDER}

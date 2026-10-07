@@ -24,19 +24,19 @@ export function ErrorState({
   return (
     <section
       role="alert"
-      className="rounded-md border border-danger/40 bg-surface px-6 py-8"
+      className="rounded-md border border-danger/40 bg-surface px-5 py-6"
     >
       <h2 className="text-display lg:text-display-lg font-semibold leading-tight text-ink">{heading}</h2>
-      <p className="mt-4 text-subtitle font-semibold text-ink">{cause}</p>
-      <p className="mt-2 max-w-2xl text-body text-ink-soft">{nextAction}</p>
+      <p className="mt-3 text-subtitle font-semibold text-ink">{cause}</p>
+      <p className="mt-1.5 max-w-2xl text-body text-ink-soft">{nextAction}</p>
 
       {onRetry ? (
-        <Button variant="outline" size="md" className="mt-5" onClick={onRetry}>
+        <Button variant="outline" size="md" className="mt-4" onClick={onRetry}>
           {retryLabel}
         </Button>
       ) : null}
 
-      {guidance ? <p className="mt-6 text-body text-ink-soft">{guidance}</p> : null}
+      {guidance ? <p className="mt-5 text-body text-ink-soft">{guidance}</p> : null}
     </section>
   );
 }

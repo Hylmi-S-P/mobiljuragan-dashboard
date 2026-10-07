@@ -1,22 +1,32 @@
+import type { Metadata } from "next";
 import { BookingsTable } from "@/components/bookings/BookingsTable";
 import { DataNotice } from "@/components/ui/DataNotice";
-import { ScreenHeader } from "@/components/ui/ScreenHeader";
-import { SAMPLE_DATA_LABEL } from "@/lib/mockData";
+import { PageLead } from "@/components/ui/PageLayout";
+import { getAllVehicles, getBookings } from "@/lib/operations";
 
-export default function BookingsPage() {
+export const metadata: Metadata = {
+  title: "Pesanan Masuk | MobilJuragan",
+  description:
+    "Antrean pesanan sewa yang masuk dari aplikasi pelanggan MobilJuragan Merauke, siap diverifikasi tim operasional.",
+};
+
+// Antrean pesanan berubah setiap ada pemesanan baru, jadi data diambil segar tiap request.
+export const dynamic = "force-dynamic";
+
+export default async function BookingsPage() {
+  const [bookings, vehicles] = await Promise.all([getBookings(), getAllVehicles()]);
+
   return (
     <>
-      <ScreenHeader
-        heading="Pemesanan Masuk"
-        subheading="Pesanan yang masuk dari aplikasi pelanggan. Cek kesiapan unit, tentukan tarif final, dan alokasikan supir."
-      />
+      <PageLead lead="Pesanan yang masuk dari aplikasi pelanggan. Cek kesiapan unit, tentukan tarif final, dan alokasikan supir." />
 
-      <DataNotice label={SAMPLE_DATA_LABEL}>
-        Nama pemesan, nomor booking, dan tanggal pada antrean ini adalah data contoh.
+      <DataNotice label="Antrean pesanan">
+        Pesanan baru masuk dengan tarif belum ditentukan. Nomor kontak pelanggan ditampilkan
+        apa adanya dari data pemesanan supaya tim bisa menghubungi pemesan.
       </DataNotice>
 
-      <div className="mt-4">
-        <BookingsTable />
+      <div className="mt-3">
+        <BookingsTable initialBookings={bookings} vehicles={vehicles} />
       </div>
     </>
   );

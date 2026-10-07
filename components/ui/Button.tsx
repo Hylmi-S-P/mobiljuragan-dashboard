@@ -13,10 +13,12 @@ const VARIANTS: Record<Variant, string> = {
   danger: "bg-danger text-white hover:bg-danger/90",
 };
 
-/* Semua tinggi minimal 44px supaya target sentuh tetap aman di layar sempit. */
+/* Semua tinggi minimal 44px supaya target sentuh tetap aman di layar sempit.
+   Ukuran ini sengaja tidak ikut turun saat kepadatan dirapatkan: yang dirapatkan
+   jarak dan teksnya, bukan bidang yang harus dijangkau jari. */
 const SIZES: Record<Size, string> = {
   sm: "h-11 px-3 text-body",
-  md: "h-12 px-5 text-body",
+  md: "h-11 px-4 text-body",
 };
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -34,7 +36,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
       {...props}
     />
   );

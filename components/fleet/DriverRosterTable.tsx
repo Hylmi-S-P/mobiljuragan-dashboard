@@ -6,7 +6,7 @@ import { DeleteDriverModal } from "@/components/modals/DeleteDriverModal";
 import { DriverFormModal } from "@/components/modals/DriverFormModal";
 import { Button } from "@/components/ui/Button";
 import { DataNotice } from "@/components/ui/DataNotice";
-import { Panel } from "@/components/ui/ScreenHeader";
+import { Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import {
   Table,
@@ -19,10 +19,14 @@ import {
 import { Toggle } from "@/components/ui/Toggle";
 import { IconPencil, IconPlus } from "@/components/ui/icons";
 import { DRIVER_ROUTE, DRIVER_STATUS } from "@/lib/labels";
-import { DRIVERS, SAMPLE_DATA_LABEL } from "@/lib/mockData";
+import type { Driver } from "@/lib/types";
 
-export function DriverRosterTable() {
-  const [drivers, setDrivers] = useState(DRIVERS);
+type Props = {
+  initialDrivers: Driver[];
+};
+
+export function DriverRosterTable({ initialDrivers }: Props) {
+  const [drivers, setDrivers] = useState<Driver[]>(initialDrivers);
   const [formTarget, setFormTarget] = useState<{ driverId: string | null } | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -42,9 +46,9 @@ export function DriverRosterTable() {
 
   return (
     <>
-      <DataNotice label={SAMPLE_DATA_LABEL}>
-        Nama supir mengikuti layar contoh; nomor kontak dikosongkan karena datanya belum
-        diverifikasi. Perubahan di halaman ini hanya bertahan selama sesi.
+      <DataNotice label="Roster supir resmi">
+        Supir nonaktif tetap tampil agar riwayat penugasannya tidak hilang. Sakelar kesiapan
+        mengunci diri saat supir sedang bertugas, jadi statusnya tidak bisa diubah manual.
       </DataNotice>
 
       {notice ? (
@@ -53,7 +57,7 @@ export function DriverRosterTable() {
         </p>
       ) : null}
 
-      <div className="mt-4">
+      <div className="mt-3">
         <Panel
           action={
             <Button variant="confirm" size="md" onClick={() => setFormTarget({ driverId: null })}>
@@ -65,10 +69,10 @@ export function DriverRosterTable() {
           <Table caption="Roster supir resmi MobilJuragan Merauke">
             <TableHead>
               <TableRow>
-                <TableHeaderCell className="w-[260px]">Nama Supir</TableHeaderCell>
-                <TableHeaderCell className="w-[200px]">Rute</TableHeaderCell>
-                <TableHeaderCell className="w-[330px]">Status Kesiapan</TableHeaderCell>
-                <TableHeaderCell className="w-[306px]">Aksi Operasional</TableHeaderCell>
+                <TableHeaderCell className="w-[290px]">Nama Supir</TableHeaderCell>
+                <TableHeaderCell className="w-[180px]">Rute</TableHeaderCell>
+                <TableHeaderCell className="w-[295px]">Status Kesiapan</TableHeaderCell>
+                <TableHeaderCell className="w-[245px]">Aksi Operasional</TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>

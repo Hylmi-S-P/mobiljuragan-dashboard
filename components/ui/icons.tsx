@@ -113,6 +113,37 @@ export function IconSearch({ className }: IconProps) {
   );
 }
 
+/** Ikon pengguna pada kolom username di halaman masuk. */
+export function IconUser({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <circle cx="12" cy="8" r="3.25" />
+      <path d="M5.5 20v-1.25a6.5 6.5 0 0 1 13 0V20" />
+    </Svg>
+  );
+}
+
+/** Mata untuk memperlihatkan atau menyamarkan kata sandi. */
+export function IconEye({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="M2.5 12s3.25-5.5 9.5-5.5 9.5 5.5 9.5 5.5-3.25 5.5-9.5 5.5S2.5 12 2.5 12Z" />
+      <circle cx="12" cy="12" r="2.5" />
+    </Svg>
+  );
+}
+
+/** Mata tertutup saat kata sandi ditampilkan. */
+export function IconEyeOff({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <path d="m3 3 18 18" />
+      <path d="M10.6 6.65A10.8 10.8 0 0 1 12 6.5c6.25 0 9.5 5.5 9.5 5.5a16.3 16.3 0 0 1-3.15 3.65M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.25 5.5 9.5 5.5c1.2 0 2.25-.2 3.2-.55" />
+      <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+    </Svg>
+  );
+}
+
 export function IconPlus({ className }: IconProps) {
   return (
     <Svg className={className}>

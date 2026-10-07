@@ -16,7 +16,7 @@ const TONES: Record<ChipTone, string> = {
 export function StatusChip({ tone, children }: { tone: ChipTone; children: ReactNode }) {
   return (
     <span
-      className={`inline-flex items-center rounded-sm border px-2 py-1 text-meta font-medium ${TONES[tone]}`}
+      className={`inline-flex items-center rounded-sm border px-2 py-0.5 text-meta font-medium ${TONES[tone]}`}
     >
       {children}
     </span>

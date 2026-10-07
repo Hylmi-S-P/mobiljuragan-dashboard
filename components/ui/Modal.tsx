@@ -79,20 +79,20 @@ export function Modal({ open, onClose, title, description, children, footer }: M
         tabIndex={-1}
         className="relative flex max-h-[90dvh] w-full flex-col rounded-t-md bg-surface shadow-modal sm:max-w-2xl sm:rounded-md"
       >
-        <div className="flex items-start justify-between gap-4 border-b border-rule px-6 py-4">
+        <div className="flex items-start justify-between gap-4 border-b border-rule px-5 py-3.5">
           <div className="min-w-0">
             <h2 id={titleId} className="text-subtitle font-semibold text-ink">
               {title}
             </h2>
-            {description ? <p className="mt-1 text-body text-ink-soft">{description}</p> : null}
+            {description ? <p className="mt-0.5 text-meta text-ink-soft">{description}</p> : null}
           </div>
           <Button variant="ghost" onClick={onClose}>
             Tutup
           </Button>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5">{children}</div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">{children}</div>
         {footer ? (
-          <div className="flex flex-wrap justify-end gap-3 border-t border-rule px-6 py-4">{footer}</div>
+          <div className="flex flex-wrap justify-end gap-2.5 border-t border-rule px-5 py-3.5">{footer}</div>
         ) : null}
       </div>
     </div>

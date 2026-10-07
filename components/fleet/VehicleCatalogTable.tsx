@@ -7,7 +7,7 @@ import { VehicleFormModal } from "@/components/modals/VehicleFormModal";
 import { DataNotice } from "@/components/ui/DataNotice";
 import { Button } from "@/components/ui/Button";
 import { PlateBadge } from "@/components/ui/PlateBadge";
-import { Panel } from "@/components/ui/ScreenHeader";
+import { Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import {
   Table,
@@ -18,11 +18,15 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 import { IconCar, IconPencil, IconPlus } from "@/components/ui/icons";
-import { SAMPLE_DATA_LABEL, VEHICLES } from "@/lib/mockData";
+import type { Vehicle } from "@/lib/types";
 import { VEHICLE_STATUS } from "@/lib/labels";
 
-export function VehicleCatalogTable() {
-  const [vehicles, setVehicles] = useState(VEHICLES);
+type Props = {
+  initialVehicles: Vehicle[];
+};
+
+export function VehicleCatalogTable({ initialVehicles }: Props) {
+  const [vehicles, setVehicles] = useState<Vehicle[]>(initialVehicles);
   const [formTarget, setFormTarget] = useState<{ vehicleId: string | null } | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -34,10 +38,9 @@ export function VehicleCatalogTable() {
 
   return (
     <>
-      <DataNotice label={SAMPLE_DATA_LABEL}>
-        Spesifikasi 9 unit mengikuti dokumen master konteks sistem. Unit yang ditambahkan lewat
-        modal akan menampilkan penanda sampai kolomnya diisi. Perubahan di halaman ini hanya
-        bertahan selama sesi, sampai backend tersambung.
+      <DataNotice label="Armada resmi Merauke">
+        Status unit berubah saat kendaraan disewa atau masuk perawatan. Perubahan dari halaman
+        ini langsung tersimpan, jadi unit yang sedang keluar tidak lagi tampil tersedia.
       </DataNotice>
 
       {notice ? (
@@ -46,9 +49,9 @@ export function VehicleCatalogTable() {
         </p>
       ) : null}
 
-      <div className="mt-4">
+      <div className="mt-3">
         <Panel
-          title="Katalog armada resmi"
+          title="Daftar unit & spesifikasi"
           icon={<IconCar />}
           action={
             <Button variant="confirm" size="md" onClick={() => setFormTarget({ vehicleId: null })}>
@@ -60,11 +63,11 @@ export function VehicleCatalogTable() {
           <Table caption="Katalog armada resmi MobilJuragan">
             <TableHead>
               <TableRow>
-                <TableHeaderCell className="w-[260px]">Kendaraan &amp; Kategori</TableHeaderCell>
-                <TableHeaderCell className="w-[185px]">Plat Nomor</TableHeaderCell>
-                <TableHeaderCell className="w-[170px]">Transmisi &amp; Kursi</TableHeaderCell>
-                <TableHeaderCell className="w-[130px]">Ketersediaan</TableHeaderCell>
-                <TableHeaderCell className="w-[220px]">Status &amp; Aksi</TableHeaderCell>
+                <TableHeaderCell className="w-[245px]">Kendaraan &amp; Kategori</TableHeaderCell>
+                <TableHeaderCell className="w-[170px]">Plat Nomor</TableHeaderCell>
+                <TableHeaderCell className="w-[155px]">Transmisi &amp; Kursi</TableHeaderCell>
+                <TableHeaderCell className="w-[120px]">Ketersediaan</TableHeaderCell>
+                <TableHeaderCell className="w-[190px]">Status &amp; Aksi</TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -92,7 +95,7 @@ export function VehicleCatalogTable() {
                       {VEHICLE_STATUS[vehicle.status].label}
                     </StatusChip>
                   </TableCell>
-                                                      <TableCell>
+                  <TableCell>
                     <Button
                       variant="outline"
                       onClick={() => setFormTarget({ vehicleId: vehicle.id })}

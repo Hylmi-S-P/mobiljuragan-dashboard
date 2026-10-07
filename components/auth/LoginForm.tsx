@@ -1,102 +1,122 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useId, useState, type FormEvent } from "react";
-
+import { useActionState, useId, useState } from "react";
+import { useFormStatus } from "react-dom";
+import { loginAction } from "@/app/actions";
 import { Button } from "@/components/ui/Button";
+import { IconEye, IconEyeOff, IconUser } from "@/components/ui/icons";
 
-export function LoginForm() {
-  const router = useRouter();
-  const fieldId = useId();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const nextErrors: Record<string, string> = {};
-    if (username.trim().length === 0) nextErrors.username = "Username akun wajib diisi.";
-    if (password.trim().length === 0) nextErrors.password = "Kata sandi wajib diisi.";
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) return;
-
-    router.push("/");
-  }
+function SubmitButton() {
+  const { pending } = useFormStatus();
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex h-full flex-col">
-      <h1 className="text-2xl font-bold text-ink">Masuk ke Akun Anda</h1>
-      <p className="mt-3 max-w-md text-meta text-ink-soft">
+    <Button
+      type="submit"
+      variant="confirm"
+      size="md"
+      className="mt-3 h-12 w-full rounded-[10px]"
+      disabled={pending}
+    >
+      {pending ? "Memverifikasi Kredensial..." : "Masuk ke Dashboard"}
+    </Button>
+  );
+}
+
+export function LoginForm() {
+  const fieldId = useId();
+  const [state, formAction] = useActionState(loginAction, null);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+
+  return (
+    <form action={formAction} noValidate className="flex h-full flex-col">
+      <h1 className="text-[26px] font-bold leading-[1.2] text-ink">Masuk ke Akun Anda</h1>
+      <p className="mt-2 max-w-full text-[13px] leading-[1.45] text-rule-strong">
         Gunakan kredensial resmi staf untuk mengakses seluruh modul operasional.
       </p>
 
+      {state?.message ? (
+        <div
+          role="alert"
+          className="mt-4 rounded-md border border-danger/40 bg-danger/10 px-3.5 py-2.5 text-meta text-danger"
+        >
+          {state.message}
+        </div>
+      ) : null}
+
       <div className="mt-8 space-y-5">
         <div>
-          <label htmlFor={`${fieldId}-username`} className="block text-meta font-medium text-ink">
-            Username akun
+          <label htmlFor={`${fieldId}-username`} className="block text-[13px] font-medium text-slate-700">
+            Username Akun
           </label>
-          <input
-            id={`${fieldId}-username`}
-            name="username"
-            autoComplete="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            aria-invalid={Boolean(errors.username)}
-            aria-describedby={errors.username ? `${fieldId}-username-error` : undefined}
-            className="mt-2 h-12 w-full rounded-md border border-rule-strong bg-canvas px-3 text-body text-ink"
-            placeholder="username.staf"
-          />
-          {errors.username ? (
+          <div className="relative mt-1.5">
+            <input
+              id={`${fieldId}-username`}
+              name="username"
+              autoComplete="username"
+              aria-invalid={Boolean(state?.errors?.username)}
+              aria-describedby={state?.errors?.username ? `${fieldId}-username-error` : undefined}
+              className="h-[46px] w-full rounded-md border border-slate-300 bg-canvas pl-3 pr-11 text-body text-ink focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
+              placeholder="081234567890 atau admin"
+            />
+            <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-slate-400">
+              <IconUser className="h-3.5 w-3.5" />
+            </span>
+          </div>
+          {state?.errors?.username ? (
             <p id={`${fieldId}-username-error`} className="mt-1 text-meta text-danger">
-              {errors.username}
+              {state.errors.username}
             </p>
           ) : null}
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-password`} className="block text-meta font-medium text-ink">
-            Kata sandi
+          <label htmlFor={`${fieldId}-password`} className="block text-[13px] font-medium text-slate-700">
+            Kata Sandi (Password)
           </label>
-          <div className="mt-2 flex gap-2">
+          <div className="relative mt-1.5">
             <input
               id={`${fieldId}-password`}
               name="password"
               type={passwordVisible ? "text" : "password"}
               autoComplete="current-password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              aria-invalid={Boolean(errors.password)}
-              aria-describedby={errors.password ? `${fieldId}-password-error` : undefined}
-              className="h-12 min-w-0 flex-1 rounded-md border border-rule-strong bg-canvas px-3 text-body text-ink"
+              aria-invalid={Boolean(state?.errors?.password)}
+              aria-describedby={state?.errors?.password ? `${fieldId}-password-error` : undefined}
+              className="h-[46px] w-full rounded-md border border-slate-300 bg-canvas pl-3 pr-12 text-body text-ink focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
             />
-            <Button
-              variant="outline"
+            <button
+              type="button"
               onClick={() => setPasswordVisible((value) => !value)}
+              aria-label={passwordVisible ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
               aria-pressed={passwordVisible}
+              className="absolute inset-y-0 right-0 flex h-[46px] w-11 items-center justify-center rounded-r-md text-slate-500 transition-colors hover:text-ink focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy"
             >
-              {passwordVisible ? "Sembunyikan" : "Tampilkan"}
-            </Button>
+              {passwordVisible ? <IconEyeOff className="h-3.5 w-3.5" /> : <IconEye className="h-3.5 w-3.5" />}
+            </button>
           </div>
-          {errors.password ? (
+          {state?.errors?.password ? (
             <p id={`${fieldId}-password-error`} className="mt-1 text-meta text-danger">
-              {errors.password}
+              {state.errors.password}
             </p>
           ) : null}
         </div>
       </div>
 
-      <Button type="submit" variant="confirm" size="md" className="mt-8 w-full">
-        Masuk ke Dashboard
-      </Button>
+      <label className="mt-1.5 flex min-h-11 cursor-pointer items-center gap-3 text-[13px] text-ink-soft">
+        <input
+          type="checkbox"
+          name="rememberMe"
+          value="on"
+          checked={rememberMe}
+          onChange={(event) => setRememberMe(event.target.checked)}
+          className="h-[18px] w-[18px] shrink-0 cursor-pointer rounded-sm accent-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
+        />
+        <span>Ingat sesi perangkat ini selama 7 hari</span>
+      </label>
 
-      <p className="mt-3 text-meta text-ink-soft">
-        Autentikasi belum tersambung ke backend. Form ini memvalidasi isian lalu membuka dashboard,
-        belum memeriksa kredensial sungguhan.
-      </p>
+      <SubmitButton />
 
-      <p className="mt-auto pt-8 text-meta text-ink-soft">
+      <p className="mt-auto pt-6 text-meta text-ink-soft">
         Hak Cipta &copy; 2026 CV. Mobil Juragan Express Transport
       </p>
     </form>

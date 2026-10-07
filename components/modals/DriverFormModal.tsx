@@ -94,7 +94,7 @@ export function DriverFormModal({ driver, onClose, onSave, onRequestDelete }: Pr
         </>
       }
     >
-      <div className="space-y-4">
+      <div className="space-y-3.5">
         <div>
           <label htmlFor={`${fieldId}-label`} className="block text-meta font-medium text-ink">
             Nama lengkap supir
@@ -182,7 +182,7 @@ export function DriverFormModal({ driver, onClose, onSave, onRequestDelete }: Pr
           )}
         </div>
 
-        <div className="rounded-sm border border-rule bg-canvas px-4 py-3">
+        <div className="rounded-sm border border-rule bg-canvas px-3.5 py-2.5">
           <p className="text-micro font-semibold uppercase text-ink-soft">ID supir</p>
           <p className="mt-1 text-meta text-ink">
             {driver ? driver.id : "Dibuat sistem saat data disimpan"}

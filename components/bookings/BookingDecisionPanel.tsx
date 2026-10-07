@@ -5,7 +5,7 @@ import { useState } from "react";
 import { ManualSurchargeModal } from "@/components/modals/ManualSurchargeModal";
 import { Button } from "@/components/ui/Button";
 import { StatusChip } from "@/components/ui/StatusChip";
-import { AMOUNT_PLACEHOLDER, TARIFF_PENDING_NOTE } from "@/lib/mockData";
+import { AMOUNT_PLACEHOLDER, TARIFF_PENDING_NOTE } from "@/lib/uiText";
 import { BOOKING_STATUS, DRIVER_STATUS } from "@/lib/labels";
 import type { Booking, BookingStatus, LineItem, Vehicle } from "@/lib/types";
 
@@ -23,19 +23,19 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
 
   return (
     <section className="rounded-md border border-rule bg-surface">
-      <div className="border-b border-rule px-5 py-4">
+      <div className="border-b border-rule px-4 py-3">
         <h3 className="text-body font-semibold text-ink">Armada &amp; Rincian Pembayaran</h3>
       </div>
 
-      <div className="space-y-4 px-5 py-4">
-        <div className="flex items-start gap-4 rounded-sm border border-rule bg-canvas p-3">
-          <div className="flex h-16 w-[72px] shrink-0 items-center justify-center rounded-sm border border-rule bg-surface text-micro text-ink-soft">
+      <div className="space-y-3.5 px-4 py-3.5">
+        <div className="flex items-start gap-3 rounded-sm border border-rule bg-canvas p-2.5">
+          <div className="flex h-14 w-16 shrink-0 items-center justify-center rounded-sm border border-rule bg-surface text-micro text-ink-soft">
             [Foto unit]
           </div>
           <div className="min-w-0">
             <p className="text-meta font-semibold text-ink">{vehicle.name}</p>
-            <p className="mt-1 text-micro text-ink-soft">Plat {vehicle.plate}</p>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <p className="mt-0.5 text-micro text-ink-soft">Plat {vehicle.plate}</p>
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
               <StatusChip tone={booking.driverStatus ? "available" : "neutral"}>
                 {vehicle.status === "tersedia" ? "Unit siap di pool" : "Perlu cek unit"}
               </StatusChip>
@@ -52,13 +52,13 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
           <p className="text-micro font-bold uppercase text-ink-soft">
             Rincian tagihan &amp; penyesuaian biaya
           </p>
-          <ul className="mt-3 divide-y divide-rule">
+          <ul className="mt-2 divide-y divide-rule">
             {items.map((item) => (
-              <li key={item.id} className="flex items-start justify-between gap-4 py-2">
+              <li key={item.id} className="flex items-start justify-between gap-4 py-1.5">
                 <span className="min-w-0">
                   <span className="block text-meta text-ink">{item.label}</span>
                   {item.note ? (
-                    <span className="mt-1 block text-micro text-ink-soft">{item.note}</span>
+                    <span className="mt-0.5 block text-micro text-ink-soft">{item.note}</span>
                   ) : null}
                 </span>
                 <span className="tabular-nums shrink-0 text-meta font-semibold text-ink">
@@ -68,13 +68,13 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
             ))}
           </ul>
           {canDecide ? (
-            <Button variant="outline" className="mt-3" onClick={() => setSurchargeOpen(true)}>
+            <Button variant="outline" className="mt-2.5" onClick={() => setSurchargeOpen(true)}>
               + Tambah Surcharge Manual
             </Button>
           ) : null}
         </div>
 
-        <div className="rounded-sm border border-rule bg-canvas px-4 py-3">
+        <div className="rounded-sm border border-rule bg-canvas px-3.5 py-2.5">
           <div className="flex items-baseline justify-between gap-4">
             <span className="text-micro font-bold uppercase text-ink-soft">
               Total tagihan bersih
@@ -85,7 +85,7 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
         </div>
 
         {canDecide ? (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             <Button
               variant="confirm"
               size="md"
@@ -101,7 +101,7 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
             </Button>
           </div>
         ) : (
-          <div className="rounded-sm border border-rule bg-canvas px-4 py-3">
+          <div className="rounded-sm border border-rule bg-canvas px-3.5 py-2.5">
             <p className="text-meta font-medium text-ink">
               {status === "ditolak"
                 ? "Permintaan sewa ditolak. Status tersimpan di perangkat ini saja sampai backend tersambung."

@@ -23,15 +23,15 @@ export function EmptyState({
   children,
 }: EmptyStateProps) {
   return (
-    <section className="rounded-md border border-rule bg-surface px-6 py-8">
+    <section className="rounded-md border border-rule bg-surface px-5 py-6">
       <h2 className="text-display lg:text-display-lg font-semibold leading-tight text-ink">{heading}</h2>
-      <p className="mt-4 text-subtitle font-semibold text-ink">{cause}</p>
-      <p className="mt-2 max-w-2xl text-body text-ink-soft">{nextAction}</p>
+      <p className="mt-3 text-subtitle font-semibold text-ink">{cause}</p>
+      <p className="mt-1.5 max-w-2xl text-body text-ink-soft">{nextAction}</p>
 
       {actionHref && actionLabel ? (
         <Link
           href={actionHref}
-          className="mt-5 inline-flex h-11 items-center rounded-sm border border-rule-strong px-4 text-body font-medium text-ink hover:bg-canvas"
+          className="mt-4 inline-flex h-11 items-center rounded-sm border border-rule-strong px-4 text-body font-medium text-ink hover:bg-canvas"
         >
           {actionLabel}
         </Link>
@@ -39,7 +39,7 @@ export function EmptyState({
 
       {children}
 
-      {guidance ? <p className="mt-6 text-body text-ink-soft">{guidance}</p> : null}
+      {guidance ? <p className="mt-5 text-body text-ink-soft">{guidance}</p> : null}
     </section>
   );
 }

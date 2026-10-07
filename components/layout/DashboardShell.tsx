@@ -19,7 +19,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
       <Sidebar open={navOpen} onClose={() => setNavOpen(false)} />
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar onOpenNav={() => setNavOpen(true)} />
-        <main id="konten" className="flex-1 px-6 py-6 lg:px-8">
+        <main id="konten" className="flex-1 px-5 py-5 lg:px-7">
           {children}
         </main>
       </div>
