@@ -61,44 +61,44 @@ Berikut adalah struktur file penting dalam aplikasi dashboard:
 
 ```text
 frontend/
-â”œâ”€â”€ app/
-â”‚   â”œâ”€â”€ layout.tsx              # Root layout, metadata global, font, & QueryProvider
-â”‚   â”œâ”€â”€ actions.ts              # Server Actions ("use server") pemanggil API Express
-â”‚   â”œâ”€â”€ not-found.tsx           # Halaman 404
-â”‚   â”œâ”€â”€ proxy.ts                # Gerbang sesi: verifikasi token sebelum halaman dibuka
-â”‚   â”œâ”€â”€ globals.css             # Tailwind CSS 4 & variabel desain global
-â”‚   â”œâ”€â”€ (auth)/login/           # Halaman masuk staf/admin
-â”‚   â””â”€â”€ (dashboard)/            # Grup rute dashboard (butuh sesi)
-â”‚       â”œâ”€â”€ page.tsx            # Ringkasan operasional
-â”‚       â”œâ”€â”€ loading.tsx         # Skeleton saat data sedang dimuat
-â”‚       â”œâ”€â”€ error.tsx           # Error boundary dashboard
-â”‚       â”œâ”€â”€ admin/              # Manajemen akun staf & admin
-â”‚       â”œâ”€â”€ bookings/           # Antrean pemesanan & detail [id]
-â”‚       â”œâ”€â”€ customer-care/      # Meja kerja tiket bantuan
-â”‚       â””â”€â”€ fleet/              # Katalog, kalender, dan roster supir
-â”œâ”€â”€ components/
-â”‚   â”œâ”€â”€ providers/              # QueryProvider (QueryClient lewat useState)
-â”‚   â”œâ”€â”€ ui/                     # Komponen dasar: Button, Table, Modal, StatusChip, dll
-â”‚   â”œâ”€â”€ layout/                 # DashboardShell, Sidebar, Topbar
-â”‚   â”œâ”€â”€ modals/                 # Modal form dan konfirmasi hapus
-â”‚   â”œâ”€â”€ admin/                  # Manajemen akun admin
-â”‚   â”œâ”€â”€ bookings/               # Tabel dan panel keputusan pemesanan
-â”‚   â”œâ”€â”€ fleet/                  # Tabel katalog, roster, dan kalender
-â”‚   â””â”€â”€ support/                # Meja kerja tiket
-â”œâ”€â”€ lib/
-â”‚   â”œâ”€â”€ api.ts                  # Pemanggil API Express (server-only), termasuk autentikasi
-â”‚   â”œâ”€â”€ operations.ts           # Pemanggil API Express untuk data operasional (server-only)
-â”‚   â”œâ”€â”€ axios.ts                # Instance Axios untuk panggilan dari browser
-â”‚   â”œâ”€â”€ labels.ts               # Label bahasa Indonesia untuk status & peran
-â”‚   â”œâ”€â”€ format.ts               # Pemformat tanggal dan rentang tanggal
-â”‚   â”œâ”€â”€ navigation.ts           # Peta menu sidebar & judul halaman
-â”‚   â”œâ”€â”€ types.ts                # Tipe data bersama
-â”‚   â””â”€â”€ uiText.ts               # Konstanta teks tampilan (placeholder nominal, dll)
-â”œâ”€â”€ public/                     # Aset gambar & ikon
-â”œâ”€â”€ .env.example                # Template konfigurasi environment variable
-â”œâ”€â”€ next.config.ts              # Konfigurasi runtime Next.js
-â”œâ”€â”€ package.json                # Manifest dependency & skrip npm
-â””â”€â”€ tsconfig.json               # Konfigurasi compiler TypeScript
+├── app/
+│   ├── layout.tsx              # Root layout, metadata global, font, & QueryProvider
+│   ├── actions.ts              # Server Actions ("use server") pemanggil API Express
+│   ├── not-found.tsx           # Halaman 404
+│   ├── proxy.ts                # Gerbang sesi: verifikasi token sebelum halaman dibuka
+│   ├── globals.css             # Tailwind CSS 4 & variabel desain global
+│   ├── (auth)/login/           # Halaman masuk staf/admin
+│   └── (dashboard)/            # Grup rute dashboard (butuh sesi)
+│       ├── page.tsx            # Ringkasan operasional
+│       ├── loading.tsx         # Skeleton saat data sedang dimuat
+│       ├── error.tsx           # Error boundary dashboard
+│       ├── admin/              # Manajemen akun staf & admin
+│       ├── bookings/           # Antrean pemesanan & detail [id]
+│       ├── customer-care/      # Meja kerja tiket bantuan
+│       └── fleet/              # Katalog, kalender, dan roster supir
+├── components/
+│   ├── providers/              # QueryProvider (QueryClient lewat useState)
+│   ├── ui/                     # Komponen dasar: Button, Table, Modal, StatusChip, dll
+│   ├── layout/                 # DashboardShell, Sidebar, Topbar
+│   ├── modals/                 # Modal form dan konfirmasi hapus
+│   ├── admin/                  # Manajemen akun admin
+│   ├── bookings/               # Tabel dan panel keputusan pemesanan
+│   ├── fleet/                  # Tabel katalog, roster, dan kalender
+│   └── support/                # Meja kerja tiket
+├── lib/
+│   ├── api.ts                  # Pemanggil API Express (server-only), termasuk autentikasi
+│   ├── operations.ts           # Pemanggil API Express untuk data operasional (server-only)
+│   ├── axios.ts                # Instance Axios untuk panggilan dari browser
+│   ├── labels.ts               # Label bahasa Indonesia untuk status & peran
+│   ├── format.ts               # Pemformat tanggal dan rentang tanggal
+│   ├── navigation.ts           # Peta menu sidebar & judul halaman
+│   ├── types.ts                # Tipe data bersama
+│   └── uiText.ts               # Konstanta teks tampilan (placeholder nominal, dll)
+├── public/                     # Aset gambar & ikon
+├── .env.example                # Template konfigurasi environment variable
+├── next.config.ts              # Konfigurasi runtime Next.js
+├── package.json                # Manifest dependency & skrip npm
+└── tsconfig.json               # Konfigurasi compiler TypeScript
 ```
 
 ---
