@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { VehicleCatalogTable } from "@/components/fleet/VehicleCatalogTable";
-import { PageLead } from "@/components/ui/PageLayout";
 import { getAllVehicles } from "@/lib/operations";
 
 export const metadata: Metadata = {
@@ -15,10 +14,5 @@ export const dynamic = "force-dynamic";
 export default async function FleetCatalogPage() {
   const vehicles = await getAllVehicles();
 
-  return (
-    <>
-      <PageLead lead="Armada resmi, detail spesifikasi, dan penambahan unit baru. Tarif per unit dikonfirmasi tim MobilJuragan saat booking masuk." />
-      <VehicleCatalogTable initialVehicles={vehicles} />
-    </>
-  );
+  return <VehicleCatalogTable initialVehicles={vehicles} />;
 }

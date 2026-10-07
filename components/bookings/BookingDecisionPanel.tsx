@@ -104,7 +104,7 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
           <div className="rounded-sm border border-rule bg-canvas px-3.5 py-2.5">
             <p className="text-meta font-medium text-ink">
               {status === "ditolak"
-                ? "Permintaan sewa ditolak. Status tersimpan di perangkat ini saja sampai backend tersambung."
+                ? "Permintaan sewa ditolak. Perubahan ini sudah tersimpan."
                 : "Tarif sudah dikonfirmasi. Perubahan tarif berikutnya lewat penyesuaian biaya baru."}
             </p>
           </div>
@@ -112,8 +112,7 @@ export function BookingDecisionPanel({ booking, vehicle }: { booking: Booking; v
 
         <p className="text-micro text-ink-soft">
           Status pesanan sekarang:{" "}
-          <StatusChip tone={statusMeta.tone}>{statusMeta.label}</StatusChip> &middot; Status pada
-          siklus backend: {statusMeta.canonical}
+          <StatusChip tone={statusMeta.tone}>{statusMeta.label}</StatusChip>
         </p>
       </div>
 

@@ -185,10 +185,7 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
           </p>
         </div>
 
-        <p className="text-micro text-ink-soft">
-          Penyesuaian tercatat dalam audit operasional dan hanya berlaku selama sesi ini sampai
-          backend tersambung.
-        </p>
+        <p className="text-micro text-ink-soft">Penyesuaian tercatat pada riwayat pesanan.</p>
       </div>
     </Modal>
   );

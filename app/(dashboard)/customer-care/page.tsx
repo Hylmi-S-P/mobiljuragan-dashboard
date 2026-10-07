@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { TicketWorkspace } from "@/components/support/TicketWorkspace";
-import { PageLead } from "@/components/ui/PageLayout";
 import { getSupportTickets, getTicketMessages } from "@/lib/operations";
 
 export const metadata: Metadata = {
@@ -17,10 +16,5 @@ export default async function CustomerCarePage() {
   const firstTicket = tickets[0];
   const messages = firstTicket ? await getTicketMessages(firstTicket.id) : [];
 
-  return (
-    <>
-      <PageLead lead="Kelola pertanyaan dan keluhan pelanggan secara terstruktur." />
-      <TicketWorkspace initialTickets={tickets} initialMessages={messages} />
-    </>
-  );
+  return <TicketWorkspace initialTickets={tickets} initialMessages={messages} />;
 }

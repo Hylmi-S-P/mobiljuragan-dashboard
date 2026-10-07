@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { DataNotice } from "@/components/ui/DataNotice";
 import { PageLead, Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import {
@@ -34,13 +33,7 @@ export default async function FleetCalendarPage() {
 
   return (
     <>
-      <PageLead lead="Riwayat ketersediaan unit, jadwal sewa aktif, dan pesanan harian armada." />
-
-      <DataNotice label={`Jadwal ${calendar.totalVehicles} unit`}>
-        Hanya pesanan yang sudah dikonfirmasi yang mengunci tanggal. Pesanan yang masih menunggu
-        konfirmasi belum muncul di sini, jadi unitnya masih terlihat bebas. Ketersediaan mengikuti
-        jadwal sewa; Status adalah kondisi fisik unit yang diubah dari Katalog.
-      </DataNotice>
+      <PageLead lead={`Jadwal sewa aktif ${calendar.totalVehicles} unit armada.`} />
 
       <div className="mt-3">
         <Panel title="Status yang digunakan">
@@ -63,7 +56,6 @@ export default async function FleetCalendarPage() {
               <TableRow>
                 <TableHeaderCell className="w-[325px]">Kendaraan</TableHeaderCell>
                 <TableHeaderCell className="w-[255px]">Tanggal</TableHeaderCell>
-                <TableHeaderCell className="w-[275px]">Ketersediaan</TableHeaderCell>
                 <TableHeaderCell className="w-[170px]">Status</TableHeaderCell>
               </TableRow>
             </TableHead>
@@ -84,9 +76,6 @@ export default async function FleetCalendarPage() {
                             countDays(schedule.startDateTime, schedule.endDateTime),
                           )
                         : "Belum ada jadwal"}
-                    </TableCell>
-                    <TableCell className={schedule ? "text-ink" : "text-ink-soft"}>
-                      {schedule ? "Disewa" : "Tersedia"}
                     </TableCell>
                     <TableCell>
                       <StatusChip tone={VEHICLE_STATUS[vehicle.status].tone}>

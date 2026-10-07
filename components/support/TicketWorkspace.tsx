@@ -4,7 +4,6 @@ import { useMemo, useState, useTransition } from "react";
 
 import { replyToTicketAction } from "@/app/actions";
 import { Button } from "@/components/ui/Button";
-import { DataNotice } from "@/components/ui/DataNotice";
 import { Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { TICKET_STATUS } from "@/lib/labels";
@@ -51,19 +50,19 @@ export function TicketWorkspace({ initialTickets, initialMessages }: Props) {
     }
 
     setDraftError(null);
-    const optimisticMessage: TicketMessageView = {
-      id: `optimistic-${Date.now()}`,
-      from: "tim",
-      text,
-      sentAt: new Date().toISOString(),
-      senderName: "Tim MobilJuragan",
-    };
-
-    // Balasan tampil lebih dulu, lalu dikirim ke Express lewat Server Action.
-    setMessages((current) => [...current, optimisticMessage]);
     setDraft("");
 
     startTransition(async () => {
+      // Balasan tampil lebih dulu, lalu dikirim ke Express lewat Server Action.
+      const optimisticMessage: TicketMessageView = {
+        id: `optimistic-${Date.now()}`,
+        from: "tim",
+        text,
+        sentAt: new Date().toISOString(),
+        senderName: "Tim MobilJuragan",
+      };
+      setMessages((current) => [...current, optimisticMessage]);
+
       const result = await replyToTicketAction(activeTicket.id, text);
       if (result.success) {
         setNotice(result.message ?? "Balasan terkirim.");
@@ -71,18 +70,13 @@ export function TicketWorkspace({ initialTickets, initialMessages }: Props) {
         // Gagal kirim: tarik kembali pesan optimistis supaya tidak menyesatkan.
         setMessages((current) => current.filter((message) => message.id !== optimisticMessage.id));
         setDraft(text);
-        setDraftError(result.message ?? "Balasan gagal dikirim ke server.");
+        setDraftError(result.message ?? "Balasan gagal dikirim.");
       }
     });
   }
 
   return (
     <>
-      <DataNotice label="Meja kerja tiket">
-        Balasan yang dikirim dari sini tersimpan pada tiketnya dan mengubah status tiket menjadi
-        menunggu pelanggan.
-      </DataNotice>
-
       {notice ? (
         <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-meta text-ink">
           {notice}

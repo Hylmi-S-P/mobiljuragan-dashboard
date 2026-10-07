@@ -1,10 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
 import { DeleteVehicleModal } from "@/components/modals/DeleteVehicleModal";
 import { VehicleFormModal } from "@/components/modals/VehicleFormModal";
-import { DataNotice } from "@/components/ui/DataNotice";
 import { Button } from "@/components/ui/Button";
 import { PlateBadge } from "@/components/ui/PlateBadge";
 import { Panel } from "@/components/ui/PageLayout";
@@ -40,11 +39,6 @@ export function VehicleCatalogTable({ initialVehicles }: Props) {
 
   return (
     <>
-      <DataNotice label="Armada resmi Merauke">
-        Status unit berubah saat kendaraan disewa atau masuk perawatan. Perubahan dari halaman ini
-        langsung tersimpan, jadi unit yang sedang keluar tidak lagi tampil tersedia.
-      </DataNotice>
-
       {notice ? (
         <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-meta text-ink">
           {notice}

@@ -172,16 +172,6 @@ export function BookingsTable({ initialBookings, vehicles }: Props) {
           </TableBody>
         </Table>
       )}
-
-      <div className="mt-3 space-y-1.5">
-        <p className="text-meta text-ink-soft">
-          Staf memverifikasi KTP dan SIM A asli secara fisik saat serah terima unit di pool.
-        </p>
-        <p className="text-body font-medium text-ink">
-          Aksi operasional: buka detail pemesanan, tentukan tarif final dan surcharge, alokasikan
-          supir resmi, atau tolak reservasi.
-        </p>
-      </div>
     </Panel>
   );
 }

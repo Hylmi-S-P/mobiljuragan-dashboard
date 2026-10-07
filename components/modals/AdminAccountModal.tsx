@@ -218,7 +218,7 @@ export function AdminAccountModal({ account, onClose, onSave }: Props) {
         <div className="rounded-sm border border-rule bg-canvas px-3.5 py-2.5">
           <p className="text-micro font-semibold uppercase text-ink-soft">Pengidentifikasi Akun</p>
           <p className="mt-1 text-meta text-ink">
-            {account ? account.id : "Dibuat otomatis oleh sistem backend"}
+            {account ? account.id : "Dibuat otomatis oleh sistem"}
           </p>
         </div>
       </form>

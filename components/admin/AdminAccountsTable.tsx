@@ -5,7 +5,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AdminAccountModal } from "@/components/modals/AdminAccountModal";
 import { DeleteAdminAccountModal } from "@/components/modals/DeleteAdminAccountModal";
 import { Button } from "@/components/ui/Button";
-import { DataNotice } from "@/components/ui/DataNotice";
 import { Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { IconPlus, IconSearch, IconTrash } from "@/components/ui/icons";
@@ -25,7 +24,15 @@ type Props = {
   initialAccounts?: AdminAccount[];
 };
 
-function mapApiUser(user: any): AdminAccount {
+type StaffUserPayload = {
+  id: string;
+  fullName: string;
+  phoneNumber: string;
+  role: string;
+  isActive: boolean;
+};
+
+function mapApiUser(user: StaffUserPayload): AdminAccount {
   const role: AdminRole = user.role === "ADMIN" ? "super_admin" : "staf_operasional";
   return {
     id: user.id,
@@ -146,11 +153,6 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
 
   return (
     <>
-      <DataNotice label="Akun pengelola portal">
-        Klik chip status untuk mengaktifkan atau menonaktifkan akun. Perubahan langsung tersimpan,
-        jadi staf yang dinonaktifkan tidak bisa masuk lagi.
-      </DataNotice>
-
       {notice ? (
         <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-meta text-ink">
           {notice}
@@ -186,9 +188,7 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
           }
         >
           {isFetching ? (
-            <p className="mb-2 text-micro text-ink-soft">
-              Menyinkronkan data terbaru dengan server...
-            </p>
+            <p className="mb-2 text-micro text-ink-soft">Menyinkronkan data terbaru...</p>
           ) : null}
 
           <Table caption="Akun staf dan hak akses portal admin">

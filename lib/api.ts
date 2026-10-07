@@ -10,7 +10,7 @@ export class ApiError extends Error {
     public status: number,
     public code: string,
     message: string,
-    public details?: any,
+    public details?: unknown,
   ) {
     super(message);
     this.name = "ApiError";
@@ -59,7 +59,15 @@ export async function apiAdminLogin(usernameOrPhone: string, password: string, r
 }
 
 // Menyelaraskan enum role Prisma backend (ADMIN / STAFF) ke model peran dashboard.
-function mapUserToAdminAccount(user: any): AdminAccount {
+type StaffUserPayload = {
+  id: string;
+  fullName: string;
+  phoneNumber: string;
+  role: string;
+  isActive: boolean;
+};
+
+function mapUserToAdminAccount(user: StaffUserPayload): AdminAccount {
   const role: AdminRole = user.role === "ADMIN" ? "super_admin" : "staf_operasional";
   return {
     id: user.id,

@@ -310,9 +310,7 @@ export function VehicleFormModal({
           />
           {errors.photo ? <p className="mt-1 text-meta text-danger">{errors.photo}</p> : null}
           <p className="mt-1 text-micro text-ink-soft">
-            {photoName
-              ? `Berkas dipilih: ${photoName}. Belum diunggah, menunggu backend penyimpanan.`
-              : "PNG atau JPG, maksimal 5 MB. Foto tampil di katalog aplikasi pelanggan setelah backend tersambung."}
+            {photoName ? `Berkas dipilih: ${photoName}.` : "PNG atau JPG, maksimal 5 MB."}
           </p>
         </div>
       </div>

@@ -1,11 +1,10 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
 import { DeleteDriverModal } from "@/components/modals/DeleteDriverModal";
 import { DriverFormModal } from "@/components/modals/DriverFormModal";
 import { Button } from "@/components/ui/Button";
-import { DataNotice } from "@/components/ui/DataNotice";
 import { Panel } from "@/components/ui/PageLayout";
 import { StatusChip } from "@/components/ui/StatusChip";
 import {
@@ -46,11 +45,6 @@ export function DriverRosterTable({ initialDrivers }: Props) {
 
   return (
     <>
-      <DataNotice label="Roster supir resmi">
-        Supir nonaktif tetap tampil agar riwayat penugasannya tidak hilang. Sakelar kesiapan
-        mengunci diri saat supir sedang bertugas, jadi statusnya tidak bisa diubah manual.
-      </DataNotice>
-
       {notice ? (
         <p className="mt-3 rounded-sm border border-rule bg-surface px-3 py-2 text-meta text-ink">
           {notice}

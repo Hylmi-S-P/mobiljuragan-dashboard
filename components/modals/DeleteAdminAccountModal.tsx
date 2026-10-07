@@ -62,8 +62,7 @@ export function DeleteAdminAccountModal({ account, onClose }: Props) {
       </form>
 
       <p className="text-body text-ink">
-        Akun <strong>{account.name}</strong> ({account.username}) akan dihapus permanen dari
-        database.
+        Akun <strong>{account.name}</strong> ({account.username}) akan dihapus permanen.
       </p>
 
       {state?.message && !state?.success ? (
@@ -77,7 +76,7 @@ export function DeleteAdminAccountModal({ account, onClose }: Props) {
 
       <p className="mt-3 rounded-sm border border-rule bg-canvas px-3 py-2 text-meta text-ink-soft">
         Pertimbangkan menonaktifkan akun lewat menu Edit kalau yang diinginkan hanya mencabut
-        aksesnya. Riwayat audit akun ini tetap tersimpan meski akun dihapus.
+        aksesnya.
       </p>
     </Modal>
   );
