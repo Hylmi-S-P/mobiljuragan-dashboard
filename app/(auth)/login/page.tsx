@@ -18,9 +18,6 @@ export default async function LoginPage() {
 
   return (
     <main className="flex min-h-dvh items-center justify-center bg-inset px-4 py-6">
-      {/* Skala 90% dari frame Figma 1120x720. Alasannya: kartu 720px membuat
-          halaman menggulir di laptop 1366x768, padahal isinya hanya form.
-          Tinggi kontrol interaktif tetap 44px, jadi target sentuh tidak ikut mengecil. */}
       <div className="grid w-full max-w-[1008px] overflow-hidden rounded-lg border border-rule bg-surface lg:min-h-[648px] lg:grid-cols-[432px_minmax(0,1fr)] lg:rounded-[18px]">
         <section className="bg-navy px-6 py-8 lg:px-9 lg:py-10">
           <div className="flex flex-wrap items-center gap-3">
