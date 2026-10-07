@@ -1,18 +1,13 @@
-"use client";
+import type { Metadata } from "next";
 
-import { useRouter } from "next/navigation";
+import { ErrorStateDemo } from "@/components/ui/ErrorStateDemo";
 
-import { ErrorState } from "@/components/ui/ErrorState";
+export const metadata: Metadata = {
+  title: "Contoh Error Boundary | MobilJuragan",
+  description:
+    "Rujukan tampilan saat halaman gagal dimuat, lengkap dengan tombol coba lagi untuk memuat ulang data.",
+};
 
 export default function ErrorBoundaryPage() {
-  const router = useRouter();
-
-  return (
-    <ErrorState
-      cause="Data dashboard tidak berhasil dimuat."
-      nextAction="Periksa koneksi lalu coba lagi."
-      guidance="Jika masalah berlanjut, hubungi admin sistem."
-      onRetry={() => router.refresh()}
-    />
-  );
+  return <ErrorStateDemo />;
 }
