@@ -35,10 +35,7 @@ function ConfirmButton({ formId }: { formId: string }) {
 export function DeleteAdminAccountModal({ account, onClose }: Props) {
   const fieldId = useId();
   const formId = `${fieldId}-delete-admin-form`;
-  const [state, formAction] = useActionState<ActionState | null, FormData>(
-    deleteAdminAction,
-    null
-  );
+  const [state, formAction] = useActionState<ActionState | null, FormData>(deleteAdminAction, null);
 
   useEffect(() => {
     if (state?.success) {

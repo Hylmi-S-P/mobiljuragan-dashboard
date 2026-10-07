@@ -22,11 +22,10 @@ export function ErrorState({
   retryLabel = "Coba lagi",
 }: ErrorStateProps) {
   return (
-    <section
-      role="alert"
-      className="rounded-md border border-danger/40 bg-surface px-5 py-6"
-    >
-      <h2 className="text-display lg:text-display-lg font-semibold leading-tight text-ink">{heading}</h2>
+    <section role="alert" className="rounded-md border border-danger/40 bg-surface px-5 py-6">
+      <h2 className="text-display lg:text-display-lg font-semibold leading-tight text-ink">
+        {heading}
+      </h2>
       <p className="mt-3 text-subtitle font-semibold text-ink">{cause}</p>
       <p className="mt-1.5 max-w-2xl text-body text-ink-soft">{nextAction}</p>
 

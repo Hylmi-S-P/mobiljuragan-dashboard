@@ -84,15 +84,11 @@ export default async function OverviewPage() {
                       <span className="block text-body font-semibold text-ink">
                         {booking.customerName}
                       </span>
-                      <span className="mt-0.5 block text-micro text-ink-soft">
-                        {booking.code}
-                      </span>
+                      <span className="mt-0.5 block text-micro text-ink-soft">{booking.code}</span>
                     </TableCell>
                     <TableCell>
                       <span className="block text-body font-medium text-ink">{vehicle?.name}</span>
-                      {vehicle ? (
-                        <PlateBadge plate={vehicle.plate} className="mt-1" />
-                      ) : null}
+                      {vehicle ? <PlateBadge plate={vehicle.plate} className="mt-1" /> : null}
                     </TableCell>
                     <TableCell className="text-body tabular-nums">
                       {formatDateRange(booking.startDate, booking.endDate, booking.dayCount)}

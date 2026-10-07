@@ -10,10 +10,6 @@ export const metadata: Metadata = {
     "Rujukan tampilan saat terjadi kegagalan memuat data, dipakai konsisten di seluruh modul dashboard.",
 };
 
-export default function ErrorBoundaryLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ErrorBoundaryLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

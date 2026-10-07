@@ -27,8 +27,8 @@ function ModalSubmitButton({ isEdit, formId }: { isEdit: boolean; formId: string
           ? "Menyimpan..."
           : "Membuat Admin..."
         : isEdit
-        ? "Simpan Perubahan"
-        : "Buat Admin"}
+          ? "Simpan Perubahan"
+          : "Buat Admin"}
     </Button>
   );
 }
@@ -145,7 +145,9 @@ export function AdminAccountModal({ account, onClose, onSave }: Props) {
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               aria-invalid={Boolean(state?.errors?.phoneNumber)}
-              aria-describedby={state?.errors?.phoneNumber ? `${fieldId}-username-error` : undefined}
+              aria-describedby={
+                state?.errors?.phoneNumber ? `${fieldId}-username-error` : undefined
+              }
               className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
               placeholder="081234567890"
               required
@@ -169,7 +171,9 @@ export function AdminAccountModal({ account, onClose, onSave }: Props) {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               aria-invalid={Boolean(state?.errors?.password)}
-              aria-describedby={state?.errors?.password ? `${fieldId}-password-error` : `${fieldId}-password-hint`}
+              aria-describedby={
+                state?.errors?.password ? `${fieldId}-password-error` : `${fieldId}-password-hint`
+              }
               className="mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
               placeholder={account ? "Kosongkan jika tidak diubah" : "Minimal 8 karakter"}
             />

@@ -56,7 +56,11 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   return (
     <>
       {open ? (
-        <div aria-hidden="true" onClick={onClose} className="fixed inset-0 z-30 bg-ink/50 lg:hidden" />
+        <div
+          aria-hidden="true"
+          onClick={onClose}
+          className="fixed inset-0 z-30 bg-ink/50 lg:hidden"
+        />
       ) : null}
 
       {/* Di layar sempit sidebar adalah laci melayang (fixed). Mulai lg ia jadi kolom
@@ -145,10 +149,14 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 aria-current={active ? "page" : undefined}
                 onClick={onClose}
                 className={`flex h-11 items-center gap-2.5 rounded-nav px-3 text-body font-medium transition-colors ${
-                  active ? "bg-teal text-white" : "text-white/85 hover:bg-navy-hover hover:text-white"
+                  active
+                    ? "bg-teal text-white"
+                    : "text-white/85 hover:bg-navy-hover hover:text-white"
                 }`}
               >
-                <Ikon className={`h-[18px] w-[18px] shrink-0 ${active ? "text-white" : "text-white/70"}`} />
+                <Ikon
+                  className={`h-[18px] w-[18px] shrink-0 ${active ? "text-white" : "text-white/70"}`}
+                />
                 {entry.label}
               </Link>
             );

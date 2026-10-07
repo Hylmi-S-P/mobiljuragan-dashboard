@@ -44,13 +44,11 @@ export default async function BookingDetailPage({ params }: Params) {
     <>
       {/* Kode booking dan moda sewa tetap ditampilkan: itu keterangan yang tidak
           ada di judul topbar, bukan pengulangan nama halaman. */}
-      <PageLead
-        lead={`${booking.code} • ${isDriverService ? "Dengan Supir" : "Lepas Kunci"}`}
-      />
+      <PageLead lead={`${booking.code} • ${isDriverService ? "Dengan Supir" : "Lepas Kunci"}`} />
 
       <DataNotice label="Verifikasi pemesanan">
-        Identitas pemesan yang belum diperiksa tim ditandai placeholder, bukan diisi contoh.
-        Tarif final ditentukan di panel keputusan sebelum pesanan dikonfirmasi.
+        Identitas pemesan yang belum diperiksa tim ditandai placeholder, bukan diisi contoh. Tarif
+        final ditentukan di panel keputusan sebelum pesanan dikonfirmasi.
       </DataNotice>
 
       <div className="mt-3 grid gap-4 lg:grid-cols-[688fr_424fr]">

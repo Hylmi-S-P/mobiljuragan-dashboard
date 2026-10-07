@@ -80,9 +80,7 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
       const previous = queryClient.getQueryData<AdminAccount[]>(["adminAccounts"]);
 
       queryClient.setQueryData<AdminAccount[]>(["adminAccounts"], (current) =>
-        (current ?? []).map((account) =>
-          account.id === id ? { ...account, active } : account
-        )
+        (current ?? []).map((account) => (account.id === id ? { ...account, active } : account)),
       );
 
       return { previous };
@@ -95,9 +93,7 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
       setNotice("Gagal memperbarui status akun via REST API.");
     },
     onSuccess: (_data, variables) => {
-      setNotice(
-        `Status akun berhasil diubah menjadi ${variables.active ? "Aktif" : "Nonaktif"}.`
-      );
+      setNotice(`Status akun berhasil diubah menjadi ${variables.active ? "Aktif" : "Nonaktif"}.`);
     },
     onSettled: () => {
       // Sinkronkan ulang dengan server setelah mutasi selesai, berhasil maupun gagal.
@@ -129,9 +125,7 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
   const [optimisticAccounts, setOptimisticAccount] = useOptimistic(
     filteredAccounts,
     (current, update: { id: string; active: boolean }) =>
-      current.map((acc) =>
-        acc.id === update.id ? { ...acc, active: update.active } : acc
-      )
+      current.map((acc) => (acc.id === update.id ? { ...acc, active: update.active } : acc)),
   );
 
   const handleToggleStatus = (account: AdminAccount) => {
@@ -153,8 +147,8 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
   return (
     <>
       <DataNotice label="Akun pengelola portal">
-        Klik chip status untuk mengaktifkan atau menonaktifkan akun. Perubahan langsung
-        tersimpan, jadi staf yang dinonaktifkan tidak bisa masuk lagi.
+        Klik chip status untuk mengaktifkan atau menonaktifkan akun. Perubahan langsung tersimpan,
+        jadi staf yang dinonaktifkan tidak bisa masuk lagi.
       </DataNotice>
 
       {notice ? (
@@ -180,7 +174,11 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
                   className="h-11 w-56 rounded-sm border border-rule-strong bg-canvas pl-9 pr-3 text-meta text-ink focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy sm:w-64"
                 />
               </div>
-              <Button variant="confirm" size="md" onClick={() => setFormTarget({ accountId: null })}>
+              <Button
+                variant="confirm"
+                size="md"
+                onClick={() => setFormTarget({ accountId: null })}
+              >
                 <IconPlus className="h-4 w-4" />
                 Buat Akun Admin Baru
               </Button>
@@ -188,7 +186,9 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
           }
         >
           {isFetching ? (
-            <p className="mb-2 text-micro text-ink-soft">Menyinkronkan data terbaru dengan server...</p>
+            <p className="mb-2 text-micro text-ink-soft">
+              Menyinkronkan data terbaru dengan server...
+            </p>
           ) : null}
 
           <Table caption="Akun staf dan hak akses portal admin">
@@ -205,7 +205,8 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
               {filteredAccounts.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={5} className="py-6 text-center text-meta text-ink-soft">
-                    Tidak ada akun staf atau admin yang cocok dengan pencarian &ldquo;{searchQuery}&rdquo;.
+                    Tidak ada akun staf atau admin yang cocok dengan pencarian &ldquo;{searchQuery}
+                    &rdquo;.
                   </TableCell>
                 </TableRow>
               ) : (
@@ -266,7 +267,7 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
             setNotice(
               editing
                 ? `Akun ${saved.username} berhasil diperbarui.`
-                : `Akun ${saved.username} berhasil didaftarkan.`
+                : `Akun ${saved.username} berhasil didaftarkan.`,
             );
             setFormTarget(null);
           }}

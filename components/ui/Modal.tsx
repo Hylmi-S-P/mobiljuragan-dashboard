@@ -66,11 +66,7 @@ export function Modal({ open, onClose, title, description, children, footer }: M
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6">
-      <div
-        aria-hidden="true"
-        onClick={onClose}
-        className="absolute inset-0 bg-ink/50"
-      />
+      <div aria-hidden="true" onClick={onClose} className="absolute inset-0 bg-ink/50" />
       <div
         ref={panelRef}
         role="dialog"
@@ -92,7 +88,9 @@ export function Modal({ open, onClose, title, description, children, footer }: M
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">{children}</div>
         {footer ? (
-          <div className="flex flex-wrap justify-end gap-2.5 border-t border-rule px-5 py-3.5">{footer}</div>
+          <div className="flex flex-wrap justify-end gap-2.5 border-t border-rule px-5 py-3.5">
+            {footer}
+          </div>
         ) : null}
       </div>
     </div>

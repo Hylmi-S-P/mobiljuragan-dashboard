@@ -21,8 +21,8 @@ export default async function BookingsPage() {
       <PageLead lead="Pesanan yang masuk dari aplikasi pelanggan. Cek kesiapan unit, tentukan tarif final, dan alokasikan supir." />
 
       <DataNotice label="Antrean pesanan">
-        Pesanan baru masuk dengan tarif belum ditentukan. Nomor kontak pelanggan ditampilkan
-        apa adanya dari data pemesanan supaya tim bisa menghubungi pemesan.
+        Pesanan baru masuk dengan tarif belum ditentukan. Nomor kontak pelanggan ditampilkan apa
+        adanya dari data pemesanan supaya tim bisa menghubungi pemesan.
       </DataNotice>
 
       <div className="mt-3">

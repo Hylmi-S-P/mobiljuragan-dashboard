@@ -25,7 +25,7 @@ export type ActionState = {
  */
 export async function loginAction(
   _prevState: ActionState | null,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const username = (formData.get("username") as string)?.trim() || "";
   const password = (formData.get("password") as string)?.trim() || "";
@@ -75,7 +75,7 @@ export async function loginAction(
 // Validasi minimal 8 karakter sandi disesuaikan dengan aturan bcrypt backend.
 export async function createAdminAction(
   _prevState: ActionState | null,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const fullName = (formData.get("fullName") as string)?.trim() || "";
   const phoneNumber = (formData.get("phoneNumber") as string)?.trim() || "";
@@ -114,7 +114,7 @@ export async function createAdminAction(
 // Kata sandi bersifat opsional pada update; dikirim hanya jika staf memasukkan nilai baru.
 export async function updateAdminAction(
   _prevState: ActionState | null,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const id = formData.get("id") as string;
   const fullName = (formData.get("fullName") as string)?.trim();
@@ -157,7 +157,7 @@ export async function updateAdminAction(
  */
 export async function deleteAdminAction(
   _prevState: ActionState | null,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionState> {
   const id = formData.get("id") as string;
 
@@ -186,10 +186,7 @@ export async function deleteAdminAction(
  * menampilkan balasan lebih dulu lalu menariknya kembali kalau pengiriman gagal.
  * Kegagalan dikembalikan sebagai pesan, bukan dilempar.
  */
-export async function replyToTicketAction(
-  ticketId: string,
-  body: string
-): Promise<ActionState> {
+export async function replyToTicketAction(ticketId: string, body: string): Promise<ActionState> {
   if (!ticketId) {
     return { success: false, message: "Tiket tidak valid." };
   }

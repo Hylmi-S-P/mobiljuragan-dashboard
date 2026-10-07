@@ -14,7 +14,9 @@ export function Table({ children, caption }: { children: ReactNode; caption: str
 }
 
 export function TableHead({ children }: { children: ReactNode }) {
-  return <thead className="bg-canvas text-center text-meta font-medium text-ink-soft">{children}</thead>;
+  return (
+    <thead className="bg-canvas text-center text-meta font-medium text-ink-soft">{children}</thead>
+  );
 }
 
 export function TableBody({ children }: { children: ReactNode }) {

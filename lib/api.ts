@@ -3,16 +3,14 @@ import { cookies } from "next/headers";
 import type { AdminAccount, AdminRole } from "./types";
 
 const API_BASE_URL =
-  process.env.API_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:4000/api/v1";
+  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
 
 export class ApiError extends Error {
   constructor(
     public status: number,
     public code: string,
     message: string,
-    public details?: any
+    public details?: any,
   ) {
     super(message);
     this.name = "ApiError";
@@ -30,11 +28,7 @@ export async function getSessionToken(): Promise<string | undefined> {
 }
 
 // Mendukung autentikasi via nomor telepon resmi maupun username.
-export async function apiAdminLogin(
-  usernameOrPhone: string,
-  password: string,
-  rememberMe = false
-) {
+export async function apiAdminLogin(usernameOrPhone: string, password: string, rememberMe = false) {
   const res = await fetch(`${API_BASE_URL}/admin/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -54,7 +48,7 @@ export async function apiAdminLogin(
       res.status,
       json?.error?.code || "LOGIN_FAILED",
       json?.error?.message || "Nomor telepon/username atau kata sandi salah.",
-      json?.error?.details
+      json?.error?.details,
     );
   }
 
@@ -104,7 +98,7 @@ export async function getAdminAccounts(): Promise<AdminAccount[]> {
     throw new ApiError(
       res.status,
       json?.error?.code || "FETCH_ADMIN_ACCOUNTS_FAILED",
-      json?.error?.message || "Gagal memuat daftar akun admin dari backend."
+      json?.error?.message || "Gagal memuat daftar akun admin dari backend.",
     );
   }
 
@@ -141,7 +135,7 @@ export async function apiCreateAdminAccount(data: {
       res.status,
       json?.error?.code || "CREATE_ADMIN_FAILED",
       json?.error?.message || "Gagal membuat akun admin.",
-      json?.error?.details
+      json?.error?.details,
     );
   }
 
@@ -156,15 +150,11 @@ export async function apiUpdateAdminAccount(
     role?: AdminRole;
     password?: string;
     isActive?: boolean;
-  }
+  },
 ) {
   const token = await getSessionToken();
   const backendRole =
-    data.role !== undefined
-      ? data.role === "super_admin"
-        ? "ADMIN"
-        : "STAFF"
-      : undefined;
+    data.role !== undefined ? (data.role === "super_admin" ? "ADMIN" : "STAFF") : undefined;
 
   const res = await fetch(`${API_BASE_URL}/admin/users/${id}`, {
     method: "PATCH",
@@ -188,7 +178,7 @@ export async function apiUpdateAdminAccount(
       res.status,
       json?.error?.code || "UPDATE_ADMIN_FAILED",
       json?.error?.message || "Gagal memperbarui akun admin.",
-      json?.error?.details
+      json?.error?.details,
     );
   }
 
@@ -214,7 +204,7 @@ export async function apiDeleteAdminAccount(id: string) {
       res.status,
       json?.error?.code || "DELETE_ADMIN_FAILED",
       json?.error?.message || "Gagal menghapus akun admin.",
-      json?.error?.details
+      json?.error?.details,
     );
   }
 
@@ -234,7 +224,7 @@ export async function apiReplyToTicket(ticketId: string, body: string) {
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify({ body }),
-    }
+    },
   );
 
   const json = await res.json().catch(() => null);
@@ -244,7 +234,7 @@ export async function apiReplyToTicket(ticketId: string, body: string) {
       res.status,
       json?.error?.code || "TICKET_REPLY_FAILED",
       json?.error?.message || "Gagal mengirim balasan tiket.",
-      json?.error?.details
+      json?.error?.details,
     );
   }
 

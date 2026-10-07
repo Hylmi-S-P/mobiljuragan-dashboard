@@ -35,8 +35,8 @@ export function TicketWorkspace({ initialTickets, initialMessages }: Props) {
     if (keyword.length === 0) return initialTickets;
     return initialTickets.filter((ticket) =>
       [ticket.customerLabel, ticket.title, ticket.category].some((field) =>
-        field.toLowerCase().includes(keyword)
-      )
+        field.toLowerCase().includes(keyword),
+      ),
     );
   }, [query, initialTickets]);
 
@@ -69,9 +69,7 @@ export function TicketWorkspace({ initialTickets, initialMessages }: Props) {
         setNotice(result.message ?? "Balasan terkirim.");
       } else {
         // Gagal kirim: tarik kembali pesan optimistis supaya tidak menyesatkan.
-        setMessages((current) =>
-          current.filter((message) => message.id !== optimisticMessage.id)
-        );
+        setMessages((current) => current.filter((message) => message.id !== optimisticMessage.id));
         setDraft(text);
         setDraftError(result.message ?? "Balasan gagal dikirim ke server.");
       }
@@ -81,8 +79,8 @@ export function TicketWorkspace({ initialTickets, initialMessages }: Props) {
   return (
     <>
       <DataNotice label="Meja kerja tiket">
-        Balasan yang dikirim dari sini tersimpan pada tiketnya dan mengubah status tiket
-        menjadi menunggu pelanggan.
+        Balasan yang dikirim dari sini tersimpan pada tiketnya dan mengubah status tiket menjadi
+        menunggu pelanggan.
       </DataNotice>
 
       {notice ? (
@@ -169,9 +167,7 @@ export function TicketWorkspace({ initialTickets, initialMessages }: Props) {
                   <span className="text-body font-semibold text-ink">
                     {activeTicket.customerLabel}
                   </span>
-                  <StatusChip
-                    tone={TICKET_STATUS[activeTicket.status as SupportTicketStatus].tone}
-                  >
+                  <StatusChip tone={TICKET_STATUS[activeTicket.status as SupportTicketStatus].tone}>
                     {TICKET_STATUS[activeTicket.status as SupportTicketStatus].label}
                   </StatusChip>
                 </div>
@@ -184,7 +180,9 @@ export function TicketWorkspace({ initialTickets, initialMessages }: Props) {
                       <dd className="mt-1 text-meta text-ink">{activeTicket.title}</dd>
                     </div>
                     <div>
-                      <dt className="text-micro font-bold uppercase text-ink-soft">Jenis bantuan</dt>
+                      <dt className="text-micro font-bold uppercase text-ink-soft">
+                        Jenis bantuan
+                      </dt>
                       <dd className="mt-1 text-meta text-ink">{activeTicket.category}</dd>
                     </div>
                     <div>

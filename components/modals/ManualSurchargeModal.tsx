@@ -26,7 +26,8 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
 
   function handleApply() {
     const nextErrors: Record<string, string> = {};
-    if (description.trim().length === 0) nextErrors.description = "Deskripsi penyesuaian wajib diisi.";
+    if (description.trim().length === 0)
+      nextErrors.description = "Deskripsi penyesuaian wajib diisi.";
     if (amount.trim().length === 0) nextErrors.amount = "Nominal penyesuaian wajib diisi.";
     if (justification.trim().length === 0) {
       nextErrors.justification = "Catatan justifikasi wajib diisi untuk audit internal.";
@@ -61,7 +62,10 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
     >
       <div className="space-y-3.5">
         <div>
-          <label htmlFor={`${fieldId}-category`} className="block text-micro font-semibold text-ink">
+          <label
+            htmlFor={`${fieldId}-category`}
+            className="block text-micro font-semibold text-ink"
+          >
             Kategori penyesuaian biaya
           </label>
           <select
@@ -103,7 +107,10 @@ export function ManualSurchargeModal({ onClose, onApply, booking }: Props) {
 
         <div className="grid gap-3.5 sm:grid-cols-2">
           <div>
-            <label htmlFor={`${fieldId}-amount`} className="block text-micro font-semibold text-ink">
+            <label
+              htmlFor={`${fieldId}-amount`}
+              className="block text-micro font-semibold text-ink"
+            >
               Nominal penyesuaian
             </label>
             <input

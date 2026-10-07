@@ -5,9 +5,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * Token palsu atau kedaluwarsa dibersihkan lalu diarahkan ke halaman masuk.
  */
 const API_BASE_URL =
-  process.env.API_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:4000/api/v1";
+  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
 
 /** Halaman yang boleh dibuka tanpa sesi. */
 const PUBLIC_PATHS = ["/login"];
@@ -59,5 +57,7 @@ export const config = {
    * Lindungi semua halaman kecuali aset statis, berkas Next internal, dan favicon.
    * Route API dashboard tidak ada, jadi pola ini cukup.
    */
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|svg|gif|webp|ico|css|js|woff2?)$).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|svg|gif|webp|ico|css|js|woff2?)$).*)",
+  ],
 };

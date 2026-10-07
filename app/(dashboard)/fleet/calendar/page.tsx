@@ -37,8 +37,8 @@ export default async function FleetCalendarPage() {
       <PageLead lead="Riwayat ketersediaan unit, jadwal sewa aktif, dan pesanan harian armada." />
 
       <DataNotice label={`Jadwal ${calendar.totalVehicles} unit`}>
-        Hanya pesanan yang sudah dikonfirmasi yang mengunci tanggal. Pesanan yang masih
-        menunggu konfirmasi belum muncul di sini, jadi unitnya masih terlihat bebas.
+        Hanya pesanan yang sudah dikonfirmasi yang mengunci tanggal. Pesanan yang masih menunggu
+        konfirmasi belum muncul di sini, jadi unitnya masih terlihat bebas.
       </DataNotice>
 
       <div className="mt-3">
@@ -80,14 +80,12 @@ export default async function FleetCalendarPage() {
                         ? formatDateRange(
                             schedule.startDateTime,
                             schedule.endDateTime,
-                            countDays(schedule.startDateTime, schedule.endDateTime)
+                            countDays(schedule.startDateTime, schedule.endDateTime),
                           )
                         : "Belum ada jadwal"}
                     </TableCell>
                     <TableCell className={schedule ? "text-ink" : "text-ink-soft"}>
-                      {schedule
-                        ? `Terblokir untuk ${schedule.bookingCode}`
-                        : "Menunggu pembaruan"}
+                      {schedule ? `Terblokir untuk ${schedule.bookingCode}` : "Menunggu pembaruan"}
                     </TableCell>
                     <TableCell>
                       <StatusChip tone={VEHICLE_STATUS[vehicle.status].tone}>

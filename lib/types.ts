@@ -26,10 +26,7 @@ export type CanonicalBookingStatus =
   | "CANCELLED";
 
 export type BookingStatus =
-  | "perlu_konfirmasi_tarif"
-  | "perlu_alokasi_sopir"
-  | "tarif_terkonfirmasi"
-  | "ditolak";
+  "perlu_konfirmasi_tarif" | "perlu_alokasi_sopir" | "tarif_terkonfirmasi" | "ditolak";
 
 export type LineItem = {
   id: string;

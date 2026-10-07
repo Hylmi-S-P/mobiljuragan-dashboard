@@ -25,9 +25,7 @@ import type {
  * memeriksa `res.ok` dan melempar ApiError supaya halaman bisa menampilkan penyebabnya.
  */
 const API_BASE_URL =
-  process.env.API_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:4000/api/v1";
+  process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
 
 async function apiGet<T>(path: string): Promise<T> {
   const token = await getSessionToken();
@@ -47,7 +45,7 @@ async function apiGet<T>(path: string): Promise<T> {
       res.status,
       json?.error?.code || "API_REQUEST_FAILED",
       json?.error?.message || `Gagal memuat data dari ${path}.`,
-      json?.error?.details
+      json?.error?.details,
     );
   }
 
@@ -121,7 +119,7 @@ export async function getVehicleById(id: string): Promise<Vehicle | null> {
       res.status,
       json?.error?.code || "VEHICLE_FETCH_FAILED",
       json?.error?.message || "Gagal memuat detail kendaraan.",
-      json?.error?.details
+      json?.error?.details,
     );
   }
 
@@ -213,7 +211,8 @@ function mapBooking(b: ApiBooking): Booking {
       id: `${b.id}-sewa`,
       label: isDriverService ? "Sewa unit dengan supir" : "Sewa unit lepas kunci",
       // Nominal hanya ditampilkan kalau tim sudah mengonfirmasi tarifnya.
-      amount: b.quotedAmount !== null && b.quotedAmount !== undefined ? String(b.quotedAmount) : null,
+      amount:
+        b.quotedAmount !== null && b.quotedAmount !== undefined ? String(b.quotedAmount) : null,
       note: `${countDays(b.startDateTime, b.endDateTime)} hari`,
     },
   ];
@@ -232,9 +231,7 @@ function mapBooking(b: ApiBooking): Booking {
     serviceType: isDriverService ? "Dengan Supir" : "Lepas Kunci",
     pickupRoute: b.pickupLocation,
     driverName: b.driver?.fullName ?? null,
-    driverStatus: b.driver?.readiness
-      ? DRIVER_READINESS[b.driver.readiness] ?? null
-      : null,
+    driverStatus: b.driver?.readiness ? (DRIVER_READINESS[b.driver.readiness] ?? null) : null,
     lineItems,
   };
 }
@@ -261,7 +258,7 @@ export async function getBookingById(id: string): Promise<Booking | null> {
       res.status,
       json?.error?.code || "BOOKING_FETCH_FAILED",
       json?.error?.message || "Gagal memuat detail pemesanan.",
-      json?.error?.details
+      json?.error?.details,
     );
   }
 
@@ -384,12 +381,8 @@ type ApiTicketDetail = ApiTicket & {
   }>;
 };
 
-export async function getTicketMessages(
-  ticketId: string
-): Promise<TicketMessageView[]> {
-  const data = await apiGet<ApiTicketDetail>(
-    `/admin/tickets/${encodeURIComponent(ticketId)}`
-  );
+export async function getTicketMessages(ticketId: string): Promise<TicketMessageView[]> {
+  const data = await apiGet<ApiTicketDetail>(`/admin/tickets/${encodeURIComponent(ticketId)}`);
   return (data?.messages ?? []).map((m) => ({
     id: m.id,
     from: m.isCustomer ? "pelanggan" : "tim",

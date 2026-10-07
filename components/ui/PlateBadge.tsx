@@ -25,9 +25,7 @@ function pecahPlat(plate: string): string[] {
 export function PlateBadge({ plate, region, size = "sm", className = "" }: PlateBadgeProps) {
   const bagian = pecahPlat(plate);
   const ukuran =
-    size === "md"
-      ? "gap-[4px] px-2 py-1 text-body"
-      : "gap-[3px] px-1.5 py-[2px] text-meta";
+    size === "md" ? "gap-[4px] px-2 py-1 text-body" : "gap-[3px] px-1.5 py-[2px] text-meta";
 
   return (
     <span className={`inline-flex items-center gap-1.5 ${className}`}>

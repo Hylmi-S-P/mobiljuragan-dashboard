@@ -1,0 +1,21 @@
+# Dependency & hasil build Next.js
+node_modules/
+.next/
+out/
+build/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Lockfile: ditulis npm, jangan diformat ulang
+package-lock.json
+
+# Dokumen: ditulis manual, bukan kode
+README.md
+DESIGN.md
+
+# Log
+*.log
+npm-debug.log*

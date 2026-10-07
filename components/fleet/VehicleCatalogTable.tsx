@@ -34,13 +34,15 @@ export function VehicleCatalogTable({ initialVehicles }: Props) {
   const editing = formTarget?.vehicleId
     ? vehicles.find((vehicle) => vehicle.id === formTarget.vehicleId)
     : undefined;
-  const deleting = deleteTarget ? vehicles.find((vehicle) => vehicle.id === deleteTarget) : undefined;
+  const deleting = deleteTarget
+    ? vehicles.find((vehicle) => vehicle.id === deleteTarget)
+    : undefined;
 
   return (
     <>
       <DataNotice label="Armada resmi Merauke">
-        Status unit berubah saat kendaraan disewa atau masuk perawatan. Perubahan dari halaman
-        ini langsung tersimpan, jadi unit yang sedang keluar tidak lagi tampil tersedia.
+        Status unit berubah saat kendaraan disewa atau masuk perawatan. Perubahan dari halaman ini
+        langsung tersimpan, jadi unit yang sedang keluar tidak lagi tampil tersedia.
       </DataNotice>
 
       {notice ? (

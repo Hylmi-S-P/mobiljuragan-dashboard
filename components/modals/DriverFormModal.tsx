@@ -33,7 +33,8 @@ export function DriverFormModal({ driver, onClose, onSave, onRequestDelete }: Pr
     if (trimmedContact.length > 0) {
       const digits = trimmedContact.replace(/[^\d]/g, "");
       if (digits.length < 8) {
-        nextErrors.contact = "Nomor kontak minimal 8 angka, boleh memakai tanda + atau tanda hubung.";
+        nextErrors.contact =
+          "Nomor kontak minimal 8 angka, boleh memakai tanda + atau tanda hubung.";
       }
     }
 
@@ -125,7 +126,9 @@ export function DriverFormModal({ driver, onClose, onSave, onRequestDelete }: Pr
             value={contact}
             onChange={(event) => setContact(event.target.value)}
             aria-invalid={Boolean(errors.contact)}
-            aria-describedby={errors.contact ? `${fieldId}-contact-error` : `${fieldId}-contact-hint`}
+            aria-describedby={
+              errors.contact ? `${fieldId}-contact-error` : `${fieldId}-contact-hint`
+            }
             className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="+62 ..."
           />
@@ -167,7 +170,9 @@ export function DriverFormModal({ driver, onClose, onSave, onRequestDelete }: Pr
             value={licenseNumber}
             onChange={(event) => setLicenseNumber(event.target.value)}
             aria-invalid={Boolean(errors.licenseNumber)}
-            aria-describedby={errors.licenseNumber ? `${fieldId}-license-error` : `${fieldId}-license-hint`}
+            aria-describedby={
+              errors.licenseNumber ? `${fieldId}-license-error` : `${fieldId}-license-hint`
+            }
             className="tabular-nums mt-1 h-11 w-full rounded-sm border border-rule-strong bg-canvas px-3 text-body text-ink"
             placeholder="Nomor SIM sesuai dokumen"
           />

@@ -46,7 +46,10 @@ export function LoginForm() {
 
       <div className="mt-8 space-y-5">
         <div>
-          <label htmlFor={`${fieldId}-username`} className="block text-[13px] font-medium text-slate-700">
+          <label
+            htmlFor={`${fieldId}-username`}
+            className="block text-[13px] font-medium text-slate-700"
+          >
             Username Akun
           </label>
           <div className="relative mt-1.5">
@@ -71,7 +74,10 @@ export function LoginForm() {
         </div>
 
         <div>
-          <label htmlFor={`${fieldId}-password`} className="block text-[13px] font-medium text-slate-700">
+          <label
+            htmlFor={`${fieldId}-password`}
+            className="block text-[13px] font-medium text-slate-700"
+          >
             Kata Sandi (Password)
           </label>
           <div className="relative mt-1.5">
@@ -91,7 +97,11 @@ export function LoginForm() {
               aria-pressed={passwordVisible}
               className="absolute inset-y-0 right-0 flex h-[46px] w-11 items-center justify-center rounded-r-md text-slate-500 transition-colors hover:text-ink focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy"
             >
-              {passwordVisible ? <IconEyeOff className="h-3.5 w-3.5" /> : <IconEye className="h-3.5 w-3.5" />}
+              {passwordVisible ? (
+                <IconEyeOff className="h-3.5 w-3.5" />
+              ) : (
+                <IconEye className="h-3.5 w-3.5" />
+              )}
             </button>
           </div>
           {state?.errors?.password ? (
