@@ -23,7 +23,7 @@ Dashboard dibangun dengan arsitektur frontend modern berbasis Server Components 
 Berikut adalah struktur file penting dalam aplikasi dashboard:
 
 ```text
-mobiljuragan-dashboard/
+frontend/
 ├── app/
 │   ├── layout.tsx              # Root layout, metadata global, font, & QueryProvider
 │   ├── actions.ts              # Server Actions ("use server") pemanggil API Express
