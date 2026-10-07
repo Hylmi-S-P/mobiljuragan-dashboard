@@ -162,7 +162,7 @@ Seluruh kode dashboard mengikuti satu gaya penulisan yang dijaga Prettier (kutip
 
 ## 6. Strategi Rendering per Halaman (Next.js App Router)
 
-Sesuai ketentuan teknis Web Framework, strategi render ditentukan berdasarkan karakteristik data masing-masing halaman:
+Strategi render tiap halaman ditentukan berdasarkan karakteristik datanya:
 
 Seluruh halaman yang menampilkan data operasional memakai **Dynamic SSR** (`export const dynamic = "force-dynamic"`). Alasannya sama di semua halaman itu: isinya berasal dari tabel MariaDB yang berubah setiap kali ada pemesanan, penugasan supir, atau perubahan status armada, sehingga data yang dipra-render akan cepat basi. Halaman yang murni tampilan tetap statis.
 
@@ -179,6 +179,14 @@ Seluruh halaman yang menampilkan data operasional memakai **Dynamic SSR** (`expo
 | **Customer Care** | `/customer-care` | **Dynamic (SSR)** | Percakapan tiket bertambah setiap ada pesan atau balasan baru. |
 | **Contoh Keadaan Kosong** | `/empty` | **Static** | Halaman rujukan tampilan, isinya tetap dan tidak bergantung data. |
 | **Contoh Error Boundary** | `/error-boundary` | **Static** | Halaman rujukan tampilan kegagalan, tidak memuat data. |
+
+### Bukti hasil `npm run build`
+
+![Hasil npm run build: seluruh rute terkompilasi tanpa error](docs/build/npm-run-build.png)
+
+Build selesai tanpa error dan menghasilkan **12 rute**: 9 bertanda `ƒ` (Dynamic, dirender saat diminta) dan 3 bertanda `○` (Static, sudah disiapkan saat build). Tiga yang statis adalah dua halaman rujukan tampilan ditambah halaman 404 bawaan Next.js. Jumlah dan tanda pada keluaran ini cocok dengan tabel strategi render di atas.
+
+Selain itu terlihat `ƒ Proxy (Middleware)` — gerbang sesi yang memeriksa token sebelum halaman dashboard dibuka.
 
 ---
 
