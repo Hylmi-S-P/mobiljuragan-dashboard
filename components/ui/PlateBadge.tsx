@@ -1,7 +1,7 @@
 /**
  * Lencana plat nomor.
  *
- * Ini motif identitas yang sudah ditetapkan di DESIGN.md tim: plat nomor kendaraan sebagai
+ * Ini motif identitas yang sudah ditetapkan tim: plat nomor kendaraan sebagai
  * penanda visual yang berulang. Bentuknya mengikuti plat sungguhan, yaitu bidang putih dengan
  * bingkai gelap tipis, dan huruf serta angkanya dipisah supaya terbaca seperti plat asli
  * alih-alih kode acak. Datanya tetap apa adanya, tidak ada yang ditambah atau dikarang.

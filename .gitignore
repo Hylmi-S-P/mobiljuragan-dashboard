@@ -42,3 +42,7 @@ next-env.d.ts
 # Next.js agent generated files
 AGENTS.md
 CLAUDE.md
+GEMINI.md
+
+# Dokumen arah desain & catatan kerja agent, disimpan di luar repo
+DESIGN.md
