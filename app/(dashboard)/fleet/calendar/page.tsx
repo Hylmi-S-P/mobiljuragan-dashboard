@@ -38,7 +38,8 @@ export default async function FleetCalendarPage() {
 
       <DataNotice label={`Jadwal ${calendar.totalVehicles} unit`}>
         Hanya pesanan yang sudah dikonfirmasi yang mengunci tanggal. Pesanan yang masih menunggu
-        konfirmasi belum muncul di sini, jadi unitnya masih terlihat bebas.
+        konfirmasi belum muncul di sini, jadi unitnya masih terlihat bebas. Ketersediaan mengikuti
+        jadwal sewa; Status adalah kondisi fisik unit yang diubah dari Katalog.
       </DataNotice>
 
       <div className="mt-3">
@@ -85,7 +86,7 @@ export default async function FleetCalendarPage() {
                         : "Belum ada jadwal"}
                     </TableCell>
                     <TableCell className={schedule ? "text-ink" : "text-ink-soft"}>
-                      {schedule ? `Terblokir untuk ${schedule.bookingCode}` : "Menunggu pembaruan"}
+                      {schedule ? "Disewa" : "Tersedia"}
                     </TableCell>
                     <TableCell>
                       <StatusChip tone={VEHICLE_STATUS[vehicle.status].tone}>
