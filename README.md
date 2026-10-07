@@ -171,7 +171,8 @@ Tangkapan diambil pada viewport **1440x900**, sama dengan ukuran frame Figma, su
 | Isi panel armada | Jumlah unit + daftar plat | Sama, diambil dari database | Sesuai, tidak ditulis tetap |
 | Ukuran kartu | 1008x648 | 1008x648 | Sesuai. Desain Figma ikut diperkecil dari 1120x720, karena kartu 720px membuat halaman menggulir di laptop 1366x768. Tinggi kontrol tetap 44px agar target sentuh tidak mengecil. |
 | Checkbox "Ingat sesi" | Tidak tercentang | Tidak tercentang | Sesuai. Desain Figma ikut diubah dari tercentang menjadi tidak tercentang, mengikuti default aman di aplikasi. |
-| Baris "Versi Sistem" | Ada di dasar panel navy | Belum ada | Selisih tampilan, tidak memengaruhi fungsi |
+| Isi kolom form | Terisi data contoh | Kosong dengan placeholder | Perbedaan keadaan tampilan, bukan desain |
+| Teks panel armada | "9 unit armada riil Merauke terdaftar" | Sama | Sesuai, termasuk huruf besar-kecil |
 
 ### 7.2 Halaman Manajemen Admin
 
@@ -181,10 +182,11 @@ Tangkapan diambil pada viewport **1440x900**, sama dengan ukuran frame Figma, su
 | :--- | :--- | :--- | :--- |
 | Warna, tabel, chip status | Navy, tabel garis, chip | Sama | Sesuai |
 | Teks peran | "Staf Operasional (Pool)" | Sama | Sesuai |
-| Username | Username teks (`markus_pool`) | Nomor telepon (`081234567899`) | Backend memakai nomor telepon sebagai identitas masuk, jadi kolomnya menampilkan data nyata |
-| Kotak pencarian | Ada | Ada | Sesuai. Desain Figma ikut ditambahi kotak pencarian. |
+| Menu sidebar | Dashboard, Pemesanan Masuk, Manajemen Armada, Customer Care, Manajemen Admin | Sama | Sesuai, termasuk urutan dan sorotan menu aktif |
+| Judul topbar | "Manajemen Admin" + tombol "Keluar" | Sama | Sesuai |
+| Kotak pencarian | Ada | Ada | Sesuai |
+| Kepala kolom | Nama, Nomor Telepon / Username, Peran, Status Akun, Aksi Kelola | Sama | Sesuai |
 | Tombol aksi | Hanya "Edit Admin" | "Edit Admin" + "Hapus" | Hapus hanya ada di aplikasi, karena endpoint `DELETE /admin/users/:id` memang tersedia |
-| Judul halaman | Tanpa H1 | Tanpa H1 | Sesuai. Judul H1 di Figma ikut dihapus agar tidak mengulang nama halaman tiga kali (topbar, menu sidebar, dan judul konten) |
-| Kepala kolom | "Role", "Username" | "Peran", "Nomor Telepon / Username" | Label memakai bahasa Indonesia dan menyebut isi kolom apa adanya |
+| Data contoh | Markus (Staf Pool) / markus_pool | Staf Operasional Merauke / 081234567899 | Isi tabel mengikuti data nyata di MariaDB, bukan contoh di desain |
 
 Catatan: desain Figma ikut diperbarui pada 7 Oktober 2026 agar selaras dengan hasil slicing. Perbedaan yang tersisa hanyalah keputusan sadar, bukan bagian yang belum selesai. Tangkapan layar di atas dihasilkan ulang oleh skrip `.verify/buat-perbandingan-figma.mjs`, sehingga bisa diperbarui kapan saja setelah tampilan berubah.
