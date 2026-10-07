@@ -182,9 +182,8 @@ Seluruh halaman yang menampilkan data operasional memakai **Dynamic SSR** (`expo
 
 ---
 
-## 7. Nilai Tambah (Opsional): useOptimistic & TanStack Query (React Query) + Axios
+## 7.useOptimistic & TanStack Query (React Query) + Axios
 
-Sesuai butir ketentuan nilai tambah (*extra credit*) pada soal UTS Web Framework:
 - **`useOptimistic` (Interaksi Instan 0ms)**: Diterapkan pada pengubahan status aktif/nonaktif akun staf/admin di [`components/admin/AdminAccountsTable.tsx`](components/admin/AdminAccountsTable.tsx) menggunakan `useOptimistic` dan `startTransition`. Tampilan status langsung berganti secara instan mendahului respons jaringan tanpa jeda loading.
 - **Query Provider**: `QueryClient` diinisialisasi melalui `useState` di dalam [`components/providers/QueryProvider.tsx`](components/providers/QueryProvider.tsx) dan membungkus seluruh aplikasi pada root layout.
 - **Data Fetching & Caching (`useQuery`)**: Diimplementasikan pada tabel interaktif [`components/admin/AdminAccountsTable.tsx`](components/admin/AdminAccountsTable.tsx) bersama fitur pencarian instan (*live search*), memanfaatkan data awal (*initialData*) dari SSR.
