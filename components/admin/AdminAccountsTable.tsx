@@ -205,8 +205,9 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
               {filteredAccounts.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={5} className="py-6 text-center text-meta text-ink-soft">
-                    Tidak ada akun staf atau admin yang cocok dengan pencarian &ldquo;{searchQuery}
-                    &rdquo;.
+                    {(initialAccounts ?? []).length === 0
+                      ? "Belum ada akun staf atau admin yang terdaftar."
+                      : `Tidak ada akun staf atau admin yang cocok dengan pencarian "${searchQuery}".`}
                   </TableCell>
                 </TableRow>
               ) : (

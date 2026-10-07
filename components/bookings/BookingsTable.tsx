@@ -101,15 +101,26 @@ export function BookingsTable({ initialBookings, vehicles }: Props) {
 
       {filtered.length === 0 ? (
         <div className="rounded-sm border border-rule bg-canvas px-4 py-5">
-          <p className="text-body font-semibold text-ink">
-            Tidak ada pesanan yang cocok dengan filter itu.
-          </p>
-          <p className="mt-1 text-body text-ink-soft">
-            Kosongkan kata kunci atau pilih semua status untuk melihat seluruh antrean.
-          </p>
-          <Button variant="outline" className="mt-3" onClick={resetFilters}>
-            Bersihkan filter
-          </Button>
+          {initialBookings.length === 0 ? (
+            <>
+              <p className="text-body font-semibold text-ink">Belum ada pesanan masuk.</p>
+              <p className="mt-1 text-body text-ink-soft">
+                Antrean ini terisi begitu pelanggan mengirim pemesanan dari aplikasi mobile.
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-body font-semibold text-ink">
+                Tidak ada pesanan yang cocok dengan filter itu.
+              </p>
+              <p className="mt-1 text-body text-ink-soft">
+                Kosongkan kata kunci atau pilih semua status untuk melihat seluruh antrean.
+              </p>
+              <Button variant="outline" className="mt-3" onClick={resetFilters}>
+                Bersihkan filter
+              </Button>
+            </>
+          )}
         </div>
       ) : (
         <Table caption="Antrean pesanan pelanggan">
