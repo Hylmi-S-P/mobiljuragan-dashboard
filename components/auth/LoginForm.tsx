@@ -14,7 +14,7 @@ function SubmitButton() {
       type="submit"
       variant="confirm"
       size="md"
-      className="mt-3 h-12 w-full rounded-[10px]"
+      className="mt-3 h-11 w-full rounded-[9px]"
       disabled={pending}
     >
       {pending ? "Memverifikasi Kredensial..." : "Masuk ke Dashboard"}
@@ -30,25 +30,25 @@ export function LoginForm() {
 
   return (
     <form action={formAction} noValidate className="flex h-full flex-col">
-      <h1 className="text-[26px] font-bold leading-[1.2] text-ink">Masuk ke Akun Anda</h1>
-      <p className="mt-2 max-w-full text-[13px] leading-[1.45] text-rule-strong">
+      <h1 className="text-[23.5px] font-bold leading-[1.2] text-ink">Masuk ke Akun Anda</h1>
+      <p className="mt-[7px] max-w-full text-[12px] leading-[1.45] text-rule-strong">
         Gunakan kredensial resmi staf untuk mengakses seluruh modul operasional.
       </p>
 
       {state?.message ? (
         <div
           role="alert"
-          className="mt-4 rounded-md border border-danger/40 bg-danger/10 px-3.5 py-2.5 text-meta text-danger"
+          className="mt-3.5 rounded-md border border-danger/40 bg-danger/10 px-3.5 py-2.5 text-meta text-danger"
         >
           {state.message}
         </div>
       ) : null}
 
-      <div className="mt-8 space-y-5">
+      <div className="mt-7 space-y-[18px]">
         <div>
           <label
             htmlFor={`${fieldId}-username`}
-            className="block text-[13px] font-medium text-slate-700"
+            className="block text-[12px] font-medium text-slate-700"
           >
             Username Akun
           </label>
@@ -59,7 +59,7 @@ export function LoginForm() {
               autoComplete="username"
               aria-invalid={Boolean(state?.errors?.username)}
               aria-describedby={state?.errors?.username ? `${fieldId}-username-error` : undefined}
-              className="h-[46px] w-full rounded-md border border-slate-300 bg-canvas pl-3 pr-11 text-body text-ink focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
+              className="h-11 w-full rounded-md border border-slate-300 bg-canvas pl-3 pr-11 text-body text-ink focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
               placeholder="081234567890 atau admin"
             />
             <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-slate-400">
@@ -76,7 +76,7 @@ export function LoginForm() {
         <div>
           <label
             htmlFor={`${fieldId}-password`}
-            className="block text-[13px] font-medium text-slate-700"
+            className="block text-[12px] font-medium text-slate-700"
           >
             Kata Sandi (Password)
           </label>
@@ -88,14 +88,14 @@ export function LoginForm() {
               autoComplete="current-password"
               aria-invalid={Boolean(state?.errors?.password)}
               aria-describedby={state?.errors?.password ? `${fieldId}-password-error` : undefined}
-              className="h-[46px] w-full rounded-md border border-slate-300 bg-canvas pl-3 pr-12 text-body text-ink focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
+              className="h-11 w-full rounded-md border border-slate-300 bg-canvas pl-3 pr-12 text-body text-ink focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy"
             />
             <button
               type="button"
               onClick={() => setPasswordVisible((value) => !value)}
               aria-label={passwordVisible ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
               aria-pressed={passwordVisible}
-              className="absolute inset-y-0 right-0 flex h-[46px] w-11 items-center justify-center rounded-r-md text-slate-500 transition-colors hover:text-ink focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy"
+              className="absolute inset-y-0 right-0 flex h-11 w-11 items-center justify-center rounded-r-md text-slate-500 transition-colors hover:text-ink focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy"
             >
               {passwordVisible ? (
                 <IconEyeOff className="h-3.5 w-3.5" />
@@ -112,7 +112,7 @@ export function LoginForm() {
         </div>
       </div>
 
-      <label className="mt-1.5 flex min-h-11 cursor-pointer items-center gap-3 text-[13px] text-ink-soft">
+      <label className="mt-1.5 flex min-h-11 cursor-pointer items-center gap-3 text-[12px] text-ink-soft">
         <input
           type="checkbox"
           name="rememberMe"
@@ -126,7 +126,7 @@ export function LoginForm() {
 
       <SubmitButton />
 
-      <p className="mt-auto pt-6 text-meta text-ink-soft">
+      <p className="mt-auto pt-5 text-meta text-ink-soft">
         Hak Cipta &copy; 2026 CV. Mobil Juragan Express Transport
       </p>
     </form>
