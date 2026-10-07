@@ -153,3 +153,38 @@ Sesuai butir ketentuan nilai tambah (*extra credit*) pada soal UTS Web Framework
 - **Data Fetching & Caching (`useQuery`)**: Diimplementasikan pada tabel interaktif [`components/admin/AdminAccountsTable.tsx`](components/admin/AdminAccountsTable.tsx) bersama fitur pencarian instan (*live search*), memanfaatkan data awal (*initialData*) dari SSR.
 - **Mutasi & Invalidasi Cache (`useMutation` & `invalidateQueries`)**: Mutasi status akun secara langsung memicu invalidasi query `adminAccounts`, menyinkronkan data client browser dengan REST API Express dan MariaDB tanpa reload halaman.
 - **Konfigurasi CORS**: Backend Express telah mengaktifkan middleware `cors()` secara terbuka sehingga request langsung dari Axios di browser berjalan tanpa hambatan CORS.
+
+---
+
+## 7. Perbandingan Figma vs Hasil Slicing
+
+Tangkapan diambil pada viewport **1440x900**, sama dengan ukuran frame Figma, supaya proporsinya bisa dibandingkan langsung. Frame acuan: `Screen / Login Admin` (`49:9355`) dan `Screen / Manajemen Akun Admin` (`49:8879`) pada halaman **dashboard** berkas *Mobiljuragan*.
+
+### 7.1 Halaman Login
+
+![Perbandingan Login: Figma di kiri, hasil slicing di kanan](docs/perbandingan-figma/login.png)
+
+| Bagian | Figma | Hasil slicing | Keterangan |
+| :--- | :--- | :--- | :--- |
+| Warna, tipografi, ikon | Navy + teal, Inter, ikon SVG | Sama | Sesuai |
+| Susunan panel | Panel navy kiri, form kanan | Sama | Sesuai |
+| Isi panel armada | Jumlah unit + daftar plat | Sama, diambil dari database | Sesuai, tidak ditulis tetap |
+| Ukuran kartu | 1120x720 | 1008x648 (skala 90%) | **Disengaja**: kartu 720px membuat halaman menggulir di laptop 1366x768. Tinggi kontrol tetap 44px agar target sentuh tidak mengecil. |
+| Checkbox "Ingat sesi" | Tercentang | Tidak tercentang | **Disengaja**: default aman, sesi tidak otomatis tersimpan 7 hari |
+| Baris "Versi Sistem" | Ada di dasar panel navy | Belum ada | Selisih tampilan, tidak memengaruhi fungsi |
+
+### 7.2 Halaman Manajemen Admin
+
+![Perbandingan Manajemen Admin: Figma di kiri, hasil slicing di kanan](docs/perbandingan-figma/manajemen-admin.png)
+
+| Bagian | Figma | Hasil slicing | Keterangan |
+| :--- | :--- | :--- | :--- |
+| Warna, tabel, chip status | Navy, tabel garis, chip | Sama | Sesuai |
+| Kolom tabel | Nama, Username, Role, Status, Aksi | Sama | Sesuai |
+| Teks peran | "Staf Operasional (Pool)" | Sama | Sesuai |
+| Username | Username teks (`markus_pool`) | Nomor telepon (`081234567899`) | Backend memakai nomor telepon sebagai identitas masuk, jadi kolomnya menampilkan data nyata |
+| Kotak pencarian | Tidak ada | Ada | **Tambahan** untuk nilai ekstra React Query (pencarian langsung) |
+| Tombol aksi | Hanya "Edit Admin" | "Edit Admin" + "Hapus" | Hapus ditambahkan karena endpoint `DELETE /admin/users/:id` memang ada |
+| Judul halaman | H1 "Manajemen Akun Staf & Hak Akses" | Hanya judul di topbar | Judul H1 dihapus agar tidak mengulang nama halaman tiga kali (topbar, menu sidebar, dan judul konten) |
+
+Catatan: seluruh perbedaan di atas adalah keputusan yang diambil sadar, bukan bagian yang belum selesai. Tangkapan layar di atas dihasilkan ulang oleh skrip `.verify/buat-perbandingan-figma.mjs`, sehingga bisa diperbarui kapan saja setelah tampilan berubah.
