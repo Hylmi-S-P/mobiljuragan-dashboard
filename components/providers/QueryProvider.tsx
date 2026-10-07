@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 
 export function QueryProvider({ children }: { children: ReactNode }) {
-  // Sesuai ketentuan soal UTS: QueryClient dibuat lewat useState di dalam provider
+  // QueryClient dibuat sekali lewat useState supaya tidak lahir ulang setiap render
   const [queryClient] = useState(
     () =>
       new QueryClient({

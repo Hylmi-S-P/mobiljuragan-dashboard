@@ -120,7 +120,7 @@ export function AdminAccountsTable({ initialAccounts }: Props) {
     );
   });
 
-  /* Nilai Tambah UTS: useOptimistic membuat chip status berganti sebelum jaringan selesai.
+  /* useOptimistic membuat chip status berganti sebelum jaringan selesai.
      Terukur sekitar 7 ms dari klik sampai DOM berubah, bukan menunggu respons server. */
   const [optimisticAccounts, setOptimisticAccount] = useOptimistic(
     filteredAccounts,

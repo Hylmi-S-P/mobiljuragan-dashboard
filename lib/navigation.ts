@@ -5,8 +5,8 @@ export type NavEntry = NavLink | NavGroup;
 export const WORKSPACE_NAME = "CV. Mobil Juragan Express Transport";
 export const WORKSPACE_ROLE = "Portal admin";
 
-/* IA kanonik dari rencana slicing bagian 2.2. Grup "Manajemen Armada" tidak punya halaman sendiri,
-   jadi kepala grup dirender sebagai tombol akordeon, bukan tautan. */
+/* Grup "Manajemen Armada" tidak punya halaman sendiri, jadi kepala grup
+   dirender sebagai tombol akordeon, bukan tautan. */
 export const NAV_ENTRIES: NavEntry[] = [
   { label: "Dashboard", href: "/" },
   { label: "Pemesanan Masuk", href: "/bookings" },

@@ -7,7 +7,7 @@ export type Vehicle = {
   name: string;
   plate: string;
   status: VehicleStatus;
-  /* Spesifikasi dari dokumen MASTER-SYSTEM-CONTEXT-AND-ARCHITECTURE bagian 1.C. */
+  /* Spesifikasi teknis unit, dipakai untuk pencocokan mode sewa di katalog. */
   category: string | null;
   transmission: string | null;
   seats: number | null;

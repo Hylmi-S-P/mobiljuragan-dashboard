@@ -72,7 +72,7 @@ export const TICKET_STATUS: Record<SupportTicketStatus, { label: string; tone: C
   selesai: { label: "Selesai", tone: "available" },
 };
 
-/* Kategori dan spesifikasi mengikuti dokumen master bagian 1.C. */
+/* Pilihan kategori armada yang dipakai form katalog dan filter. */
 export const VEHICLE_CATEGORY_OPTIONS = [
   "MPV",
   "SUV Premium",
