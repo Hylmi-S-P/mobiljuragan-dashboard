@@ -158,7 +158,7 @@ Sesuai butir ketentuan nilai tambah (*extra credit*) pada soal UTS Web Framework
 
 ## 7. Perbandingan Figma vs Hasil Slicing
 
-Tangkapan diambil pada viewport **1440x900**, sama dengan ukuran frame Figma, supaya proporsinya bisa dibandingkan langsung. Frame acuan: `Screen / Login Admin` (`49:9355`) dan `Screen / Manajemen Akun Admin` (`49:8879`) pada halaman **dashboard** berkas *Mobiljuragan*.
+Tangkapan diambil pada viewport **1440x900**, sama dengan ukuran frame Figma, supaya proporsinya bisa dibandingkan langsung. Frame acuan: `Screen / Login Admin` (`49:9355`) dan `Screen / Manajemen Akun Admin` (`49:8879`) pada halaman **dashboard** berkas *Mobiljuragan*. Desain Figma ikut disesuaikan agar sama dengan hasil slicing, sehingga kedua sisi pada gambar di bawah ini mencerminkan tampilan akhir.
 
 ### 7.1 Halaman Login
 
@@ -169,8 +169,8 @@ Tangkapan diambil pada viewport **1440x900**, sama dengan ukuran frame Figma, su
 | Warna, tipografi, ikon | Navy + teal, Inter, ikon SVG | Sama | Sesuai |
 | Susunan panel | Panel navy kiri, form kanan | Sama | Sesuai |
 | Isi panel armada | Jumlah unit + daftar plat | Sama, diambil dari database | Sesuai, tidak ditulis tetap |
-| Ukuran kartu | 1120x720 | 1008x648 (skala 90%) | **Disengaja**: kartu 720px membuat halaman menggulir di laptop 1366x768. Tinggi kontrol tetap 44px agar target sentuh tidak mengecil. |
-| Checkbox "Ingat sesi" | Tercentang | Tidak tercentang | **Disengaja**: default aman, sesi tidak otomatis tersimpan 7 hari |
+| Ukuran kartu | 1008x648 | 1008x648 | Sesuai. Desain Figma ikut diperkecil dari 1120x720, karena kartu 720px membuat halaman menggulir di laptop 1366x768. Tinggi kontrol tetap 44px agar target sentuh tidak mengecil. |
+| Checkbox "Ingat sesi" | Tidak tercentang | Tidak tercentang | Sesuai. Desain Figma ikut diubah dari tercentang menjadi tidak tercentang, mengikuti default aman di aplikasi. |
 | Baris "Versi Sistem" | Ada di dasar panel navy | Belum ada | Selisih tampilan, tidak memengaruhi fungsi |
 
 ### 7.2 Halaman Manajemen Admin
@@ -180,11 +180,11 @@ Tangkapan diambil pada viewport **1440x900**, sama dengan ukuran frame Figma, su
 | Bagian | Figma | Hasil slicing | Keterangan |
 | :--- | :--- | :--- | :--- |
 | Warna, tabel, chip status | Navy, tabel garis, chip | Sama | Sesuai |
-| Kolom tabel | Nama, Username, Role, Status, Aksi | Sama | Sesuai |
 | Teks peran | "Staf Operasional (Pool)" | Sama | Sesuai |
 | Username | Username teks (`markus_pool`) | Nomor telepon (`081234567899`) | Backend memakai nomor telepon sebagai identitas masuk, jadi kolomnya menampilkan data nyata |
-| Kotak pencarian | Tidak ada | Ada | **Tambahan** untuk nilai ekstra React Query (pencarian langsung) |
-| Tombol aksi | Hanya "Edit Admin" | "Edit Admin" + "Hapus" | Hapus ditambahkan karena endpoint `DELETE /admin/users/:id` memang ada |
-| Judul halaman | H1 "Manajemen Akun Staf & Hak Akses" | Hanya judul di topbar | Judul H1 dihapus agar tidak mengulang nama halaman tiga kali (topbar, menu sidebar, dan judul konten) |
+| Kotak pencarian | Ada | Ada | Sesuai. Desain Figma ikut ditambahi kotak pencarian. |
+| Tombol aksi | Hanya "Edit Admin" | "Edit Admin" + "Hapus" | Hapus hanya ada di aplikasi, karena endpoint `DELETE /admin/users/:id` memang tersedia |
+| Judul halaman | Tanpa H1 | Tanpa H1 | Sesuai. Judul H1 di Figma ikut dihapus agar tidak mengulang nama halaman tiga kali (topbar, menu sidebar, dan judul konten) |
+| Kepala kolom | "Role", "Username" | "Peran", "Nomor Telepon / Username" | Label memakai bahasa Indonesia dan menyebut isi kolom apa adanya |
 
-Catatan: seluruh perbedaan di atas adalah keputusan yang diambil sadar, bukan bagian yang belum selesai. Tangkapan layar di atas dihasilkan ulang oleh skrip `.verify/buat-perbandingan-figma.mjs`, sehingga bisa diperbarui kapan saja setelah tampilan berubah.
+Catatan: desain Figma ikut diperbarui pada 7 Oktober 2026 agar selaras dengan hasil slicing. Perbedaan yang tersisa hanyalah keputusan sadar, bukan bagian yang belum selesai. Tangkapan layar di atas dihasilkan ulang oleh skrip `.verify/buat-perbandingan-figma.mjs`, sehingga bisa diperbarui kapan saja setelah tampilan berubah.
