@@ -189,3 +189,54 @@ Seluruh halaman yang menampilkan data operasional memakai **Dynamic SSR** (`expo
 - **Data Fetching & Caching (`useQuery`)**: Diimplementasikan pada tabel interaktif [`components/admin/AdminAccountsTable.tsx`](components/admin/AdminAccountsTable.tsx) bersama fitur pencarian instan (*live search*), memanfaatkan data awal (*initialData*) dari SSR.
 - **Mutasi & Invalidasi Cache (`useMutation` & `invalidateQueries`)**: Mutasi status akun secara langsung memicu invalidasi query `adminAccounts`, menyinkronkan data client browser dengan REST API Express dan MariaDB tanpa reload halaman.
 - **Konfigurasi CORS**: Backend Express telah mengaktifkan middleware `cors()` secara terbuka sehingga request langsung dari Axios di browser berjalan tanpa hambatan CORS.
+
+---
+
+## 8. Daftar Endpoint API yang Dipakai Frontend
+
+Seluruh data dashboard diambil dari REST API Express buatan sendiri di `http://localhost:4000/api/v1`. Tidak ada satu pun data contoh yang ditulis langsung di komponen. Kolom **Dipakai di** menunjukkan halaman atau komponen frontend yang memanggilnya.
+
+| Modul | Method | Endpoint | Akses | Dipakai di |
+| :--- | :--- | :--- | :--- | :--- |
+| Health | `GET` | `/health` | Publik | Pemeriksaan backend aktif |
+| Katalog | `GET` | `/vehicles?operationalStatus=ALL` | Publik | Katalog, Kalender, Ringkasan |
+| Katalog | `GET` | `/vehicles/categories` | Publik | Filter kategori katalog |
+| Katalog | `GET` | `/vehicles/:id` | Publik | Detail pemesanan |
+| Auth Admin | `POST` | `/admin/auth/login` | Publik | **Halaman Login** |
+| Auth Admin | `GET` | `/admin/auth/me` | Admin/Staff | Gerbang sesi (`proxy.ts`) |
+| Akun Admin | `GET` | `/admin/users` | Admin/Staff | **Manajemen Admin** (SSR + React Query) |
+| Akun Admin | `POST` | `/admin/users` | Admin/Staff | **Manajemen Admin** — tambah akun |
+| Akun Admin | `GET` | `/admin/users/:id` | Admin/Staff | Tersedia di API, belum dipanggil frontend |
+| Akun Admin | `PATCH` | `/admin/users/:id` | Admin/Staff | **Manajemen Admin** — ubah akun & status |
+| Akun Admin | `DELETE` | `/admin/users/:id` | Admin/Staff | **Manajemen Admin** — hapus akun |
+| Pemesanan Admin | `GET` | `/admin/bookings` | Admin/Staff | Pemesanan Masuk, Ringkasan |
+| Pemesanan Admin | `GET` | `/admin/bookings/:id` | Admin/Staff | Detail Pemesanan |
+| Pemesanan Admin | `PATCH` | `/admin/bookings/:id/status` | Admin/Staff | Konfirmasi tarif & ubah status |
+| Pemesanan Admin | `PATCH` | `/admin/bookings/:id/driver` | Admin/Staff | Tugaskan supir |
+| Armada Admin | `GET` | `/admin/fleet/calendar` | Admin/Staff | Kalender Armada |
+| Armada Admin | `PATCH` | `/admin/vehicles/:id/status` | Admin/Staff | Ubah status unit di Katalog |
+| Supir Admin | `GET` | `/admin/drivers` | Admin/Staff | Manajemen Supir, Detail Pemesanan |
+| Supir Admin | `POST` | `/admin/drivers` | Admin/Staff | Tambah supir |
+| Supir Admin | `GET` | `/admin/drivers/:id` | Admin/Staff | Detail supir |
+| Supir Admin | `PATCH` | `/admin/drivers/:id` | Admin/Staff | Ubah data supir |
+| Supir Admin | `PATCH` | `/admin/drivers/:id/readiness` | Admin/Staff | Sakelar kesiapan SIAGA/LIBUR |
+| Supir Admin | `DELETE` | `/admin/drivers/:id` | Admin/Staff | Nonaktifkan supir |
+| Customer Care | `GET` | `/admin/tickets` | Admin/Staff | Customer Care |
+| Customer Care | `POST` | `/admin/tickets` | Admin/Staff | Tersedia di API, belum dipanggil frontend |
+| Customer Care | `GET` | `/admin/tickets/:id` | Admin/Staff | Percakapan tiket |
+| Customer Care | `PATCH` | `/admin/tickets/:id/status` | Admin/Staff | Ubah status tiket |
+| Customer Care | `POST` | `/admin/tickets/:id/messages` | Admin/Staff | Kirim balasan tim |
+| Pemesanan Pelanggan | `POST` | `/bookings` | Pelanggan | Dipakai aplikasi mobile (rencana) |
+| Pemesanan Pelanggan | `GET` | `/bookings` | Pelanggan | Dipakai aplikasi mobile (rencana) |
+| Pemesanan Pelanggan | `GET` | `/bookings/:id` | Pelanggan | Dipakai aplikasi mobile (rencana) |
+| Pemesanan Pelanggan | `GET` | `/bookings/:id/status` | Pelanggan | Dipakai aplikasi mobile (rencana) |
+| Auth Pelanggan | `POST` | `/auth/otp/request` | Publik | Dipakai aplikasi mobile (rencana) |
+| Auth Pelanggan | `POST` | `/auth/otp/verify` | Publik | Dipakai aplikasi mobile (rencana) |
+
+**Catatan cara frontend memanggil API:**
+
+- **Server Component & Server Action** memanggil lewat [`lib/api.ts`](lib/api.ts) dan [`lib/operations.ts`](lib/operations.ts), keduanya bertanda `import "server-only"`. Panggilan ini terjadi antar-server sehingga tidak terkena aturan CORS.
+- **Client Component** (tabel Manajemen Admin) memanggil lewat Axios di [`lib/axios.ts`](lib/axios.ts). Karena browser yang memanggil langsung, CORS di backend harus aktif — dan memang sudah.
+- Endpoint bertanda **Admin/Staff** menolak permintaan tanpa token yang sah dengan status `401`.
+
+Dokumentasi payload lengkap tiap endpoint ada di `docs/README.md` pada repositori **mobiljuragan-backend**.
