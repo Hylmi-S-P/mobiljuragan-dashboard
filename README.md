@@ -182,7 +182,7 @@ Seluruh halaman yang menampilkan data operasional memakai **Dynamic SSR** (`expo
 
 ---
 
-## 7.useOptimistic & TanStack Query (React Query) + Axios
+## 7. useOptimistic & TanStack Query (React Query) + Axios
 
 - **`useOptimistic` (Interaksi Instan 0ms)**: Diterapkan pada pengubahan status aktif/nonaktif akun staf/admin di [`components/admin/AdminAccountsTable.tsx`](components/admin/AdminAccountsTable.tsx) menggunakan `useOptimistic` dan `startTransition`. Tampilan status langsung berganti secara instan mendahului respons jaringan tanpa jeda loading.
 - **Query Provider**: `QueryClient` diinisialisasi melalui `useState` di dalam [`components/providers/QueryProvider.tsx`](components/providers/QueryProvider.tsx) dan membungkus seluruh aplikasi pada root layout.
